@@ -2,6 +2,8 @@ version: '3.4'
 
 x-app-override:
   &app-override
+  build:
+    target: development
   volumes:
     - .:${APP_DIR}/
 
