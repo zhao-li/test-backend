@@ -17,10 +17,22 @@ x-app-base:
   ports:
     - ${APP_PORT}
 
+x-database-base:
+  &database-base
+  image: postgres:13.0
+  volumes:
+    - data:/var/lib/postgresql/data/
+
 services:
   app:
     <<: *app-base
 
   app-production:
     <<: *app-base
+
+  database:
+    <<: *database-base
+
+volumes:
+  data:
 
