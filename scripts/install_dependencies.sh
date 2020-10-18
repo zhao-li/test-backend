@@ -32,6 +32,7 @@ gather_options() {
 set_defaults
 gather_options "$@"
 
+pip install --upgrade pip
 case $environment in
   'production')
     pip install -r requirements.txt
