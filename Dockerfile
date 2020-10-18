@@ -24,7 +24,7 @@ WORKDIR ${APP_DIR}/
 
 RUN microdnf install \
     nc \
-    python38-devel.x86_64 \
+    python38.x86_64 \
   && microdnf clean all
 RUN ln -s ${BIN_DIR}/pip3 ${BIN_DIR}/pip
 
@@ -34,7 +34,7 @@ RUN scripts/install_dependencies.sh
 
 # not sure why removing erros with: The transaction was empty
 #RUN microdnf remove \
-#    python38-devel.x86_64 \
+#    python38.x86_64 \
 #  && microdnf clean all
 #:end not sure why removing erros with: The transaction was empty
 
