@@ -2,11 +2,19 @@ version: '3.4'
 
 x-app-override:
   &app-override
-  build:
-    target: development
   volumes:
     - .:${APP_DIR}/
 
 services:
   app:
     <<: *app-override
+    build:
+      target: development
+    ports:
+      - 8000:8000
+
+  app-production:
+    <<: *app-override
+    ports:
+      - 8001:8000
+
