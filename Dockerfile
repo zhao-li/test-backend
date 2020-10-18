@@ -5,8 +5,6 @@ USER root
 RUN rpm -ivh \
   https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum --nobest --assumeyes update && yum --allowerasing --assumeyes install \
-    coreutils \
-    epel-release \
     nc \
     ShellCheck \
   && yum clean all
