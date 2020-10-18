@@ -12,9 +12,10 @@ x-app-base:
   command:
     - scripts/start_app.sh
   env_file:
+    - .env
     - app.env
   ports:
-    - 8000
+    - ${APP_PORT}
 
 services:
   app:

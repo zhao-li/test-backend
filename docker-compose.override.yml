@@ -11,10 +11,10 @@ services:
     build:
       target: development
     ports:
-      - 8000:8000
+      - ${APP_PORT}:${APP_PORT}
 
   app-production:
     <<: *app-override
     ports:
-      - 8001:8000
+      - 8001:${APP_PORT}
 
