@@ -13,7 +13,13 @@ x-app-base:
     - scripts/start_app.sh
   env_file:
     - app.env
+  ports:
+    - 8000
 
 services:
   app:
     <<: *app-base
+
+  app-production:
+    <<: *app-base
+

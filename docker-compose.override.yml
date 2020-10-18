@@ -8,3 +8,13 @@ x-app-override:
 services:
   app:
     <<: *app-override
+    build:
+      target: development
+    ports:
+      - 8000:8000
+
+  app-production:
+    <<: *app-override
+    ports:
+      - 8001:8000
+
