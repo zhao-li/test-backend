@@ -1,8 +1,5 @@
 version: '3.4'
 
-# using extension fields is overkill in this scenario,
-# but it can be useful if you need multiple similar
-# instances of the same service
 x-app-base:
   &app-base
   build:
@@ -14,8 +11,19 @@ x-app-base:
   env_file:
     - .env
     - app.env
+    - database/.env
   ports:
     - ${APP_PORT}
+  depends_on:
+    - database
+
+x-database-base:
+  &database-base
+  image: postgres:13.0
+  env_file:
+    - database/.env
+  volumes:
+    - data:/var/lib/postgresql/data/
 
 services:
   app:
@@ -23,4 +31,10 @@ services:
 
   app-production:
     <<: *app-base
+
+  database:
+    <<: *database-base
+
+volumes:
+  data:
 
