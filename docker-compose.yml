@@ -11,12 +11,17 @@ x-app-base:
   env_file:
     - .env
     - app.env
+    - database/.env
   ports:
     - ${APP_PORT}
+  depends_on:
+    - database
 
 x-database-base:
   &database-base
   image: postgres:13.0
+  env_file:
+    - database/.env
   volumes:
     - data:/var/lib/postgresql/data/
 
