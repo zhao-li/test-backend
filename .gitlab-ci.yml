@@ -24,10 +24,12 @@ after_script:
   - env
   - ls -la /opt/app-root/lib/python3.8/site-packages/
   - ls .cache/pip/
+  - ls "$CI_PROJECT_DIR/.cache/pip"
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - /opt/app-root/lib/python3.8/site-packages/
     - .cache/pip/
+    - "$CI_PROJECT_DIR/.cache/pip"
 
