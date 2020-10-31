@@ -18,17 +18,29 @@ To test the application:
 
     app$ scripts/test_app.sh
 
-Documenting
------------
-To document the application:
+To run a single test:
 
-    app$ scripts/document_app.sh
+    app$ python manage.py test greeting.tests.GreetingTests.test_fetching_greeters
 
 Linting
 -------
 To lint the application:
 
     app$ scripts/lint_app.sh
+
+Documenting
+-----------
+To document the application:
+
+    app$ scripts/document_app.sh
+
+Migratiing Database
+-------------------
+To create database migrations:
+
+    app$ python manage.py makemigrations
+
+For more information: https://docs.djangoproject.com/en/3.1/topics/migrations/
 
 Notes
 -----
