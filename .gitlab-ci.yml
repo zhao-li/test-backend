@@ -2,10 +2,10 @@ image: registry.access.redhat.com/ubi8/python-38
 
 stages:
   - .pre
-  - unit-test-stage
-  - build-stage
-  - integration-test-stage
-  - deploy-stage
+  - pre-build-checks
+  - build
+  - post-build-checks 
+  - deploy
   - .post
 
 cache:
@@ -17,6 +17,6 @@ before_script:
   - env
 
 include:
-  - gitlab/pre-stage.yaml
-  - gitlab/unit-test-stage.yaml
+  - gitlab/pre.yaml
+  - gitlab/pre-build-checks.yaml
 

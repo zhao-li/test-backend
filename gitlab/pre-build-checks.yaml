@@ -1,5 +1,5 @@
 unit-test-job:
-  stage: unit-test-stage
+  stage: pre-build-checks
   script:
     - scripts/test_app.sh
 
