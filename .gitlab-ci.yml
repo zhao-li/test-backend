@@ -17,5 +17,6 @@ before_script:
   - env
 
 include:
-  - gitlab/pre-stage.yaml
+  - gitlab/pre-stage.yml
+  - gitlab/unit-test-stage.yml
 
