@@ -2,6 +2,7 @@ include:
   - gitlab/pre.yaml
   - gitlab/pre-build-checks.yaml
   - gitlab/build.yaml
+  - gitlab/post-build-checks.yaml
 
 stages:
   - .pre

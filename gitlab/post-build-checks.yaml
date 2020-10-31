@@ -1,0 +1,8 @@
+.base:
+  stage: post-build-checks
+
+integration-test-job:
+  extends: .base
+  script:
+    - scripts/test_app.sh
+
