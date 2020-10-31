@@ -1,1 +1,9 @@
+build-job:
+  stage: build
+  script:
+    - scripts/lint_app.sh
+  artifacts:
+    name: ${CI_PROJECT_PATH}
+    paths:
+      - .
 
