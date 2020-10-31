@@ -1,0 +1,22 @@
+[master]
+load-plugins =
+  pylint_django
+
+ignore =
+  README.md,
+  app.env,
+  bootstrap.sh,
+  database,
+  docker-compose.yml,
+  docker-compose.override.yml,
+  docs,
+  Dockerfile,
+  migrations,
+  requirements.txt,
+  requirements.development.txt,
+  tox.ini,
+
+[MESSAGES CONTROL]
+disable =
+  trailing-newlines
+

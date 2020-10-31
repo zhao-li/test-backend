@@ -1,2 +1,8 @@
 !.keep
 __pycache__/
+.coverage
+docs/source/*
+docs/build/*
+!docs/source/conf.py
+!docs/source/index.rst
+
