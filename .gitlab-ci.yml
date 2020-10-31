@@ -18,14 +18,16 @@ image: registry.access.redhat.com/ubi8/python-38
 before_script:
   - env
   - ls -la /opt/app-root/lib/python3.8/site-packages/
+  - ls .cache/pip/
 
 after_script:
   - env
   - ls -la /opt/app-root/lib/python3.8/site-packages/
+  - ls .cache/pip/
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - /opt/app-root/lib/python3.8/site-packages/
-    - "$CI_PROJECT_DIR/.cache/pip"
+    - .cache/pip/
 
