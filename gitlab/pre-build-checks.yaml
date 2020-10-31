@@ -3,3 +3,13 @@ unit-test-job:
   script:
     - scripts/test_app.sh
 
+lint-job:
+  stage: pre-build-checks
+  script:
+    - scripts/lint_app.sh
+
+document-job:
+  stage: pre-build-checks
+  script:
+    - scripts/document_app.sh
+

@@ -19,4 +19,5 @@ before_script:
 include:
   - gitlab/pre.yaml
   - gitlab/pre-build-checks.yaml
+  - gitlab/build.yaml
 
