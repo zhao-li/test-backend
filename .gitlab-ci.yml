@@ -3,8 +3,6 @@ include:
   - gitlab/pre-build-checks.yaml
   - gitlab/build.yaml
 
-image: registry.access.redhat.com/ubi8/python-38
-
 stages:
   - .pre
   - pre-build-checks
@@ -13,11 +11,13 @@ stages:
   - deploy
   - .post
 
+image: registry.access.redhat.com/ubi8/python-38
+
+before_script:
+  - env
+
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - /opt/app-root/lib/python3.8/site-packages/
-
-before_script:
-  - env
 
