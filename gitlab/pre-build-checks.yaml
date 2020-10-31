@@ -1,18 +1,19 @@
 .base:
+  &base
   stage: pre-build-checks
 
 unit-test-job:
-  extends: .base
+  <<: *base
   script:
     - scripts/test_app.sh
 
 lint-job:
-  extends: .base
+  <<: *base
   script:
     - scripts/lint_app.sh
 
 document-job:
-  extends: .base
+  <<: *base
   script:
     - scripts/document_app.sh
 

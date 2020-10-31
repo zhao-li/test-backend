@@ -1,8 +1,9 @@
 .base:
+  &base
   stage: post-build-checks
 
 integration-test-job:
-  extends: .base
+  <<: *base
   script:
     - scripts/test_app.sh
 
