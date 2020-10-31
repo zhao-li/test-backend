@@ -15,3 +15,7 @@ cache:
 
 before_script:
   - env
+
+include:
+  - gitlab/pre-stage.yaml
+
