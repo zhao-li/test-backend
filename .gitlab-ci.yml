@@ -26,6 +26,10 @@ after_script:
   #- ls .cache/pip/
   - ls "$CI_PROJECT_DIR/.cache/pip"
 
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip"
+
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
