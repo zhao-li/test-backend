@@ -1,11 +1,12 @@
-# Template
+# Porter:Backend
+The API backend for the Porter application.
 
 Prerequisites
 -------------
 1. install docker
 1. install docker-compose
 1. install git
-1. clone repository: `git clone --recursive TBD`
+1. clone repository: `git clone --recursive https://gitlab.com/porter4/backend.git`
 
 Getting Started
 ---------------
