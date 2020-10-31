@@ -1,0 +1,5 @@
+unit-test-job:
+  stage: unit-test-stage
+  script:
+    - scripts/test_app.sh
+
