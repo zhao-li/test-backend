@@ -1,0 +1,5 @@
+install-dependencies-job:
+  stage: .pre
+  script:
+    - scripts/install_dependencies.sh -e development
+

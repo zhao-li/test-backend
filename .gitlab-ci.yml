@@ -1,2 +1,17 @@
 image: registry.access.redhat.com/ubi8/python-38
 
+stages:
+  - .pre
+  - unit-test-stage
+  - build-stage
+  - integration-test-stage
+  - deploy-stage
+  - .post
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - /opt/app-root/lib/python3.8/site-packages/
+
+before_script:
+  - env
