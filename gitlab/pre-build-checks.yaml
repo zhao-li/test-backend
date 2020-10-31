@@ -1,15 +1,19 @@
-unit-test-job:
+base:
+  &base
   stage: pre-build-checks
+
+unit-test-job:
+  <<: *base
   script:
     - scripts/test_app.sh
 
 lint-job:
-  stage: pre-build-checks
+  <<: *base
   script:
     - scripts/lint_app.sh
 
 document-job:
-  stage: pre-build-checks
+  <<: *base
   script:
     - scripts/document_app.sh
 
