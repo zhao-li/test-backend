@@ -23,7 +23,7 @@ before_script:
 after_script:
   - env
   - ls -la /opt/app-root/lib/python3.8/site-packages/
-  - ls .cache/pip/
+  #- ls .cache/pip/
   - ls "$CI_PROJECT_DIR/.cache/pip"
 
 cache:
