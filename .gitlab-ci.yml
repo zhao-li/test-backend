@@ -27,4 +27,5 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - /opt/app-root/lib/python3.8/site-packages/
+    - "$CI_PROJECT_DIR/.cache/pip"
 
