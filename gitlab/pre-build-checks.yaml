@@ -20,7 +20,11 @@ lint-shell-job:
     entrypoint: ['']
 
   script:
-    - shellcheck -- *.sh 
+    - ls -la
+    - ls -la scripts/
+    - ls -la scripts/bootstrap/
+    - ls -la scripts/setup_app/
+    - shellcheck -- *.sh \
         scripts/*.sh \
         scripts/bootstrap/*.sh \
         scripts/setup_app/*.sh
