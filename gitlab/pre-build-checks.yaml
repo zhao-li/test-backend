@@ -20,10 +20,7 @@ lint-shell-job:
     entrypoint: ['/bin/sh']
 
   script:
-    - shellcheck -- *.sh 
-        scripts/*.sh \
-        scripts/bootstrap/*.sh \
-        scripts/setup_app/*.sh
+    - pwd
 
 document-job:
   <<: *base
