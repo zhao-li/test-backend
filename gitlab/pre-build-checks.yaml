@@ -5,21 +5,15 @@
 unit-test-job:
   <<: *base
   script:
-    - scripts/test_app.sh
+    - PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"; scripts/test_app.sh
 
 lint-job:
   <<: *base
   script:
-    - scripts/lint_app.sh
+    - PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"; scripts/lint_app.sh
 
 document-job:
   <<: *base
   script:
-    - export PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"
-    - ls -la /builds/porter4/backend/.cache/pip/
-    - ls -la /builds/porter4/backend/.cache/pip/bin/
-    - pwd
-    - "$CI_PROJECT_DIR/.cache/pip/bin/sphinx-build docs/source/ docs/build/"
-    - PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"; sphinx-build docs/source/ docs/build/
     - PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"; scripts/document_app.sh
 

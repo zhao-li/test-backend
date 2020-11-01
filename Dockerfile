@@ -12,6 +12,7 @@ RUN yum --nobest --assumeyes update && yum --allowerasing --assumeyes install \
 
 COPY requirements*.txt ${APP_DIR}/
 COPY scripts/install_dependencies.sh ${APP_DIR}/scripts/install_dependencies.sh
+RUN pip install --upgrade pip
 RUN scripts/install_dependencies.sh -e development
 
 COPY . ${APP_DIR}
@@ -31,6 +32,7 @@ RUN ln -s ${BIN_DIR}/pip3 ${BIN_DIR}/pip
 
 COPY requirements*.txt ${APP_DIR}/
 COPY scripts/install_dependencies.sh ${APP_DIR}/scripts/install_dependencies.sh
+RUN pip install --upgrade pip
 RUN scripts/install_dependencies.sh
 
 # not sure why removing erros with: The transaction was empty
