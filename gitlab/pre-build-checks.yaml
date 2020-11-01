@@ -10,13 +10,20 @@ unit-test-job:
 
 lint-job:
   <<: *base
-  image:
-    name: registry.access.redhat.com/ubi8/python-38
   script:
     - PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"; scripts/lint_app.sh
+
+lint-shell-job:
+  <<: *base
+  image:
+    name: koalaman/shellcheck
+  script:
+    #- scripts/lint_shell_scripts.sh
+    - shellcheck -- *.sh scripts/*.sh scripts/bootstrap/*.sh scripts/setup_app/*.sh
 
 document-job:
   <<: *base
   script:
     - PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"; scripts/document_app.sh
+
 
