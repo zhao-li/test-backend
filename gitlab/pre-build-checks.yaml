@@ -22,4 +22,5 @@ document-job:
     - scripts/document_app.sh
     - sphinx-build docs/source/ docs/build/
     - "$CI_PROJECT_DIR/sphinx-build docs/source/ docs/build/"
+    - pwd
 
