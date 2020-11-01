@@ -9,4 +9,6 @@ install-dependencies-job:
   #  PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip"
   script:
     - scripts/install_dependencies.sh -e development
+    - ls -la /builds/porter4/backend/.cache/pip/
+    - ls -la /builds/porter4/backend/.cache/pip/bin/
 
