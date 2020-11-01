@@ -10,6 +10,8 @@ unit-test-job:
 lint-job:
   <<: *base
   script:
+    - rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    - yum --nobest --assumeyes update && yum --allowerasing --assumeyes install shellcheck
     - PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"; scripts/lint_app.sh
 
 document-job:
