@@ -3,6 +3,7 @@ load-plugins =
   pylint_django
 
 ignore =
+  .cache, ; needed for Gitlab's CI/CD
   README.md,
   app.env,
   bootstrap.sh,
