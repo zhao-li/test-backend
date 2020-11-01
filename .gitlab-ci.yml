@@ -4,6 +4,7 @@ include:
   #- gitlab/pre-build-checks.yaml
   - gitlab/development-checks.yaml
   #- gitlab/build.yaml
+  - gitlab/production-container.yaml
   #- gitlab/post-build-checks.yaml
   #- gitlab/deploy.yaml
 
@@ -13,6 +14,7 @@ stages:
   #- pre-build-checks
   - development-checks
   #- build
+  - production-container
   #- post-build-checks 
   #- deploy
   #- .post
@@ -23,6 +25,7 @@ variables:
   #DOCKER_HOST: tcp://docker:2376
   #DOCKER_TLS_CERTDIR: "/certs"
   DEVELOPMENT_CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:development
+  PRODUCTION_CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest
 
 before_script:
   - env
