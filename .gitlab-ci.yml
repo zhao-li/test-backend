@@ -13,7 +13,16 @@ stages:
   - deploy
   - .post
 
-image: registry.access.redhat.com/ubi8/python-38
+#image: registry.access.redhat.com/ubi8/python-38
+image: docker:19.03.12
+services:
+  - docker:19.03.12-dind
+
+variables:
+  #DOCKER_HOST: tcp://docker:2376
+  #DOCKER_TLS_CERTDIR: "/certs"
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
 
 before_script:
   - env
