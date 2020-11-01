@@ -4,9 +4,9 @@
 
 install-dependencies-job:
   <<: *base
-  variables:
-    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-    PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip"
+  #variables:
+  #  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  #  PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip"
   script:
     - scripts/install_dependencies.sh -e development
 
