@@ -25,15 +25,20 @@ after_script:
   - ls -la /opt/app-root/lib/python3.8/site-packages/
   #- ls .cache/pip/
   - ls "$CI_PROJECT_DIR/.cache/pip"
+  - ls ~/.cache/pip/
 
 variables:
-  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-  PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip"
+  #PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  #PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip"
+  PYTHONUSERBASE: ~/.cache/pip/
+  PYTHONPATH: ~/.cache/pip/
+  PIP_TARGET: ~/.cache/pip/
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - /opt/app-root/lib/python3.8/site-packages/
     - .cache/pip/
-    - "$CI_PROJECT_DIR/.cache/pip"
+    - "$CI_PROJECT_DIR/.cache/pip/"
+    - ~/.cache/pip/
 
