@@ -10,16 +10,13 @@ unit-test-job:
 lint-job:
   <<: *base
   script:
-    - env
     - scripts/lint_app.sh
 
 document-job:
   <<: *base
   script:
-    - env
     - export PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"
-    - env
-    - ls -la /builds/porter4/backend/.cache/pip/bin/
+    - ls -la /builds/porter4/backend/.cache/pip/
     - pwd
     - PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"; sphinx-build docs/source/ docs/build/
     - PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"; scripts/document_app.sh
