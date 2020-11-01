@@ -1,0 +1,27 @@
+.base:
+  &base
+  stage: development-checks
+  image: $DEVELOPMENT_CONTAINER_IMAGE
+
+build-development-container:
+  <<: *base
+  script:
+    - docker build --pull --target development --tag $DEVELOPMENT_CONTAINER_TEST_IMAGE .
+    - docker push $DEVELOPMENT_CONTAINER_TEST_IMAGE
+
+unit-test-job:
+  <<: *base
+  script:
+    - scripts/test_app.sh
+  allow_failure: true
+
+lint-job:
+  <<: *base
+  script:
+    - scripts/lint_app.sh
+
+document-job:
+  <<: *base
+  script:
+    - scripts/document_app.sh
+
