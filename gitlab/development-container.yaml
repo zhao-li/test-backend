@@ -8,6 +8,6 @@
 build-development-container:
   <<: *base
   script:
-    - docker build --pull --target development --tag $DEVELOPMENT_CONTAINER_TEST_IMAGE .
-    - docker push $DEVELOPMENT_CONTAINER_TEST_IMAGE
+    - docker build --pull --target development --tag $DEVELOPMENT_CONTAINER_IMAGE .
+    - docker push $DEVELOPMENT_CONTAINER_IMAGE
 
