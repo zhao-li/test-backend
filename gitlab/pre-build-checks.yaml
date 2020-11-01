@@ -17,6 +17,7 @@ lint-shell-job:
   <<: *base
   image:
     name: koalaman/shellcheck-alpine
+    entrypoint: ['bash']
 
   script:
     - shellcheck -- *.sh 
