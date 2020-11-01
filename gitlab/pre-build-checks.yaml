@@ -21,7 +21,8 @@ lint-shell-job:
 
   script:
     - pwd
-    - shellcheck -- *.sh
+    - shellcheck --
+        *.sh
         scripts/*.sh
         scripts/bootstrap/*.sh
         scripts/setup_app/*.sh
