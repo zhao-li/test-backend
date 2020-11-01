@@ -1,0 +1,14 @@
+.base:
+  &base
+  stage: production-container
+  image: docker:19.03.12
+  services:
+    - docker:19.03.12-dind
+
+build-development-container:
+  <<: *base
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --pull --target production --tag $PRODUCTION_CONTAINER_IMAGE .
+    - docker push $PRODUCTION_CONTAINER_IMAGE
+
