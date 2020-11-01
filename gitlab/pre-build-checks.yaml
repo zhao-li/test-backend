@@ -16,10 +16,13 @@ lint-job:
 lint-shell-job:
   <<: *base
   image:
-    name: koalaman/shellcheck
+    name: koalaman/shellcheck-alpine
+
   script:
-    #- scripts/lint_shell_scripts.sh
-    - shellcheck -- *.sh scripts/*.sh scripts/bootstrap/*.sh scripts/setup_app/*.sh
+    - shellcheck -- *.sh 
+        scripts/*.sh \
+        scripts/bootstrap/*.sh \
+        scripts/setup_app/*.sh
 
 document-job:
   <<: *base
