@@ -4,9 +4,11 @@
 
 install-dependencies-job:
   <<: *base
-  #variables:
-  #  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-  #  PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip"
+  variables:
+    PYTHONUSERBASE: "$CI_PROJECT_DIR/.cache/pip/"
+    PYTHONPATH: "$CI_PROJECT_DIR/.cache/pip/"
+    PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip/"
+
   script:
     - scripts/install_dependencies.sh -e development
 
