@@ -1,5 +1,9 @@
-build-job:
+.base:
+  &base
   stage: build
+
+build-job:
+  <<: *base
   script:
     - echo "building..."
   artifacts:

@@ -32,4 +32,3 @@ document-job:
   script:
     - PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"; scripts/document_app.sh
 
-
