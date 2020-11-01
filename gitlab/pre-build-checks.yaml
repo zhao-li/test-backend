@@ -12,7 +12,7 @@ lint-job:
   <<: *base
   image:
     name: registry.access.redhat.com/ubi8/python-38
-    entrypoint: ['bash', '-c', 'useradd myuser && exec su myuser -c bash']
+    user: root
   script:
     - rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
     - yum --nobest --assumeyes update && yum --allowerasing --assumeyes install shellcheck
