@@ -18,6 +18,7 @@ image: registry.access.redhat.com/ubi8/python-38
 before_script:
   - env
   - ls -la /opt/app-root/lib/python3.8/site-packages/
+  - export PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"
 
 after_script:
   - env
@@ -30,7 +31,7 @@ variables:
   PYTHONUSERBASE: "$CI_PROJECT_DIR/.cache/pip/"
   PYTHONPATH: "$CI_PROJECT_DIR/.cache/pip/"
   PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip/"
-  PATH: "$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"
+  #PATH: "$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
