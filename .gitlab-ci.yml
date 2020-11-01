@@ -6,12 +6,12 @@ include:
   - gitlab/deploy.yaml
 
 stages:
-  - .pre
-  - pre-build-checks
-  - build
-  - post-build-checks 
-  - deploy
-  - .post
+  #- .pre
+  #- pre-build-checks
+  #- build
+  #- post-build-checks 
+  #- deploy
+  #- .post
 
 #image: registry.access.redhat.com/ubi8/python-38
 image: docker:19.03.12
@@ -31,13 +31,13 @@ before_script:
 after_script:
   - env
 
-variables:
-  PYTHONUSERBASE: "$CI_PROJECT_DIR/.cache/pip/"
-  PYTHONPATH: "$CI_PROJECT_DIR/.cache/pip/"
-  PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip/"
+#variables:
+#  PYTHONUSERBASE: "$CI_PROJECT_DIR/.cache/pip/"
+#  PYTHONPATH: "$CI_PROJECT_DIR/.cache/pip/"
+#  PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip/"
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - .cache/pip/
+#cache:
+#  key: ${CI_COMMIT_REF_SLUG}
+#  paths:
+#    - .cache/pip/
 
