@@ -12,10 +12,9 @@ lint-job:
   <<: *base
   image:
     name: registry.access.redhat.com/ubi8/python-38
-    user: root
   script:
-    - rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-    - yum --nobest --assumeyes update && yum --allowerasing --assumeyes install shellcheck
+    - sudo rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    - sudo yum --nobest --assumeyes update && yum --allowerasing --assumeyes install shellcheck
     - PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"; scripts/lint_app.sh
 
 document-job:
