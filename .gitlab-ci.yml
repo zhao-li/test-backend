@@ -32,6 +32,7 @@ variables:
   PYTHONUSERBASE: "$CI_PROJECT_DIR/.cache/pip/"
   PYTHONPATH: "$CI_PROJECT_DIR/.cache/pip/"
   PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip/"
+
   PATH: "$CI_PROJECT_DIR/.cache/pip/:$PATH"
 
 cache:
