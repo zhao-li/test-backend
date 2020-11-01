@@ -7,6 +7,7 @@ include:
 
 stages:
   #- .pre
+  - development-container
   #- pre-build-checks
   #- build
   #- post-build-checks 
@@ -14,19 +15,16 @@ stages:
   #- .post
 
 #image: registry.access.redhat.com/ubi8/python-38
-image: docker:19.03.12
-services:
-  - docker:19.03.12-dind
 
 variables:
   #DOCKER_HOST: tcp://docker:2376
   #DOCKER_TLS_CERTDIR: "/certs"
-  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+  DEVELOPMENT_CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE-development:$CI_COMMIT_REF_SLUG
+  DEVELOPMENT_CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE-development:latest
 
 before_script:
   - env
-  - docker info
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 after_script:
   - env
