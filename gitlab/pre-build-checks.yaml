@@ -19,8 +19,8 @@ document-job:
     - env
     - export PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"
     - env
-    - scripts/document_app.sh
     - sphinx-build docs/source/ docs/build/
     - "$CI_PROJECT_DIR/sphinx-build docs/source/ docs/build/"
     - pwd
+    - PATH="$CI_PROJECT_DIR/.cache/pip/bin/:$PATH" scripts/document_app.sh
 
