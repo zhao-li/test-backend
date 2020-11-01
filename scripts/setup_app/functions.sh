@@ -11,10 +11,10 @@
 #
 # example usage: wait_for_service http://localhost 27017
 wait_for_service() {
-  local host=$1
-  local port=$2
+  host=$1
+  port=$2
 
-  local service_up=1 #assume service is not up yet
+  service_up=1 #assume service is not up yet
   until [ "$service_up" -eq 0 ]; do
     sleep 5
     nc -z "$host" "$port"
