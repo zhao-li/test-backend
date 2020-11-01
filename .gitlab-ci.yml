@@ -27,10 +27,10 @@ after_script:
 variables:
   #PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
   #PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip"
-  #PYTHONUSERBASE: "$CI_PROJECT_DIR/.cache/pip/"
-  #PYTHONPATH: "$CI_PROJECT_DIR/.cache/pip/"
-  #PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip/"
-  #PATH: "$CI_PROJECT_DIR/.cache/pip/:$PATH"
+  PYTHONUSERBASE: "$CI_PROJECT_DIR/.cache/pip/"
+  PYTHONPATH: "$CI_PROJECT_DIR/.cache/pip/"
+  PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip/"
+  PATH: "$CI_PROJECT_DIR/.cache/pip/bin/:$PATH"
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
