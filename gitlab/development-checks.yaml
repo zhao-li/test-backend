@@ -3,18 +3,18 @@
   stage: development-checks
   image: $DEVELOPMENT_CONTAINER_IMAGE
 
-unit-test-job:
+unit-test:
   <<: *base
   script:
     - scripts/test_app.sh
   allow_failure: true
 
-lint-job:
+lint:
   <<: *base
   script:
     - scripts/lint_app.sh
 
-document-job:
+document:
   <<: *base
   script:
     - scripts/document_app.sh
