@@ -2,5 +2,8 @@
 
 # This script runs shellcheck to lint shell scripts
 
-shellcheck -- *.sh **/*.sh
+shellcheck -- *.sh
+for file in scripts/**/*.sh; do
+  shellcheck "$file"
+done
 

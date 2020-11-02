@@ -10,7 +10,7 @@ Prerequisites
 
 Getting Started
 ---------------
-1. run bootstrap.bash: `./bootstrap.bash`
+1. run bootstrap.sh: `./bootstrap.sh`
 1. start service: `docker-compose up`
 
 Testing
