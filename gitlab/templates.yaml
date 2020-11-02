@@ -1,7 +1,7 @@
 .build-container:
   variables:
     ENVIRONMENT: development
-    IMAGE_TAG: ${DEVELOPMENT_CONTAINER_IMAGE}
+    IMAGE_TAG: "${DEVELOPMENT_CONTAINER_IMAGE}"
   image: docker:19.03.12
   services:
     - docker:19.03.12-dind
