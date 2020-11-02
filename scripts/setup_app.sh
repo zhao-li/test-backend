@@ -3,7 +3,6 @@
 # This script sets up the application
 
 SRC_DIR=$(cd "$(dirname "$0")" || exit; pwd -P)
-# shellcheck source=scripts/setup_app/functions.sh
 . "$SRC_DIR"/setup_app/functions.sh
 
 wait_for_service "$DATABASE_HOST" "$DATABASE_PORT"
