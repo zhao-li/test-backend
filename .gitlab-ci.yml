@@ -7,6 +7,7 @@ include:
   #- gitlab/build.yaml
   - gitlab/production-container.yaml
   #- gitlab/post-build-checks.yaml
+  - gitlab/production-checks.yaml
   #- gitlab/deploy.yaml
 
 stages:
@@ -17,6 +18,7 @@ stages:
   #- build
   - production-container
   #- post-build-checks 
+  - production-checks
   #- deploy
   #- .post
 

@@ -1,0 +1,10 @@
+.base:
+  &base
+  stage: production-checks
+  image: $PRODUCTION_CONTAINER_IMAGE
+
+production-unit-test:
+  <<: *base
+  extends: .unit-test
+  allow_failure: true
+
