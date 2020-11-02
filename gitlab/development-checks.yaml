@@ -3,10 +3,9 @@
   stage: development-checks
   image: $DEVELOPMENT_CONTAINER_IMAGE
 
-unit-test:
+development-unit-test:
   <<: *base
-  script:
-    - scripts/test_app.sh
+  extends: .unit-test
   allow_failure: true
 
 lint:

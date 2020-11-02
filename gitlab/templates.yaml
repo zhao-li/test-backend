@@ -10,3 +10,7 @@
     - docker build --pull --target $ENVIRONMENT --tag $IMAGE_TAG .
     - docker push $IMAGE_TAG
 
+.unit-test:
+  script:
+    - scripts/test_app.sh
+
