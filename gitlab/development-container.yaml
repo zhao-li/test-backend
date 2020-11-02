@@ -9,5 +9,5 @@ build-development-container:
     ENVIRONMENT: development
     IMAGE_TAG: ${DEVELOPMENT_CONTAINER_IMAGE} # does not interpolate properly: https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1809#note_99891354
   before_script:
-    - export IMAGE_TAG="${DEVELOPMENT_CONTAINER_IMAGE}" # delete hack when possible: https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1809#note_99891354
+    - export IMAGE_TAG=${DEVELOPMENT_CONTAINER_IMAGE} # delete hack when possible: https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1809#note_99891354
 
