@@ -8,10 +8,10 @@ include:
   - gitlab/production-container.yaml
   #- gitlab/post-build-checks.yaml
   - gitlab/production-checks.yaml
-  #- gitlab/deploy.yaml
+  - gitlab/deploy.yaml
 
 stages:
-  #- .pre
+  - .pre
   - development-container
   #- pre-build-checks
   - development-checks
@@ -19,8 +19,8 @@ stages:
   - production-container
   #- post-build-checks 
   - production-checks
-  #- deploy
-  #- .post
+  - deploy
+  - .post
 
 #image: registry.access.redhat.com/ubi8/python-38
 
