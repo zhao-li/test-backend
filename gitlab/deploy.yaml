@@ -2,8 +2,45 @@
   &base
   stage: deploy
 
-deploy-job:
-  <<: *base
+.deploy:
+  variables:
+    ENVIRONMENT: "this needs to be set"
   script:
-    - echo "deploying..." # using as placeholder
+    - echo "deploying to ${ENVIRONMENT}" # using as a placeholder
+
+release:
+  <<: *base
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  release:
+     name: 'Release $CI_COMMIT_TAG'
+     description: Created from CI/CD pipeline
+     tag_name: '$CI_COMMIT_TAG'
+     ref: '$CI_COMMIT_TAG'
+
+deploy-to-isolated-staging:
+  <<: *base
+  extends: .deploy
+  variables:
+    ENVIRONMENT: $GITLAB_USER_EMAIL
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /feature/'
+
+deploy-to-staging:
+  <<: *base
+  extends: .deploy
+  variables:
+    ENVIRONMENT: staging
+  stage: deploy-stage
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+
+deploy-to-production:
+  <<: *base
+  extends: .deploy
+  variables:
+    ENVIRONMENT: production
+  rules:
+    - if: $CI_COMMIT_TAG
 
