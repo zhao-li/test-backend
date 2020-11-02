@@ -11,6 +11,16 @@
     - docker push $IMAGE_TAG
 
 .unit-test:
+  services:
+    - postgres:13.0
+      variables:
+        POSTGRES_DB=porter_development
+        POSTGRES_USER=porter_app
+        POSTGRES_PASSWORD=password
   script:
     - scripts/test_app.sh
+  variables:
+    POSTGRES_DB=porter_development
+    POSTGRES_USER=porter_app
+    POSTGRES_PASSWORD=password
 
