@@ -1,4 +1,5 @@
 include:
+  - gitlab/templates.yaml
   #- gitlab/pre.yaml
   - gitlab/development-container.yaml
   #- gitlab/pre-build-checks.yaml

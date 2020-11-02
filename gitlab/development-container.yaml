@@ -1,14 +1,11 @@
 .base:
   &base
   stage: development-container
-  image: docker:19.03.12
-  services:
-    - docker:19.03.12-dind
 
 build-development-container:
   <<: *base
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build --pull --target development --tag $DEVELOPMENT_CONTAINER_IMAGE .
-    - docker push $DEVELOPMENT_CONTAINER_IMAGE
+  extends: .build-container
+  variables:
+    ENVIRONMENT: development
+    IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE
 
