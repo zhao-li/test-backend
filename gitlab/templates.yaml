@@ -1,0 +1,25 @@
+.build-container:
+  variables:
+    ENVIRONMENT: development
+    IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE # does not interpolate properly: https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1809#note_99891354
+  image: docker:19.03.12
+  services:
+    - docker:19.03.12-dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --pull --target $ENVIRONMENT --tag $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+
+.unit-test:
+  services:
+    - name: postgres:13.0
+      alias: database
+  script:
+    - scripts/test_app.sh
+  variables:
+    DATABASE_HOST: database
+    DATABASE_PORT: 5432
+    POSTGRES_DB: porter_development
+    POSTGRES_USER: porter_app
+    POSTGRES_PASSWORD: password
+

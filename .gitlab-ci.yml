@@ -1,0 +1,27 @@
+include:
+  - gitlab/templates.yaml
+  - gitlab/development-container.yaml
+  - gitlab/development-checks.yaml
+  - gitlab/production-container.yaml
+  - gitlab/production-checks.yaml
+  - gitlab/deploy.yaml
+
+stages:
+  - .pre
+  - development-container
+  - development-checks
+  - production-container
+  - production-checks
+  - deploy
+  - .post
+
+variables:
+  DEVELOPMENT_CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:development
+  PRODUCTION_CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest
+
+before_script:
+  - env
+
+after_script:
+  - env
+

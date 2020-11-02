@@ -1,0 +1,9 @@
+.base:
+  &base
+  stage: deploy
+
+deploy-job:
+  <<: *base
+  script:
+    - echo "deploying..." # using as placeholder
+

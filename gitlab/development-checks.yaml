@@ -1,0 +1,29 @@
+.base:
+  &base
+  stage: development-checks
+  image: $DEVELOPMENT_CONTAINER_IMAGE
+
+development-unit-test:
+  <<: *base
+  extends: .unit-test
+
+lint-shell-scripts:
+  <<: *base
+  script:
+    - scripts/lint_app/run_shellcheck.sh
+
+lint-python-code-with-pycodestyle:
+  <<: *base
+  script:
+    - scripts/lint_app/run_pycodestyle.sh
+
+lint-python-code-with-pylint:
+  <<: *base
+  script:
+    - scripts/lint_app/run_pylint.sh
+
+document:
+  <<: *base
+  script:
+    - scripts/document_app.sh
+
