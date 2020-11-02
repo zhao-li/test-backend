@@ -7,8 +7,10 @@
 
 build-production-container:
   <<: *base
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build --pull --target production --tag $PRODUCTION_CONTAINER_IMAGE .
-    - docker push $PRODUCTION_CONTAINER_IMAGE
+  extends: .build-container
+  variables:
+    ENVIRONMENT: production
+    IMAGE_TAG: $PRODUCTION_CONTAINER_IMAGE # does not interpolate properly: https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1809#note_99891354
+  before_script:
+    - export IMAGE_TAG=$PRODUCTION_CONTAINER_IMAGE # delete hack when possible: https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1809#note_99891354
 
