@@ -7,5 +7,5 @@ build-development-container:
   extends: .build-container
   variables:
     ENVIRONMENT: development
-    IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE
+    IMAGE_TAG: ${DEVELOPMENT_CONTAINER_IMAGE}
 
