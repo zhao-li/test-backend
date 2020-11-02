@@ -1,32 +1,21 @@
 include:
   - gitlab/templates.yaml
-  #- gitlab/pre.yaml
   - gitlab/development-container.yaml
-  #- gitlab/pre-build-checks.yaml
   - gitlab/development-checks.yaml
-  #- gitlab/build.yaml
   - gitlab/production-container.yaml
-  #- gitlab/post-build-checks.yaml
   - gitlab/production-checks.yaml
   - gitlab/deploy.yaml
 
 stages:
   - .pre
   - development-container
-  #- pre-build-checks
   - development-checks
-  #- build
   - production-container
-  #- post-build-checks 
   - production-checks
   - deploy
   - .post
 
-#image: registry.access.redhat.com/ubi8/python-38
-
 variables:
-  #DOCKER_HOST: tcp://docker:2376
-  #DOCKER_TLS_CERTDIR: "/certs"
   DEVELOPMENT_CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:development
   PRODUCTION_CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest
 
@@ -35,14 +24,4 @@ before_script:
 
 after_script:
   - env
-
-#variables:
-#  PYTHONUSERBASE: "$CI_PROJECT_DIR/.cache/pip/"
-#  PYTHONPATH: "$CI_PROJECT_DIR/.cache/pip/"
-#  PIP_TARGET: "$CI_PROJECT_DIR/.cache/pip/"
-
-#cache:
-#  key: ${CI_COMMIT_REF_SLUG}
-#  paths:
-#    - .cache/pip/
 

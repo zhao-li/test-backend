@@ -1,9 +1,0 @@
-.base:
-  &base
-  stage: post-build-checks
-
-integration-test-job:
-  <<: *base
-  script:
-    - echo "doing more checks..."
-
