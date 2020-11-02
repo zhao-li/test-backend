@@ -1,11 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # This script lints the application
 
-shellcheck -- \
-  *.sh \
-  scripts/*.sh \
-  scripts/bootstrap/*.sh \
-  scripts/setup_app/*.sh
+SRC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. "$SRC_DIR"/lint_app/run_shellcheck.sh
 pycodestyle .
 pylint -- *
+
