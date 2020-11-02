@@ -1,5 +1,4 @@
 .build-container:
-  <<: *base
   variables:
     ENVIRONMENT: development
     IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE
