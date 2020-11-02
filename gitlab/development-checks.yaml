@@ -1,0 +1,20 @@
+.base:
+  &base
+  stage: development-checks
+  image: $DEVELOPMENT_CONTAINER_IMAGE
+
+development-unit-test:
+  <<: *base
+  extends: .unit-test
+  allow_failure: true
+
+lint:
+  <<: *base
+  script:
+    - scripts/lint_app.sh
+
+document:
+  <<: *base
+  script:
+    - scripts/document_app.sh
+

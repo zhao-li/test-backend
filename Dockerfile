@@ -18,7 +18,7 @@ RUN scripts/install_dependencies.sh -e development
 COPY . ${APP_DIR}
 
 
-FROM registry.access.redhat.com/ubi8/ubi-minimal
+FROM registry.access.redhat.com/ubi8/ubi-minimal as production
 ARG APP_DIR
 ARG BIN_DIR=/usr/bin/
 WORKDIR ${APP_DIR}/

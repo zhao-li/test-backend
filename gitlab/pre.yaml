@@ -1,9 +1,0 @@
-.base:
-  &base
-  stage: .pre
-
-install-dependencies-job:
-  <<: *base
-  script:
-    - scripts/install_dependencies.sh -e development
-
