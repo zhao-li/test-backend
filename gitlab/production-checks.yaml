@@ -7,6 +7,6 @@ production-unit-test:
   <<: *base
   extends: .unit-test
   allow_failure: true
-  scripts:
+  script:
     - echo "coverage is not installed for production image"
 
