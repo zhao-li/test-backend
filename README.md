@@ -1,6 +1,9 @@
 # Porter:Backend
 The API backend for the Porter application.
 
+[![pipeline status](https://gitlab.com/porter4/backend/badges/master/pipeline.svg)](https://gitlab.com/porter4/backend/-/commits/master)
+[![coverage report](https://gitlab.com/porter4/backend/badges/master/coverage.svg)](https://gitlab.com/porter4/backend/-/commits/master)
+
 Prerequisites
 -------------
 1. install docker
