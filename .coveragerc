@@ -4,4 +4,5 @@ show_missing = true
 omit =
   /opt/*
   /usr/*
+  manage.py
 
