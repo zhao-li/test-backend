@@ -8,10 +8,20 @@ development-unit-test:
   extends: .unit-test
   allow_failure: true
 
-lint:
+lint-shell-scripts:
   <<: *base
   script:
-    - scripts/lint_app.sh
+    - scripts/lint_app/run_shellcheck.sh
+
+lint-python-code-with-pycodestyle:
+  <<: *base
+  script:
+    - scripts/lint_app/run_pycodestyle.sh
+
+lint-python-code-with-pylint:
+  <<: *base
+  script:
+    - scripts/lint_app/run_pylint.sh
 
 document:
   <<: *base
