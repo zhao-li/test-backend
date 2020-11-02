@@ -3,6 +3,7 @@
   stage: deploy
 
 .deploy:
+  <<: *base
   variables:
     ENVIRONMENT: "this needs to be set"
   script:
@@ -22,7 +23,6 @@ release:
     - echo "Releasing..."
 
 deploy-to-isolated-staging:
-  <<: *base
   extends: .deploy
   variables:
     ENVIRONMENT: $GITLAB_USER_EMAIL
@@ -30,16 +30,13 @@ deploy-to-isolated-staging:
     - if: '$CI_COMMIT_BRANCH =~ /feature/'
 
 deploy-to-staging:
-  <<: *base
   extends: .deploy
   variables:
     ENVIRONMENT: staging
-  stage: deploy-stage
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
 
 deploy-to-production:
-  <<: *base
   extends: .deploy
   variables:
     ENVIRONMENT: production
