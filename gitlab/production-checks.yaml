@@ -9,4 +9,5 @@ production-unit-test:
   allow_failure: true
   script:
     - echo "coverage is not installed for production image"
+  artifacts: null
 
