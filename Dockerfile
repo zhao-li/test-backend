@@ -27,7 +27,6 @@ RUN microdnf install \
     nc \
     python38.x86_64 \
   && microdnf clean all
-RUN ln -s ${BIN_DIR}/python3 ${BIN_DIR}/python
 RUN ln -s ${BIN_DIR}/pip3 ${BIN_DIR}/pip
 
 COPY requirements*.txt ${APP_DIR}/
