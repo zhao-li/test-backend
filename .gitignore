@@ -5,4 +5,5 @@ docs/source/*
 docs/build/*
 !docs/source/conf.py
 !docs/source/index.rst
+test.xml
 
