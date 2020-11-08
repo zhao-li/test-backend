@@ -22,6 +22,7 @@
     POSTGRES_PASSWORD: password
   script:
     - scripts/test_app.sh
+    - scripts/fill_coverage_gaps.sh
     - coverage xml
   artifacts:
     reports:
