@@ -27,4 +27,5 @@
   artifacts:
     reports:
       cobertura: coverage.xml
+      junit: test.xml
 
