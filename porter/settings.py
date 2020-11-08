@@ -165,5 +165,5 @@ REST_FRAMEWORK = {
 JSON_API_FORMAT_TYPES = 'camelize'
 
 TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
-TEST_OUTPUT_FILE_NAME  = "test.xml"
+TEST_OUTPUT_FILE_NAME = "test.xml"
 
