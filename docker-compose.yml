@@ -8,10 +8,6 @@ x-app-base:
       - APP_DIR=${APP_DIR}
   command:
     - scripts/start_app.sh
-  env_file:
-    - .env
-    - app.env
-    - database/.env
   ports:
     - ${APP_PORT}
   depends_on:
@@ -20,17 +16,19 @@ x-app-base:
 x-database-base:
   &database-base
   image: postgres:13.0
-  env_file:
-    - database/.env
   volumes:
     - data:/var/lib/postgresql/data/
 
 services:
-  app:
+  backend:
     <<: *app-base
+    build:
+      target: development
 
-  app-production:
+  backend-production:
     <<: *app-base
+    build:
+      target: production
 
   database:
     <<: *database-base

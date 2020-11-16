@@ -2,21 +2,29 @@ version: '3.4'
 
 x-app-override:
   &app-override
+  env_file:
+    - .env
+    - app.env
+    - database/.env
   volumes:
     - .:${APP_DIR}/
 
+x-database-base:
+  &database-base
+  env_file:
+    - database/.env
+
 services:
-  app:
+  backend:
     <<: *app-override
-    build:
-      target: development
     ports:
       - ${APP_PORT}:${APP_PORT}
 
-  app-production:
+  backend-production:
     <<: *app-override
-    build:
-      target: production
     ports:
       - 8001:${APP_PORT}
+
+  database:
+    <<: *database-base
 
