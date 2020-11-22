@@ -31,7 +31,7 @@ setup_containers() (
   case $environment in
     'development')
       docker-compose build --pull
-      docker-compose run app scripts/setup_app.sh
+      docker-compose run backend scripts/setup_app.sh
     ;;
   esac
 )
