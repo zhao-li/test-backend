@@ -55,7 +55,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'porter.urls'
-PATH_PREFIX = '' # possible values: 'api/'
+PATH_PREFIX = ''  # possible values: 'api/'
 
 TEMPLATES = [
     {
