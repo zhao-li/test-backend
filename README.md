@@ -20,29 +20,29 @@ Testing
 -------
 To test the application:
 
-    app$ scripts/test_app.sh
+    backend$ scripts/test_app.sh
 
 To run a single test:
 
-    app$ python manage.py test greeting.tests.GreetingTests.test_fetching_greeters
+    backend$ python manage.py test greeting.tests.GreetingTests.test_fetching_greeters
 
 Linting
 -------
 To lint the application:
 
-    app$ scripts/lint_app.sh
+    backend$ scripts/lint_app.sh
 
 Documenting
 -----------
 To document the application:
 
-    app$ scripts/document_app.sh
+    backend$ scripts/document_app.sh
 
 Migratiing Database
 -------------------
 To create database migrations:
 
-    app$ python manage.py makemigrations
+    backend$ python manage.py makemigrations
 
 For more information: https://docs.djangoproject.com/en/3.1/topics/migrations/
 
