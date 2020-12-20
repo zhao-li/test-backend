@@ -1,7 +1,8 @@
 .build-container:
   variables:
     ENVIRONMENT: development
-    IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE # does not interpolate properly: https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1809#note_99891354
+    GIT_STRATEGY: fetch
+    IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE
   image: docker:19.03.12
   services:
     - docker:19.03.12-dind
