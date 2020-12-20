@@ -21,7 +21,8 @@ variables:
 
 before_script:
   - env
+  - ls -la
 
 after_script:
-  - env
+  - pwd
 
