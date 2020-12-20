@@ -21,6 +21,7 @@ variables:
 
 before_script:
   - env
+  - cd $APP_DIR
   - ls -la
 
 after_script:

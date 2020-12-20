@@ -6,8 +6,17 @@
   services:
     - docker:19.03.12-dind
   script:
-    - echo "$CI_REGISTRY_PASSWORD" | docker login --username $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-    - docker build --pull --target $ENVIRONMENT --tag $IMAGE_TAG .
+    - echo "$CI_REGISTRY_PASSWORD" |
+      docker login 
+        --username $CI_REGISTRY_USER
+        --password-stdin
+        $CI_REGISTRY
+    - docker build 
+        --pull
+        --target $ENVIRONMENT
+        --tag $IMAGE_TAG
+        --build-arg APP_DIR=$APP_DIR
+        .
     - docker push $IMAGE_TAG
 
 .unit-test:
