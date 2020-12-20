@@ -1,8 +1,6 @@
-version: '3.4'
-
 x-app-base:
   &app-base
-  build:
+  build: &app-build-base
     context: .
     args:
       - APP_DIR=${APP_DIR}
@@ -23,11 +21,13 @@ services:
   backend:
     <<: *app-base
     build:
+      <<: *app-build-base
       target: development
 
   backend-production:
     <<: *app-base
     build:
+      <<: *app-build-base
       target: production
 
   database:

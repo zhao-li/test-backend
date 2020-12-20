@@ -18,6 +18,9 @@ RUN scripts/install_dependencies.sh -e development
 COPY . ${APP_DIR}
 
 
+FROM registry.access.redhat.com/ubi8/python-38 as builder
+
+
 FROM registry.access.redhat.com/ubi8/ubi-minimal as production
 ARG APP_DIR
 ARG BIN_DIR=/usr/bin/
@@ -34,11 +37,10 @@ COPY scripts/install_dependencies.sh ${APP_DIR}/scripts/install_dependencies.sh
 RUN pip install --upgrade pip
 RUN scripts/install_dependencies.sh
 
-# not sure why removing erros with: The transaction was empty
-#RUN microdnf remove \
-#    python38.x86_64 \
-#  && microdnf clean all
-#:end not sure why removing erros with: The transaction was empty
+RUN microdnf remove \
+    python38.x86_64 \
+  && microdnf clean all; \
+  exit 0 # hacky workaround to allow Docker to continue building why microdnf fails
 
 COPY . ${APP_DIR}
 
