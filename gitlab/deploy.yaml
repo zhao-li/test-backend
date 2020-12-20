@@ -6,6 +6,8 @@
   <<: *base
   variables:
     ENVIRONMENT: "this needs to be set"
+  before_script:
+    - echo "A hacky way to override global before_script to avoid failure"
   script:
     - echo "deploying to ${ENVIRONMENT}" # using as a placeholder
 
@@ -19,8 +21,6 @@ release:
      description: Created from CI/CD pipeline
      tag_name: '$CI_COMMIT_TAG'
      ref: '$CI_COMMIT_TAG'
-  before_script:
-    - echo "A hacky way to override global before_script to avoid failure"
   script:
     - echo "Releasing..."
 
