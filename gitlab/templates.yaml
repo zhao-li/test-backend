@@ -36,6 +36,6 @@
     - coverage xml
   artifacts:
     reports:
-      cobertura: $APP_DIRcoverage.xml
-      junit: $APP_DIRtest.xml
+      cobertura: "$APP_DIR"coverage.xml
+      junit: "$APP_DIR"test.xml
 
