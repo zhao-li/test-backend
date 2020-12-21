@@ -28,4 +28,6 @@ before_script:
 
 after_script:
   - pwd
+  - ls -la
+  - la -la $APP_DIR
 
