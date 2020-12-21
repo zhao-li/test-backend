@@ -34,8 +34,8 @@
     - scripts/test_app.sh
     - scripts/fill_coverage_gaps.sh
     - coverage xml
-    - copy coverage.xml /builds/porter4/backend/.
-    - copy test.xml /builds/porter4/backend/.
+    - cp coverage.xml /builds/porter4/backend/.
+    - cp test.xml /builds/porter4/backend/.
   artifacts:
     reports:
       cobertura: coverage.xml
