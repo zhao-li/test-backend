@@ -26,9 +26,7 @@ document:
   <<: *base
   script:
     - scripts/document_app.sh
-    - ls -la docs/build/
     - cp -r docs/build/ /builds/porter4/backend/.
-    - ls -la /builds/porter4/backend/
   artifacts:
     paths:
       - build/
