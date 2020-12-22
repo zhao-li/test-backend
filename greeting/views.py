@@ -4,9 +4,8 @@ from .models import Greeting
 from .serializers import GreetingSerializer
 
 
-# pylint:disable=too-many-ancestors
 class GreetingViewSet(viewsets.ModelViewSet):
     """API endpoints for Greeting"""
 
-    queryset = Greeting.objects.all()
+    queryset= Greeting.objects.all()
     serializer_class = GreetingSerializer
