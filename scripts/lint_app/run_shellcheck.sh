@@ -10,5 +10,5 @@ for file in scripts/**/*.sh; do
   shellcheck "$file"
 done
 
-return $findings_found
+exit $findings_found
 
