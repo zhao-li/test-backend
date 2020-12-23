@@ -3,11 +3,8 @@
   stage: production-checks
   image: $PRODUCTION_CONTAINER_IMAGE
 
-production-unit-test:
+integration-test:
   <<: *base
-  extends: .unit-test
-  allow_failure: true
   script:
-    - echo "coverage is not installed for production image"
-  artifacts: null
+    - echo "production container specific testing is yet to come"
 
