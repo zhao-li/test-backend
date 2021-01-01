@@ -20,22 +20,9 @@
         .
     - docker push $IMAGE_TAG
 
-.unit-test:
-  services:
-    - name: postgres:13.0
-      alias: database
-  variables:
-    DATABASE_HOST: database
-    DATABASE_PORT: 5432
-    POSTGRES_DB: porter_development
-    POSTGRES_USER: porter_app
-    POSTGRES_PASSWORD: password
-  script:
-    - scripts/test_app.sh
-    - scripts/fill_coverage_gaps.sh
-    - coverage xml
-  artifacts:
-    reports:
-      cobertura: coverage.xml
-      junit: test.xml
+.cache-coverage:
+  cache:
+    key: ${CI_COMMIT_SHA}
+    paths:
+      - .coverage
 

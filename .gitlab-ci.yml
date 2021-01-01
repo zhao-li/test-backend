@@ -21,11 +21,3 @@ variables:
   GIT_STRATEGY: none
   PRODUCTION_CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest
 
-before_script:
-  - env
-  - cd $APP_DIR
-  - ls -la
-
-after_script:
-  - pwd
-

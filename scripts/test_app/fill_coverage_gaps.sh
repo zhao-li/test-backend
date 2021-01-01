@@ -5,6 +5,5 @@
 
 pip uninstall --yes django
 coverage run --append ./manage.py check
-coverage report --fail-under=1000
 pip install --requirement requirements.txt
 

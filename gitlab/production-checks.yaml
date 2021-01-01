@@ -1,13 +1,44 @@
 .base:
   &base
+  needs:
+    - build-production-container
   stage: production-checks
   image: $PRODUCTION_CONTAINER_IMAGE
 
-production-unit-test:
+integration-test:
   <<: *base
-  extends: .unit-test
-  allow_failure: true
+  extends:
+    - .cache-coverage
+  needs:
+    - build-production-container
+    - unit-test
+  services:
+    - name: postgres:13.0
+      alias: database
+  variables:
+    DATABASE_HOST: database
+    DATABASE_PORT: 5432
+    POSTGRES_DB: porter_pipeline
+    POSTGRES_USER: porter_app
+    POSTGRES_PASSWORD: password
+  before_script:
+    - cd $APP_DIR
+    - pip install
+        coverage
+        unittest-xml-reporting
+    - cp $CI_PROJECT_DIR/.coverage $APP_DIR/.
   script:
-    - echo "coverage is not installed for production image"
-  artifacts: null
+    - scripts/test_app/run_integration_tests.sh
+    - coverage xml
+    - coverage report
+  after_script:
+    - cp $APP_DIR/coverage.xml $CI_PROJECT_DIR/.
+    - cp $APP_DIR/test.xml $CI_PROJECT_DIR/.
+  cache:
+    policy: pull
+  artifacts:
+    reports:
+      cobertura: coverage.xml
+      junit: test.xml
+    when: always
 

@@ -1,11 +1,36 @@
 .base:
   &base
+  needs:
+    - build-development-container
   stage: development-checks
   image: $DEVELOPMENT_CONTAINER_IMAGE
+  before_script:
+    - cd $APP_DIR
+    - ls -la
 
-development-unit-test:
+unit-test:
   <<: *base
-  extends: .unit-test
+  extends:
+    - .cache-coverage
+  variables:
+    DATABASE_HOST: not_used_to_connect_to_database # needed to run test suite
+    DATABASE_PORT: not_used_to_connect_to_database # needed to run test suite
+    POSTGRES_DB: not_used_to_connect_to_database # needed to run test suite
+    POSTGRES_USER: not_used_to_connect_to_database # needed to run test suite
+    POSTGRES_PASSWORD: not_used_to_connect_to_database # needed to run test suite
+  script:
+    - scripts/test_app/run_unit_tests.sh
+    - scripts/test_app/fill_coverage_gaps.sh
+    - coverage report
+  after_script:
+    - cp $APP_DIR/.coverage $CI_PROJECT_DIR/.
+    - cp $APP_DIR/test.xml $CI_PROJECT_DIR/.
+  cache:
+    policy: push
+  artifacts:
+    reports:
+      junit: test.xml
+    when: always
 
 lint-shell-scripts:
   <<: *base
@@ -26,4 +51,8 @@ document:
   <<: *base
   script:
     - scripts/document_app.sh
+    - cp -r docs/build/ /builds/porter4/backend/.
+  artifacts:
+    paths:
+      - build/
 
