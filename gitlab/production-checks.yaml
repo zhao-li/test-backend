@@ -10,7 +10,7 @@ integration-test:
   <<: *base
   needs:
     - build-production-container
-    #- unit-test
+    - unit-test
   services:
     - name: postgres:13.0
       alias: database
@@ -24,7 +24,7 @@ integration-test:
     - pwd
     - ls -la
     - ls -la $CI_PROJECT_DIR
-    #- cp $CI_PROJECT_DIR/.coverage $APP_DIR/.
+    - cp $CI_PROJECT_DIR/.coverage $APP_DIR/.
     - pip install coverage unittest-xml-reporting
     - scripts/test_app/run_integration_tests.sh
     - coverage xml
