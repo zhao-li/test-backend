@@ -21,8 +21,3 @@ variables:
   GIT_STRATEGY: none
   PRODUCTION_CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest
 
-cache:
-  key: ${CI_COMMIT_SHA}
-  paths:
-    - .coverage
-

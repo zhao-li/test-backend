@@ -26,3 +26,9 @@
         .
     - docker push $IMAGE_TAG
 
+.cache-coverage:
+  cache:
+    key: ${CI_COMMIT_SHA}
+    paths:
+      - .coverage
+

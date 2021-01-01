@@ -8,6 +8,7 @@
 
 integration-test:
   <<: *base
+  extends: .cache-coverage
   needs:
     - build-production-container
     - unit-test
