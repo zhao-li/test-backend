@@ -27,8 +27,8 @@ integration-test:
   after_script:
     - pwd
     - ls -la
-    - cp coverage.xml /builds/porter4/backend/.
-    - cp test.xml /builds/porter4/backend/.
+    - cp $APP_DIR/coverage.xml $CI_PROJECT_DIR/.
+    - cp $APP_DIR/test.xml $CI_PROJECT_DIR/.
   artifacts:
     reports:
       cobertura: coverage.xml
