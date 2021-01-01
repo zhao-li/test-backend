@@ -24,3 +24,8 @@ variables:
 after_script:
   - pwd
 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - $APP_DIR/.coverage
+
