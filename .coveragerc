@@ -1,6 +1,6 @@
 [report]
 show_missing = true
 omit =
-  /opt/*
-  /usr/local/*
+  /opt/* # location of dependencies in development container
+  /usr/local/* # location of dependencies in production container
 
