@@ -20,6 +20,12 @@ unit-test:
     - coverage report
   after_script:
     - cp $APP_DIR/.coverage $CI_PROJECT_DIR/.
+    - cp $APP_DIR/test.xml $CI_PROJECT_DIR/.
+  artifacts:
+    reports:
+      junit: test.xml
+    when: always
+
 
 lint-shell-scripts:
   <<: *base
