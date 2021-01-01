@@ -18,8 +18,13 @@ integration-test:
     POSTGRES_USER: porter_app
     POSTGRES_PASSWORD: password
   script:
+    - pip install coverage unittest-xml-reporting
     - scripts/test_app/run_integration_tests.sh
     - coverage xml
     - cp coverage.xml /builds/porter4/backend/.
     - cp test.xml /builds/porter4/backend/.
+  artifacts:
+    reports:
+      cobertura: coverage.xml
+      junit: test.xml
 
