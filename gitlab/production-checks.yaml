@@ -34,6 +34,8 @@ integration-test:
   after_script:
     - cp $APP_DIR/coverage.xml $CI_PROJECT_DIR/.
     - cp $APP_DIR/test.xml $CI_PROJECT_DIR/.
+  cache:
+    policy: pull
   artifacts:
     reports:
       cobertura: coverage.xml
