@@ -8,7 +8,9 @@
 
 unit-test:
   <<: *base
-  extends: .cache-coverage
+  extends:
+    - .common
+    - .cache-coverage
   variables:
     DATABASE_HOST: not_used_to_connect_to_database # needed to run test suite
     DATABASE_PORT: not_used_to_connect_to_database # needed to run test suite
