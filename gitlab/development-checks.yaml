@@ -15,6 +15,8 @@ unit-test:
     POSTGRES_USER: not_used_to_connect_to_database # needed to run test suite
     POSTGRES_PASSWORD: not_used_to_connect_to_database # needed to run test suite
   script:
+    - pwd
+    - ls -la
     - scripts/test_app/run_unit_tests.sh
     - scripts/test_app/fill_coverage_gaps.sh
     - coverage xml

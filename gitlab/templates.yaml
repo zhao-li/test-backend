@@ -1,6 +1,6 @@
 .common:
   before_script:
-    - env
+    #- env
     - cd $APP_DIR
     - ls -la
 
