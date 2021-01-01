@@ -40,7 +40,7 @@ RUN scripts/install_dependencies.sh
 RUN microdnf remove \
     python38.x86_64 \
   && microdnf clean all; \
-  exit 0 # hacky workaround to allow Docker to continue building why microdnf fails
+  exit 0 # hacky workaround to allow Docker to continue building when microdnf fails
 
 COPY . ${APP_DIR}
 
