@@ -2,4 +2,5 @@
 show_missing = true
 omit =
   /opt/*
+  /usr/local/*
 
