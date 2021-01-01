@@ -20,7 +20,6 @@ unit-test:
     - ls -la $CI_PROJECT_DIR
     - scripts/test_app/run_unit_tests.sh
     - scripts/test_app/fill_coverage_gaps.sh
-    - coverage xml
     - coverage report
     - cp $APP_DIR/.coverage $CI_PROJECT_DIR/.
     - ls -la $CI_PROJECT_DIR
