@@ -20,19 +20,15 @@ integration-test:
     POSTGRES_DB: porter_pipeline
     POSTGRES_USER: porter_app
     POSTGRES_PASSWORD: password
-  script:
-    - pwd
-    - ls -la
-    - ls -la $CI_PROJECT_DIR
-    - cp $CI_PROJECT_DIR/.coverage $APP_DIR/.
+  before_script:
+    - cd $APP_DIR
     - pip install coverage unittest-xml-reporting
+    - cp $CI_PROJECT_DIR/.coverage $APP_DIR/.
+  script:
     - scripts/test_app/run_integration_tests.sh
     - coverage xml
     - coverage report
-    - ls -la $CI_PROJECT_DIR
   after_script:
-    - pwd
-    - ls -la
     - cp $APP_DIR/coverage.xml $CI_PROJECT_DIR/.
     - cp $APP_DIR/test.xml $CI_PROJECT_DIR/.
   artifacts:
