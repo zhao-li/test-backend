@@ -16,7 +16,6 @@
         --pull
         --target $ENVIRONMENT
         --tag $IMAGE_TAG
-        --build-arg APP_DIR=$APP_DIR
         .
     - docker push $IMAGE_TAG
 
