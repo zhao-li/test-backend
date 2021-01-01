@@ -25,7 +25,7 @@ after_script:
   - pwd
 
 cache:
-  key: ${CI_COMMIT_REF_SLUG}
+  key: ${CI_COMMIT_SHA}
   paths:
     - .coverage
 
