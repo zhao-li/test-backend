@@ -4,11 +4,13 @@
     - build-development-container
   stage: development-checks
   image: $DEVELOPMENT_CONTAINER_IMAGE
+  before_script:
+    - cd $APP_DIR
+    - ls -la
 
 unit-test:
   <<: *base
   extends:
-    - .common
     - .cache-coverage
   variables:
     DATABASE_HOST: not_used_to_connect_to_database # needed to run test suite
