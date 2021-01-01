@@ -21,6 +21,8 @@ integration-test:
     - pip install coverage unittest-xml-reporting
     - scripts/test_app/run_integration_tests.sh
     - coverage xml
+    - coverage report
+  after_script:
     - cp coverage.xml /builds/porter4/backend/.
     - cp test.xml /builds/porter4/backend/.
   artifacts:

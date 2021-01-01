@@ -18,12 +18,7 @@ unit-test:
     - scripts/test_app/run_unit_tests.sh
     - scripts/test_app/fill_coverage_gaps.sh
     - coverage xml
-    - cp coverage.xml /builds/porter4/backend/.
-    - cp test.xml /builds/porter4/backend/.
-  artifacts:
-    reports:
-      cobertura: coverage.xml
-      junit: test.xml
+    - coverage report
 
 lint-shell-scripts:
   <<: *base
