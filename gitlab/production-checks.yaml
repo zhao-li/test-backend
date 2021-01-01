@@ -1,10 +1,13 @@
 .base:
   &base
-  extends: .common
-  stage: production-checks
-  image: $PRODUCTION_CONTAINER_IMAGE
   needs:
     - build-production-container
+  stage: production-checks
+  image: $PRODUCTION_CONTAINER_IMAGE
+  before_script:
+    #- env
+    - cd $APP_DIR
+    - ls -la
 
 integration-test:
   <<: *base

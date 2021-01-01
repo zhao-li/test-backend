@@ -1,9 +1,3 @@
-.common:
-  before_script:
-    #- env
-    - cd $APP_DIR
-    - ls -la
-
 .build-container:
   variables:
     ENVIRONMENT: development

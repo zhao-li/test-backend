@@ -1,6 +1,5 @@
 .base:
   &base
-  extends: .common
   stage: development-checks
   image: $DEVELOPMENT_CONTAINER_IMAGE
   needs:
