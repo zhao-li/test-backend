@@ -23,6 +23,7 @@ unit-test:
     - coverage xml
     - coverage report
     - cp $APP_DIR/.coverage $CI_PROJECT_DIR/.
+    - ls -la $CI_PROJECT_DIR
 
 lint-shell-scripts:
   <<: *base

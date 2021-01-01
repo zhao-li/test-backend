@@ -27,5 +27,5 @@ after_script:
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
-    - $APP_DIR/.coverage
+    - .coverage
 
