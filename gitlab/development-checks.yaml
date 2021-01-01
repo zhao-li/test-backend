@@ -9,7 +9,7 @@
 unit-test:
   <<: *base
   variables:
-    DATABASE_HOST: database
+    DATABASE_PORT: 5432
     POSTGRES_DB: porter_pipeline
     POSTGRES_USER: porter_app
     POSTGRES_PASSWORD: password
