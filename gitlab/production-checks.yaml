@@ -22,7 +22,9 @@ integration-test:
     POSTGRES_PASSWORD: password
   before_script:
     - cd $APP_DIR
-    - pip install coverage unittest-xml-reporting
+    - pip install
+        coverage
+        unittest-xml-reporting
     - cp $CI_PROJECT_DIR/.coverage $APP_DIR/.
   script:
     - scripts/test_app/run_integration_tests.sh
