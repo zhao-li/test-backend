@@ -2,6 +2,7 @@
   &base
   stage: production-checks
   image: $PRODUCTION_CONTAINER_IMAGE
+  extends: .common
 
 integration-test:
   <<: *base
