@@ -8,6 +8,8 @@
 
 integration-test:
   <<: *base
+  needs:
+    - unit-test
   services:
     - name: postgres:13.0
       alias: database
