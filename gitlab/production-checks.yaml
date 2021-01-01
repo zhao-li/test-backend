@@ -3,6 +3,8 @@
   extends: .common
   stage: production-checks
   image: $PRODUCTION_CONTAINER_IMAGE
+  needs:
+    - build-production-container
 
 integration-test:
   <<: *base

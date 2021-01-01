@@ -1,6 +1,7 @@
 .base:
   &base
   stage: production-container
+  needs: []
 
 build-production-container:
   <<: *base

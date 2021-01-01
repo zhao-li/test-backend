@@ -3,6 +3,8 @@
   extends: .common
   stage: development-checks
   image: $DEVELOPMENT_CONTAINER_IMAGE
+  needs:
+    - build-development-container
 
 unit-test:
   <<: *base

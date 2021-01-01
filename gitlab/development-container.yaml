@@ -1,6 +1,7 @@
 .base:
   &base
   stage: development-container
+  needs: []
 
 build-development-container:
   <<: *base
