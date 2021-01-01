@@ -8,6 +8,18 @@
 
 integration-test:
   <<: *base
+  services:
+    - name: postgres:13.0
+      alias: database
+  variables:
+    DATABASE_HOST: database
+    DATABASE_PORT: 5432
+    POSTGRES_DB: porter_pipeline
+    POSTGRES_USER: porter_app
+    POSTGRES_PASSWORD: password
   script:
-    - echo "production container specific testing is yet to come"
+    - scripts/test_app/run_integration_tests.sh
+    - coverage xml
+    - cp coverage.xml /builds/porter4/backend/.
+    - cp test.xml /builds/porter4/backend/.
 
