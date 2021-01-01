@@ -1,5 +1,5 @@
 FROM registry.access.redhat.com/ubi8/python-38 as development
-ARG APP_DIR
+ARG APP_DIR=/usr/src/app/
 WORKDIR ${APP_DIR}/
 
 USER root
@@ -22,7 +22,7 @@ FROM registry.access.redhat.com/ubi8/python-38 as builder
 
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal as production
-ARG APP_DIR
+ARG APP_DIR=/usr/src/app/
 ARG BIN_DIR=/usr/bin/
 WORKDIR ${APP_DIR}/
 
