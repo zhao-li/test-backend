@@ -3,7 +3,7 @@
 import json
 
 from rest_framework import status
-from django.test import Client, TestCase
+from django.test import Client, TestCase, tag
 
 from .models import Greeting
 
@@ -14,11 +14,13 @@ class GreetingTests(TestCase):
     def setUp(self):
         self.client = Client()
 
+    @tag('integration')
     def test_fetching_greeters(self):
         """test getting a list of greeters"""
         response = self.client.get('/greetings/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    @tag('integration')
     def test_for_json_api_compliance(self):
         """test response complies with json api spec"""
         response = self.client.get('/greetings/')
@@ -26,6 +28,7 @@ class GreetingTests(TestCase):
         expected_key = 'data'
         self.assertTrue(expected_key in response.json())
 
+    @tag('integration')
     def test_creating_greeter(self):
         """test creating a greeting"""
 
@@ -52,6 +55,7 @@ class GreetingTests(TestCase):
             expected_message
         )
 
+    @tag('integration')
     def test_creating_and_getting_greeting(self):
         """test creating a greeting"""
 
