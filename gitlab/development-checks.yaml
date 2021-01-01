@@ -6,24 +6,24 @@
   needs:
     - build-development-container
 
-unit-test:
-  <<: *base
-  variables:
-    DATABASE_HOST: not_used_to_connect_to_database # needed to run test suite
-    DATABASE_PORT: not_used_to_connect_to_database # needed to run test suite
-    POSTGRES_DB: not_used_to_connect_to_database # needed to run test suite
-    POSTGRES_USER: not_used_to_connect_to_database # needed to run test suite
-    POSTGRES_PASSWORD: not_used_to_connect_to_database # needed to run test suite
-  script:
-    - pwd
-    - ls -la
-    - ls -la $CI_PROJECT_DIR
-    - scripts/test_app/run_unit_tests.sh
-    - scripts/test_app/fill_coverage_gaps.sh
-    - coverage report
-    - cp $APP_DIR/.coverage $CI_PROJECT_DIR/.
-    - ls -la
-    - ls -la $CI_PROJECT_DIR
+#unit-test:
+#  <<: *base
+#  variables:
+#    DATABASE_HOST: not_used_to_connect_to_database # needed to run test suite
+#    DATABASE_PORT: not_used_to_connect_to_database # needed to run test suite
+#    POSTGRES_DB: not_used_to_connect_to_database # needed to run test suite
+#    POSTGRES_USER: not_used_to_connect_to_database # needed to run test suite
+#    POSTGRES_PASSWORD: not_used_to_connect_to_database # needed to run test suite
+#  script:
+#    - pwd
+#    - ls -la
+#    - ls -la $CI_PROJECT_DIR
+#    - scripts/test_app/run_unit_tests.sh
+#    - scripts/test_app/fill_coverage_gaps.sh
+#    - coverage report
+#    - cp $APP_DIR/.coverage $CI_PROJECT_DIR/.
+#    - ls -la
+#    - ls -la $CI_PROJECT_DIR
 
 lint-shell-scripts:
   <<: *base
