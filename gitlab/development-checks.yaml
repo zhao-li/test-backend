@@ -26,7 +26,6 @@ unit-test:
       junit: test.xml
     when: always
 
-
 lint-shell-scripts:
   <<: *base
   script:
