@@ -4,6 +4,8 @@ from django.test import Client, TestCase, tag
 from rest_framework import status
 from .models import Greeting
 
+TYPE = 'greetings'
+
 
 class GreetingTests(TestCase):
     """Test Greeter API"""
@@ -32,7 +34,7 @@ class GreetingTests(TestCase):
         message = 'greetings'
         json_data = {
             'data': {
-                'type': 'greetings',
+                'type': TYPE,
                 'attributes': {
                     'message': message
                 }
@@ -56,10 +58,10 @@ class GreetingTests(TestCase):
     def test_creating_and_reading(self):
         """test creating and reading"""
 
-        message = 'greetings'
+        message = 'A Greeting'
         json_data = {
             'data': {
-                'type': 'greetings',
+                'type': TYPE,
                 'attributes': {
                     'message': message
                 }
