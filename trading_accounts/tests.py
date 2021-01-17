@@ -1,4 +1,4 @@
-"""Definte tests for entire module"""
+"""Define tests for entire module"""
 from django.test import Client, TestCase, tag
 from rest_framework import status
 
