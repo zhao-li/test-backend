@@ -31,7 +31,7 @@ class GreetingTests(TestCase):
     def test_creating(self):
         """test creating"""
 
-        message = 'greetings'
+        message = 'A Greeting'
         json_data = {
             'data': {
                 'type': TYPE,
