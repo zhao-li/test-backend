@@ -1,9 +1,9 @@
 """Define serializers"""
-from rest_framework import serializers
+from rest_framework_json_api import serializers
 from .models import TradingAccount
 
 
-class TradingAccountSerializer(serializers.HyperlinkedModelSerializer):
+class TradingAccountSerializer(serializers.ModelSerializer):
     """Define Trading Account serializer"""
 
     class Meta:
