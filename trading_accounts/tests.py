@@ -4,6 +4,8 @@ from django.test import Client, TestCase, tag
 from rest_framework import status
 from .models import TradingAccount
 
+TYPE = 'tradingAccounts'
+
 
 class TradingAccountTests(TestCase):
     """Test Trading Account API"""
@@ -32,7 +34,7 @@ class TradingAccountTests(TestCase):
         name = 'A Trading Account Name'
         json_data = {
             'data': {
-                'type': 'tradingAccounts',
+                'type': TYPE,
                 'attributes': {
                     'name': name
                 }
@@ -59,7 +61,7 @@ class TradingAccountTests(TestCase):
         name = 'A Trading Account Name'
         json_data = {
             'data': {
-                'type': 'tradingAccounts',
+                'type': TYPE,
                 'attributes': {
                     'name': name
                 }
