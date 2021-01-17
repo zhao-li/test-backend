@@ -24,7 +24,7 @@ To test the application:
 
 To run a single test:
 
-    backend$ python manage.py test greeting.tests.GreetingTests.test_fetching_greeters
+    backend$ python manage.py test greetings.tests.GreetingTests.test_fetching_greeters
 
 Linting
 -------

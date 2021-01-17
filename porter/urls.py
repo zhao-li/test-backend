@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(f'{settings.PATH_PREFIX}', include([
         path('trading-accounts/', include('trading_accounts.urls')),
-        path('greetings/', include('greeting.urls')),
+        path('greetings/', include('greetings.urls')),
     ])),
 ]
 
