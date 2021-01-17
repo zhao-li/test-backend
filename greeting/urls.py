@@ -1,4 +1,4 @@
-""" Greeting url configuration """
+""" Define URL/routes """
 
 from django.conf.urls import include
 from django.urls import re_path
@@ -11,3 +11,4 @@ ROUTER.register(r'', GreetingViewSet)
 urlpatterns = [
     re_path(r'', include(ROUTER.urls)),
 ]
+

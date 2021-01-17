@@ -1,11 +1,12 @@
-"""Define Greeting serializers"""
-from rest_framework import serializers
+"""Define serializers"""
+from rest_framework_json_api import serializers
 from .models import Greeting
 
 
-class GreetingSerializer(serializers.HyperlinkedModelSerializer):
+class GreetingSerializer(serializers.ModelSerializer):
     """Define Greeting serializer"""
 
     class Meta:
         model = Greeting
         fields = '__all__'
+

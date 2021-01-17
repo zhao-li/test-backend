@@ -1,10 +1,7 @@
-"""Test Greeting Module"""
-
+"""Define tests for entire module"""
 import json
-
-from rest_framework import status
 from django.test import Client, TestCase, tag
-
+from rest_framework import status
 from .models import Greeting
 
 
@@ -15,8 +12,8 @@ class GreetingTests(TestCase):
         self.client = Client()
 
     @tag('integration')
-    def test_fetching_greeters(self):
-        """test getting a list of greeters"""
+    def test_reading(self):
+        """test reading"""
         response = self.client.get('/greetings/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -29,13 +26,13 @@ class GreetingTests(TestCase):
         self.assertTrue(expected_key in response.json())
 
     @tag('integration')
-    def test_creating_greeter(self):
-        """test creating a greeting"""
+    def test_creating(self):
+        """test creating"""
 
         message = 'greetings'
         json_data = {
             'data': {
-                'type': 'greeting',
+                'type': 'greetings',
                 'attributes': {
                     'message': message
                 }
@@ -56,13 +53,13 @@ class GreetingTests(TestCase):
         )
 
     @tag('integration')
-    def test_creating_and_getting_greeting(self):
-        """test creating a greeting"""
+    def test_creating_and_reading(self):
+        """test creating and reading"""
 
         message = 'greetings'
         json_data = {
             'data': {
-                'type': 'greeting',
+                'type': 'greetings',
                 'attributes': {
                     'message': message
                 }
