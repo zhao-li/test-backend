@@ -1,3 +1,3 @@
-from django.contrib import admin
+"""Register models to Django admin console"""
 
-# Register your models here.
+
