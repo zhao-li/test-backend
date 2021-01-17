@@ -80,7 +80,10 @@ class TradingAccountTests(TestCase):
         response = self.client.get('/trading-accounts/')
         first_trading_account_index = 0
         self.assertEqual(
-            response.json()['data'][first_trading_account_index]['attributes']['name'],
+            (response.json()
+                ['data'][first_trading_account_index]
+                ['attributes']['name']
+             ),
             expected_name
         )
 

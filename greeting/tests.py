@@ -80,6 +80,10 @@ class GreetingTests(TestCase):
         response = self.client.get('/greetings/')
         first_greeter = 0
         self.assertEqual(
-            response.json()['data'][first_greeter]['attributes']['message'],
+            (response.json()
+                ['data'][first_greeter]
+                ['attributes']['message']
+             ),
             expected_message
         )
+
