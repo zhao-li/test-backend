@@ -1,3 +1,7 @@
 """Define models"""
+from django.db import models
 
-# Create your models here.
+class TradingAccount(models.Model):
+    """Define TradingAccount model"""
+    name = models.CharField(max_length=200)
+

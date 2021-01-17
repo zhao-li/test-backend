@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'greeting',
     'users',
+    'trading_accounts',
 ]
 
 MIDDLEWARE = [
