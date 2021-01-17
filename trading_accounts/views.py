@@ -4,6 +4,7 @@ from .models import TradingAccount
 from .serializers import TradingAccountSerializer
 
 
+# pylint:disable=too-many-ancestors
 class TradingAccountViewSet(viewsets.ModelViewSet):
     """API endpoints for Trading Account"""
 
