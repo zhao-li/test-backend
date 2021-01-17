@@ -4,6 +4,7 @@ from django.test import Client, TestCase, tag
 from rest_framework import status
 from .models import TradingAccount
 
+
 class TradingAccountTests(TestCase):
     """Test Trading Account API"""
 
@@ -58,25 +59,26 @@ class TradingAccountTests(TestCase):
         name = 'A Trading Account Name'
         json_data = {
             'data': {
-                'type': 'greeting',
+                'type': 'tradingAccounts',
                 'attributes': {
-                    'message': message
+                    'name': name
                 }
             }
         }
 
         response = self.client.post(
-            '/greetings/',
+            '/trading-accounts/',
             json.dumps(json_data),
             content_type='application/vnd.api+json'
         )
 
-        expected_message = message
-        self.assertEqual(Greeting.objects.first().message, expected_message)
+        expected_name = name
+        self.assertEqual(TradingAccount.objects.first().name, expected_name)
 
-        response = self.client.get('/greetings/')
-        first_greeter = 0
+        response = self.client.get('/trading-accounts/')
+        first_trading_account_index = 0
         self.assertEqual(
-            response.json()['data'][first_greeter]['attributes']['message'],
-            expected_message
+            response.json()['data'][first_trading_account_index]['attributes']['name'],
+            expected_name
         )
+
