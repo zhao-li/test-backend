@@ -4,11 +4,13 @@ from django.test import Client, TestCase, tag
 from rest_framework import status
 from .models import Greeting
 
-TYPE = 'greetings'
 
+TYPE = 'greetings'
+PATH = '/greetings/'
+CONTENT_TYPE ='application/vnd.api+json'
 
 class GreetingsTests(TestCase):
-    """Test Greeter API"""
+    """Test CRUD"""
 
     def setUp(self):
         self.client = Client()
@@ -16,13 +18,13 @@ class GreetingsTests(TestCase):
     @tag('integration')
     def test_reading(self):
         """test reading"""
-        response = self.client.get('/greetings/')
+        response = self.client.get(PATH)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     @tag('integration')
     def test_for_json_api_compliance(self):
         """test response complies with json api spec"""
-        response = self.client.get('/greetings/')
+        response = self.client.get(PATH)
 
         expected_key = 'data'
         self.assertTrue(expected_key in response.json())
@@ -42,9 +44,9 @@ class GreetingsTests(TestCase):
         }
 
         response = self.client.post(
-            '/greetings/',
+            PATH,
             json.dumps(json_data),
-            content_type='application/vnd.api+json'
+            content_type=CONTENT_TYPE,
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -68,9 +70,9 @@ class GreetingsTests(TestCase):
             }
         }
         response = self.client.post(
-            '/greetings/',
+            PATH,
             json.dumps(original_json_data),
-            content_type='application/vnd.api+json'
+            content_type=CONTENT_TYPE
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         expected_message = original_message
@@ -84,9 +86,9 @@ class GreetingsTests(TestCase):
         updated_json_data = response.json()
         updated_json_data['data']['attributes']['message'] = updated_message
         response = self.client.patch(
-            '/greetings/' + greeting_id + '/',
+            PATH + greeting_id + '/',
             data=json.dumps(updated_json_data),
-            content_type='application/vnd.api+json'
+            content_type=CONTENT_TYPE,
         )
         expected_message = updated_message
         self.assertEqual(
@@ -114,9 +116,9 @@ class GreetingsTests(TestCase):
         }
 
         response = self.client.post(
-            '/greetings/',
+            PATH,
             json.dumps(json_data),
-            content_type='application/vnd.api+json'
+            content_type=CONTENT_TYPE,
         )
         greeting_id = response.json()['data']['id']
 
@@ -128,9 +130,9 @@ class GreetingsTests(TestCase):
         )
 
         response = self.client.delete(
-            '/greetings/' + greeting_id + '/',
+            PATH + greeting_id + '/',
             json.dumps(json_data),
-            content_type='application/vnd.api+json'
+            content_type=CONTENT_TYPE,
         )
         self.assertEqual(
             Greeting.objects.count(),
@@ -152,9 +154,9 @@ class GreetingsTests(TestCase):
         }
 
         response = self.client.post(
-            '/greetings/',
+            PATH,
             json.dumps(json_data),
-            content_type='application/vnd.api+json'
+            content_type=CONTENT_TYPE,
         )
         greeting_id = response.json()['data']['id']
         updated_json_data = response.json()
@@ -165,7 +167,7 @@ class GreetingsTests(TestCase):
             expected_message
         )
 
-        response = self.client.get('/greetings/')
+        response = self.client.get(PATH)
         first_greeter = 0
         self.assertEqual(
             (response.json()
@@ -178,9 +180,9 @@ class GreetingsTests(TestCase):
         updated_message = 'Updated Greeting'
         updated_json_data['data']['attributes']['message'] = updated_message
         response = self.client.patch(
-            '/greetings/' + greeting_id + '/',
+            PATH + greeting_id + '/',
             data=json.dumps(updated_json_data),
-            content_type='application/vnd.api+json'
+            content_type=CONTENT_TYPE,
         )
         expected_message = updated_message
         self.assertEqual(
@@ -189,9 +191,7 @@ class GreetingsTests(TestCase):
         )
 
         response = self.client.delete(
-            '/greetings/' + greeting_id + '/',
-            json.dumps(json_data),
-            content_type='application/vnd.api+json'
+            PATH + greeting_id + '/',
         )
         no_greetings = 0
         self.assertEqual(
