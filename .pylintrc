@@ -3,7 +3,6 @@ load-plugins =
   pylint_django
 
 ignore =
-  .cache, ; needed for Gitlab's CI/CD
   database,
   docs,
   Dockerfile,
