@@ -7,7 +7,7 @@ from .models import Greeting
 TYPE = 'greetings'
 
 
-class GreetingTests(TestCase):
+class GreetingsTests(TestCase):
     """Test Greeter API"""
 
     def setUp(self):
@@ -31,12 +31,12 @@ class GreetingTests(TestCase):
     def test_creating(self):
         """test creating"""
 
-        message = 'A Greeting'
+        arbitrary_message = 'A Greeting'
         json_data = {
             'data': {
                 'type': TYPE,
                 'attributes': {
-                    'message': message
+                    'message': arbitrary_message
                 }
             }
         }
@@ -48,22 +48,67 @@ class GreetingTests(TestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        expected_message = message
+        expected_message = arbitrary_message
         self.assertEqual(
             Greeting.objects.first().message,
             expected_message
         )
 
     @tag('integration')
-    def test_creating_and_reading(self):
-        """test creating and reading"""
+    def test_updating(self):
+        """test updating"""
 
-        message = 'A Greeting'
+        original_message = 'Original Greeting'
+        original_json_data = {
+            'data': {
+                'type': TYPE,
+                'attributes': {
+                    'message': original_message
+                }
+            }
+        }
+        response = self.client.post(
+            '/greetings/',
+            json.dumps(original_json_data),
+            content_type='application/vnd.api+json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        expected_message = original_message
+        self.assertEqual(
+            Greeting.objects.first().message,
+            expected_message
+        )
+
+        greeting_id = response.json()['data']['id']
+        updated_message = 'Updated Greeting'
+        updated_json_data = response.json()
+        updated_json_data['data']['attributes']['message'] = updated_message
+        response = self.client.patch(
+            '/greetings/' + greeting_id + '/',
+            data=json.dumps(updated_json_data),
+            content_type='application/vnd.api+json'
+        )
+        expected_message = updated_message
+        self.assertEqual(
+            Greeting.objects.get(pk=greeting_id).message,
+            expected_message
+        )
+
+    @tag('integration')
+    def test_deleting(self):
+        """test deleting"""
+
+        no_greetings = 0
+        self.assertEqual(
+            Greeting.objects.count(),
+            no_greetings
+        )
+
         json_data = {
             'data': {
                 'type': TYPE,
                 'attributes': {
-                    'message': message
+                    'message': 'An Arbitrary Greeting'
                 }
             }
         }
@@ -73,9 +118,52 @@ class GreetingTests(TestCase):
             json.dumps(json_data),
             content_type='application/vnd.api+json'
         )
+        greeting_id = response.json()['data']['id']
 
-        expected_message = message
-        self.assertEqual(Greeting.objects.first().message, expected_message)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        one_new_greeting = 1
+        self.assertEqual(
+            Greeting.objects.count(),
+            one_new_greeting
+        )
+
+        response = self.client.delete(
+            '/greetings/' + greeting_id + '/',
+            json.dumps(json_data),
+            content_type='application/vnd.api+json'
+        )
+        self.assertEqual(
+            Greeting.objects.count(),
+            no_greetings
+        )
+
+    @tag('integration')
+    def test_full_lifecycle(self):
+        """test full lifecycle"""
+
+        original_message = 'A Greeting'
+        json_data = {
+            'data': {
+                'type': TYPE,
+                'attributes': {
+                    'message': original_message
+                }
+            }
+        }
+
+        response = self.client.post(
+            '/greetings/',
+            json.dumps(json_data),
+            content_type='application/vnd.api+json'
+        )
+        greeting_id = response.json()['data']['id']
+        updated_json_data = response.json()
+
+        expected_message = original_message
+        self.assertEqual(
+            Greeting.objects.get(pk=greeting_id).message,
+            expected_message
+        )
 
         response = self.client.get('/greetings/')
         first_greeter = 0
@@ -85,5 +173,29 @@ class GreetingTests(TestCase):
                 ['attributes']['message']
              ),
             expected_message
+        )
+
+        updated_message = 'Updated Greeting'
+        updated_json_data['data']['attributes']['message'] = updated_message
+        response = self.client.patch(
+            '/greetings/' + greeting_id + '/',
+            data=json.dumps(updated_json_data),
+            content_type='application/vnd.api+json'
+        )
+        expected_message = updated_message
+        self.assertEqual(
+            Greeting.objects.get(pk=greeting_id).message,
+            expected_message
+        )
+
+        response = self.client.delete(
+            '/greetings/' + greeting_id + '/',
+            json.dumps(json_data),
+            content_type='application/vnd.api+json'
+        )
+        no_greetings = 0
+        self.assertEqual(
+            Greeting.objects.count(),
+            no_greetings
         )
 
