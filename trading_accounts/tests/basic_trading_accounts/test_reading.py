@@ -2,7 +2,7 @@
 import json
 from django.test import Client, TestCase, tag
 from rest_framework import status
-from .models import TradingAccount
+from ...models import TradingAccount
 
 TYPE = 'tradingAccounts'
 
