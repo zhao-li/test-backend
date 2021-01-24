@@ -7,7 +7,7 @@ from .models import TradingAccount
 TYPE = 'tradingAccounts'
 
 
-class TradingAccountTests(TestCase):
+class TradingAccountsTests(TestCase):
     """Test Trading Account API"""
 
     def setUp(self):
