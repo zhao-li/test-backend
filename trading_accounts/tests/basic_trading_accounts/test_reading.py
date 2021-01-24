@@ -15,15 +15,15 @@ class ReadingTests(TestCase):
         """test response complies with json api spec"""
         response = self.client.get(PATH)
 
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         expected_key = 'data'
         self.assertTrue(expected_key in response.json())
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     @tag('integration')
     def test_reading(self):
         """test reading"""
         response = self.client.get(PATH)
-        no_trading_accounts= 0
+        no_trading_accounts = 0
         self.assertEqual(
             len(response.json()['data']),
             no_trading_accounts
