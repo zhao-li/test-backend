@@ -3,8 +3,7 @@ import json
 from django.test import Client, TestCase, tag
 from rest_framework import status
 from ...models import TradingAccount
-
-TYPE = 'tradingAccounts'
+from ..constants  import TYPE, PATH, CONTENT_TYPE
 
 
 class TradingAccountsTests(TestCase):
@@ -16,13 +15,13 @@ class TradingAccountsTests(TestCase):
     @tag('integration')
     def test_fetching(self):
         """test fetchingt"""
-        response = self.client.get('/trading-accounts/')
+        response = self.client.get(PATH)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     @tag('integration')
     def test_for_json_api_compliance(self):
         """test response complies with json api spec"""
-        response = self.client.get('/trading-accounts/')
+        response = self.client.get(PATH)
 
         expected_key = 'data'
         self.assertTrue(expected_key in response.json())
@@ -42,9 +41,9 @@ class TradingAccountsTests(TestCase):
         }
 
         response = self.client.post(
-            '/trading-accounts/',
+            PATH,
             json.dumps(json_data),
-            content_type='application/vnd.api+json'
+            content_type=CONTENT_TYPE,
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -69,15 +68,15 @@ class TradingAccountsTests(TestCase):
         }
 
         response = self.client.post(
-            '/trading-accounts/',
+            PATH,
             json.dumps(json_data),
-            content_type='application/vnd.api+json'
+            content_type=CONTENT_TYPE,
         )
 
         expected_name = name
         self.assertEqual(TradingAccount.objects.first().name, expected_name)
 
-        response = self.client.get('/trading-accounts/')
+        response = self.client.get(PATH)
         first_trading_account_index = 0
         self.assertEqual(
             (response.json()
