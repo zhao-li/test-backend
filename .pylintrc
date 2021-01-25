@@ -21,3 +21,6 @@ ignore-patterns =
 disable =
   trailing-newlines
 
+[SIMILARITIES]
+min-similarity-lines=5 # assertions are hard to DRY up and are typically 4 lines
+
