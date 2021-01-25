@@ -45,7 +45,10 @@ class CreatingTests(TestCase):
             content_type = CONTENT_TYPE,
         )
 
-        expected_number_of_accounts = initial_number_of_accounts + 1
+        number_of_accounts_created = 1
+        expected_number_of_accounts = (
+            initial_number_of_accounts + number_of_accounts_created
+        )
         self.assertEqual(
             TradingAccount.objects.count(),
             expected_number_of_accounts
