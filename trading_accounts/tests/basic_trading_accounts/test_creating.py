@@ -1,34 +1,25 @@
 """Define tests for creating"""
-import json
-from django.test import Client, TestCase, tag
+from django.test import TestCase, tag
 from rest_framework import status
+from ..helpers.api_service import ApiService
+from ..helpers.payload_factory import PayloadFactory
 from ...models import TradingAccount
-from ..constants import TYPE, PATH, CONTENT_TYPE
 
 
 class CreatingTests(TestCase):
     """Test Creating"""
 
     def setUp(self):
-        self.client = Client()
+        self.api_service = ApiService()
         self.name = 'A Trading Account Name'
-        self.json_data = {
-            'data': {
-                'type': TYPE,
-                'attributes': {
-                    'name': self.name
-                }
-            }
-        }
+        self.payload_factory = PayloadFactory({
+            'name': self.name,
+        })
 
     @tag('integration')
     def test_for_json_api_compliance(self):
         """test response complies with json api spec"""
-        response = self.client.post(
-            PATH,
-            json.dumps(self.json_data),
-            content_type=CONTENT_TYPE,
-        )
+        response = self.api_service.post(self.payload_factory.create_payload())
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         expected_key = 'data'
@@ -39,11 +30,7 @@ class CreatingTests(TestCase):
         """test creating"""
 
         initial_number_of_accounts = TradingAccount.objects.count()
-        response = self.client.post(
-            PATH,
-            json.dumps(self.json_data),
-            content_type=CONTENT_TYPE,
-        )
+        response = self.api_service.post(self.payload_factory.create_payload())
 
         number_of_accounts_created = 1
         expected_number_of_accounts = (

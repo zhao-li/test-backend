@@ -1,49 +1,32 @@
 """Define tests for updating"""
-import json
-from django.test import Client, TestCase, tag
+from django.test import TestCase, tag
 from rest_framework import status
+from ..helpers.api_service import ApiService
+from ..helpers.payload_factory import PayloadFactory
 from ...models import TradingAccount
-from ..constants import TYPE, PATH, CONTENT_TYPE
 
 
 class UpdatingTests(TestCase):
     """Test Updating"""
 
     def setUp(self):
-        self.client = Client()
+        self.api_service = ApiService()
         original_name = 'A Trading Account Name'
-        json_data = {
-            'data': {
-                'type': TYPE,
-                'attributes': {
-                    'name': original_name
-                }
-            }
-        }
-        response = self.client.post(
-            PATH,
-            json.dumps(json_data),
-            content_type=CONTENT_TYPE,
-        )
+        payload_factory = PayloadFactory({
+            'name': original_name,
+        })
+        response = self.api_service.post(payload_factory.create_payload())
         self.account_id = response.json()['data']['id']
 
     @tag('integration')
     def test_for_json_api_compliance(self):
         """test response complies with json api spec"""
-        json_data = {
-            'data': {
-                'type': TYPE,
-                'id': self.account_id,
-                'attributes': {
-                    'name': 'arbitrary name'
-                }
-            }
-        }
-
-        response = self.client.patch(
-            PATH + self.account_id + '/',
-            data=json.dumps(json_data),
-            content_type=CONTENT_TYPE,
+        payload_factory = PayloadFactory({
+            'id': self.account_id,
+        })
+        response = self.api_service.patch(
+            self.account_id,
+            payload_factory.update_payload()
         )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -55,20 +38,13 @@ class UpdatingTests(TestCase):
         """test updating"""
 
         updated_name = 'An Updated Trading Account Name'
-        json_data = {
-            'data': {
-                'type': TYPE,
-                'id': self.account_id,
-                'attributes': {
-                    'name': updated_name
-                }
-            }
-        }
-
-        self.client.patch(
-            PATH + self.account_id + '/',
-            data=json.dumps(json_data),
-            content_type=CONTENT_TYPE,
+        payload_factory = PayloadFactory({
+            'id': self.account_id,
+            'name': updated_name,
+        })
+        self.api_service.patch(
+            self.account_id,
+            payload_factory.update_payload(),
         )
 
         expected_name = updated_name

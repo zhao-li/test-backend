@@ -1,40 +1,27 @@
 """Define tests for deleting"""
-import json
-from django.test import Client, TestCase, tag
+from django.test import TestCase, tag
 from rest_framework import status
+from ..helpers.api_service import ApiService
+from ..helpers.payload_factory import PayloadFactory
 from ...models import TradingAccount
-from ..constants import TYPE, PATH, CONTENT_TYPE
 
 
 class DeletingTests(TestCase):
     """Test Deleting"""
 
     def setUp(self):
-        self.client = Client()
+        self.api_service = ApiService()
         name = 'A Trading Account Name'
-        json_data = {
-            'data': {
-                'type': TYPE,
-                'attributes': {
-                    'name': name
-                }
-            }
-        }
-        response = self.client.post(
-            PATH,
-            json.dumps(json_data),
-            content_type=CONTENT_TYPE,
-        )
+        payload_factory = PayloadFactory({
+            'name': name,
+        })
+        response = self.api_service.post(payload_factory.create_payload())
         self.account_id = response.json()['data']['id']
 
     @tag('integration')
     def test_for_json_api_compliance(self):
         """test response complies with json api spec"""
-        response = self.client.delete(
-            PATH + self.account_id + '/',
-            content_type=CONTENT_TYPE,
-        )
-
+        response = self.api_service.delete(self.account_id)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     @tag('integration')
@@ -42,10 +29,7 @@ class DeletingTests(TestCase):
         """test deleting"""
 
         initial_number_of_accounts = TradingAccount.objects.count()
-        self.client.delete(
-            PATH + self.account_id + '/',
-            content_type=CONTENT_TYPE,
-        )
+        self.api_service.delete(self.account_id)
 
         number_of_accounts_deleted = 1
         expected_number_of_accounts = (

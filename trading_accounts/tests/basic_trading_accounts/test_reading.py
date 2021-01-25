@@ -1,19 +1,19 @@
 """Define tests for reading"""
-from django.test import Client, TestCase, tag
+from django.test import TestCase, tag
 from rest_framework import status
-from ..constants import PATH
+from ..helpers.api_service import ApiService
 
 
 class ReadingTests(TestCase):
     """Test Reading"""
 
     def setUp(self):
-        self.client = Client()
+        self.api_service = ApiService()
 
     @tag('integration')
     def test_for_json_api_compliance(self):
         """test response complies with json api spec"""
-        response = self.client.get(PATH)
+        response = self.api_service.get_all()
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         expected_key = 'data'
@@ -22,7 +22,7 @@ class ReadingTests(TestCase):
     @tag('integration')
     def test_reading(self):
         """test reading"""
-        response = self.client.get(PATH)
+        response = self.api_service.get_all()
         no_trading_accounts = 0
         self.assertEqual(
             len(response.json()['data']),
