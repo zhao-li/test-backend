@@ -3,7 +3,7 @@ import json
 from django.test import Client, TestCase, tag
 from rest_framework import status
 from ...models import TradingAccount
-from ..constants  import TYPE, PATH, CONTENT_TYPE
+from ..constants import TYPE, PATH, CONTENT_TYPE
 
 
 class DeletingTests(TestCase):
@@ -32,7 +32,7 @@ class DeletingTests(TestCase):
         """test response complies with json api spec"""
         response = self.client.delete(
             PATH + self.account_id + '/',
-            content_type = CONTENT_TYPE,
+            content_type=CONTENT_TYPE,
         )
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
@@ -42,9 +42,9 @@ class DeletingTests(TestCase):
         """test deleting"""
 
         initial_number_of_accounts = TradingAccount.objects.count()
-        response = self.client.delete(
+        self.client.delete(
             PATH + self.account_id + '/',
-            content_type = CONTENT_TYPE,
+            content_type=CONTENT_TYPE,
         )
 
         number_of_accounts_deleted = 1

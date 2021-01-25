@@ -3,7 +3,7 @@ import json
 from django.test import Client, TestCase, tag
 from rest_framework import status
 from ...models import TradingAccount
-from ..constants  import TYPE, PATH, CONTENT_TYPE
+from ..constants import TYPE, PATH, CONTENT_TYPE
 
 
 class UpdatingTests(TestCase):
@@ -23,7 +23,7 @@ class UpdatingTests(TestCase):
         response = self.client.post(
             PATH,
             json.dumps(json_data),
-            content_type = CONTENT_TYPE,
+            content_type=CONTENT_TYPE,
         )
         self.account_id = response.json()['data']['id']
 
@@ -42,8 +42,8 @@ class UpdatingTests(TestCase):
 
         response = self.client.patch(
             PATH + self.account_id + '/',
-            data = json.dumps(json_data),
-            content_type = CONTENT_TYPE,
+            data=json.dumps(json_data),
+            content_type=CONTENT_TYPE,
         )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -65,10 +65,10 @@ class UpdatingTests(TestCase):
             }
         }
 
-        response = self.client.patch(
+        self.client.patch(
             PATH + self.account_id + '/',
-            data = json.dumps(json_data),
-            content_type = CONTENT_TYPE,
+            data=json.dumps(json_data),
+            content_type=CONTENT_TYPE,
         )
 
         expected_name = updated_name

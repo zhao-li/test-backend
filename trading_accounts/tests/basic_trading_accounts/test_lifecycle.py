@@ -2,8 +2,7 @@
 import json
 from django.test import Client, TestCase, tag
 from rest_framework import status
-from ...models import TradingAccount
-from ..constants  import TYPE, PATH, CONTENT_TYPE
+from ..constants import TYPE, PATH, CONTENT_TYPE
 
 
 class LIfeCycleTests(TestCase):
@@ -28,7 +27,7 @@ class LIfeCycleTests(TestCase):
         response = self.client.post(
             PATH,
             json.dumps(json_data),
-            content_type = CONTENT_TYPE,
+            content_type=CONTENT_TYPE,
         )
         returned_json = response.json()
         account_id = returned_json['data']['id']
@@ -45,8 +44,8 @@ class LIfeCycleTests(TestCase):
         updated_json_data['data']['attributes']['name'] = updated_name
         response = self.client.patch(
             PATH + account_id + '/',
-            data = json.dumps(updated_json_data),
-            content_type = CONTENT_TYPE,
+            data=json.dumps(updated_json_data),
+            content_type=CONTENT_TYPE,
         )
 
         response = self.client.get(PATH + account_id + '/')
@@ -58,7 +57,7 @@ class LIfeCycleTests(TestCase):
 
         response = self.client.delete(
             PATH + account_id + '/',
-            content_type = CONTENT_TYPE,
+            content_type=CONTENT_TYPE,
         )
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 

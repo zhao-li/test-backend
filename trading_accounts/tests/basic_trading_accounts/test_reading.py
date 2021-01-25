@@ -1,7 +1,7 @@
 """Define tests for reading"""
 from django.test import Client, TestCase, tag
 from rest_framework import status
-from ..constants  import PATH
+from ..constants import PATH
 
 
 class ReadingTests(TestCase):

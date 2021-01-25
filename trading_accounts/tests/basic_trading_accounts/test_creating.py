@@ -3,7 +3,7 @@ import json
 from django.test import Client, TestCase, tag
 from rest_framework import status
 from ...models import TradingAccount
-from ..constants  import TYPE, PATH, CONTENT_TYPE
+from ..constants import TYPE, PATH, CONTENT_TYPE
 
 
 class CreatingTests(TestCase):
@@ -27,7 +27,7 @@ class CreatingTests(TestCase):
         response = self.client.post(
             PATH,
             json.dumps(self.json_data),
-            content_type = CONTENT_TYPE,
+            content_type=CONTENT_TYPE,
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -42,7 +42,7 @@ class CreatingTests(TestCase):
         response = self.client.post(
             PATH,
             json.dumps(self.json_data),
-            content_type = CONTENT_TYPE,
+            content_type=CONTENT_TYPE,
         )
 
         number_of_accounts_created = 1
