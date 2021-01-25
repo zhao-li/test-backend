@@ -27,7 +27,7 @@ class CreatingTests(TestCase):
         response = self.client.post(
             PATH,
             json.dumps(self.json_data),
-            content_type=CONTENT_TYPE,
+            content_type = CONTENT_TYPE,
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -42,7 +42,7 @@ class CreatingTests(TestCase):
         response = self.client.post(
             PATH,
             json.dumps(self.json_data),
-            content_type=CONTENT_TYPE,
+            content_type = CONTENT_TYPE,
         )
 
         expected_number_of_accounts = initial_number_of_accounts + 1
