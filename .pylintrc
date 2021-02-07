@@ -3,21 +3,24 @@ load-plugins =
   pylint_django
 
 ignore =
-  .cache, ; needed for Gitlab's CI/CD
-  README.md,
-  app.env,
-  bootstrap.sh,
   database,
-  docker-compose.yml,
-  docker-compose.override.yml,
   docs,
   Dockerfile,
   migrations,
-  requirements.txt,
-  requirements.development.txt,
-  tox.ini,
+
+ignore-patterns =
+  .*\.env,
+  .*\.ini,
+  .*\.md,
+  .*\.sh,
+  .*\.txt,
+  .*\.xml,
+  .*\.yml,
 
 [MESSAGES CONTROL]
 disable =
   trailing-newlines
+
+[SIMILARITIES]
+min-similarity-lines=5 # assertions are hard to DRY up and are typically 4 lines
 
