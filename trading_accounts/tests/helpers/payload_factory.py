@@ -32,6 +32,16 @@ class PayloadFactory(Client):
             }
         }
 
+    def create_payload_without_owner(self):
+        return {
+            'data': {
+                'type': 'tradingAccounts',
+                'attributes': {
+                    'name': self._get_name(),
+                },
+            }
+        }
+
     def update_payload(self):
         return {
             'data': {

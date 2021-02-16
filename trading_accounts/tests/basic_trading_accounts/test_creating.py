@@ -18,22 +18,13 @@ class CreatingTests(TestCase):
         })
 
     @tag('integration')
-    def test_for_json_api_compliance(self):
-        """test response complies with json api spec"""
-        response = self.api_service.post(self.payload_factory.create_payload())
-
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        expected_key = 'data'
-        self.assertTrue(expected_key in response.json())
-
-    @tag('integration')
-    def test_creating(self):
+    def test_creating_without_user(self):
         """test creating"""
 
         initial_number_of_accounts = TradingAccount.objects.count()
-        response = self.api_service.post(self.payload_factory.create_payload())
+        response = self.api_service.post(self.payload_factory.create_payload_without_owner())
 
-        number_of_accounts_created = 1
+        number_of_accounts_created = 0
         expected_number_of_accounts = (
             initial_number_of_accounts + number_of_accounts_created
         )
@@ -42,16 +33,17 @@ class CreatingTests(TestCase):
             expected_number_of_accounts
         )
 
-        account_id = response.json()['data']['id']
-        expected_name = self.name
+        expected_status_code = status.HTTP_400_BAD_REQUEST
         self.assertEqual(
-            TradingAccount.objects.get(pk=account_id).name,
-            expected_name
+            response.status_code,
+            expected_status_code
         )
 
     @tag('integration')
     def test_creating_with_user(self):
         """test creating with associated user"""
+
+        initial_number_of_accounts = TradingAccount.objects.count()
 
         username = 'arbitrary user'
         user = User(username=username)
@@ -67,6 +59,14 @@ class CreatingTests(TestCase):
         )
         account_id = response.json()['data']['id']
 
+        number_of_accounts_created = 1
+        expected_number_of_accounts = (
+            initial_number_of_accounts + number_of_accounts_created
+        )
+        self.assertEqual(
+            TradingAccount.objects.count(),
+            expected_number_of_accounts
+        )
         self.assertEqual(
             TradingAccount.objects.get(pk=account_id).name,
             account_name
@@ -75,4 +75,8 @@ class CreatingTests(TestCase):
             TradingAccount.objects.get(pk=account_id).owner.username,
             username
         )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        expected_key = 'data'
+        self.assertTrue(expected_key in response.json())
 
