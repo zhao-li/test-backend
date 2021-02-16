@@ -1,6 +1,7 @@
 """Define tests for creating"""
 from django.test import TestCase, tag
 from rest_framework import status
+from users.models import User
 from ..helpers.api_service import ApiService
 from ..helpers.payload_factory import PayloadFactory
 from ...models import TradingAccount
@@ -46,5 +47,32 @@ class CreatingTests(TestCase):
         self.assertEqual(
             TradingAccount.objects.get(pk=account_id).name,
             expected_name
+        )
+
+    @tag('integration')
+    def test_creating_with_user(self):
+        """test creating with associated user"""
+
+        username = 'arbitrary user'
+        user = User(username=username)
+        user.save()
+        
+        account_name = 'arbitrary account name'
+        payload_factory = PayloadFactory({
+            'name': account_name,
+            'owner_id': user.id,
+        })
+        response = self.api_service.post(
+            payload_factory.create_payload()
+        )
+        account_id = response.json()['data']['id']
+
+        self.assertEqual(
+            TradingAccount.objects.get(pk=account_id).name,
+            account_name
+        )
+        self.assertEqual(
+            TradingAccount.objects.get(pk=account_id).owner.username,
+            username
         )
 

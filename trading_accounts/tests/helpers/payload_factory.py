@@ -1,6 +1,8 @@
 """Define Payload Factory for tests"""
 import json
+from django.core.exceptions import ValidationError
 from django.test import Client
+from django.utils.translation import gettext as _
 
 
 class PayloadFactory(Client):
@@ -17,7 +19,15 @@ class PayloadFactory(Client):
             'data': {
                 'type': 'tradingAccounts',
                 'attributes': {
-                    'name': self._get_name()
+                    'name': self._get_name(),
+                },
+                'relationships': {
+                    'owner': {
+                        'data': {
+                            'type': 'users',
+                            'id': self._get_owner_id(),
+                        }
+                    }
                 }
             }
         }
@@ -45,3 +55,9 @@ class PayloadFactory(Client):
         else:
             return self.DEFAULT_NAME
 
+    def _get_owner_id(self):
+        if 'owner_id' in self.overrides:
+            return self.overrides['owner_id']
+        else:
+            raise ValidationError(_('Missing owner id'))
+       
