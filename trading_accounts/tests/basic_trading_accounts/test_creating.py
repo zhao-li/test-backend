@@ -12,32 +12,6 @@ class CreatingTests(TestCase):
 
     def setUp(self):
         self.api_service = ApiService()
-        self.name = 'A Trading Account Name'
-        self.payload_factory = PayloadFactory({
-            'name': self.name,
-        })
-
-    @tag('integration')
-    def test_creating_without_user(self):
-        """test creating"""
-
-        initial_number_of_accounts = TradingAccount.objects.count()
-        response = self.api_service.post(self.payload_factory.create_payload_without_owner())
-
-        number_of_accounts_created = 0
-        expected_number_of_accounts = (
-            initial_number_of_accounts + number_of_accounts_created
-        )
-        self.assertEqual(
-            TradingAccount.objects.count(),
-            expected_number_of_accounts
-        )
-
-        expected_status_code = status.HTTP_400_BAD_REQUEST
-        self.assertEqual(
-            response.status_code,
-            expected_status_code
-        )
 
     @tag('integration')
     def test_creating_with_user(self):
@@ -67,16 +41,41 @@ class CreatingTests(TestCase):
             TradingAccount.objects.count(),
             expected_number_of_accounts
         )
+
+        account_in_database = TradingAccount.objects.get(pk=account_id)
         self.assertEqual(
-            TradingAccount.objects.get(pk=account_id).name,
+            account_in_database.name,
             account_name
         )
         self.assertEqual(
-            TradingAccount.objects.get(pk=account_id).owner.username,
+            account_in_database.owner.username,
             username
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         expected_key = 'data'
         self.assertTrue(expected_key in response.json())
+
+    @tag('integration')
+    def test_creating_without_user(self):
+        """test creating"""
+
+        initial_number_of_accounts = TradingAccount.objects.count()
+        payload_factory = PayloadFactory()
+        response = self.api_service.post(payload_factory.create_payload_without_owner())
+
+        number_of_accounts_created = 0
+        expected_number_of_accounts = (
+            initial_number_of_accounts + number_of_accounts_created
+        )
+        self.assertEqual(
+            TradingAccount.objects.count(),
+            expected_number_of_accounts
+        )
+
+        expected_status_code = status.HTTP_400_BAD_REQUEST
+        self.assertEqual(
+            response.status_code,
+            expected_status_code
+        )
 
