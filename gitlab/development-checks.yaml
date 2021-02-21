@@ -49,6 +49,7 @@ lint-python-code-with-pylint:
   variables:
     POSTGRES_DB: not_used_to_connect_to_database # needed to run linter
     POSTGRES_USER: not_used_to_connect_to_database # needed to run linter
+    POSTGRES_PASSWORD: not_used_to_connect_to_database # needed to run linter
 
 document:
   <<: *base
