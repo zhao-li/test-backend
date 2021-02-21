@@ -22,7 +22,7 @@ disable =
   trailing-newlines
 
 [SIMILARITIES]
-min-similarity-lines=5 # assertions are hard to DRY up and are typically 4 lines
+min-similarity-lines = 5 # assertions are hard to DRY up and are typically 4 lines
 
 [pylint_django]
 django-settings-module = porter.settings
