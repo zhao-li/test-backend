@@ -22,7 +22,7 @@ class CreatingTests(TestCase):
         username = 'arbitrary user'
         user = User(username=username)
         user.save()
-        
+
         account_name = 'arbitrary account name'
         payload_factory = PayloadFactory({
             'name': account_name,
@@ -62,7 +62,9 @@ class CreatingTests(TestCase):
 
         initial_number_of_accounts = TradingAccount.objects.count()
         payload_factory = PayloadFactory()
-        response = self.api_service.post(payload_factory.create_payload_without_owner())
+        response = self.api_service.post(
+            payload_factory.create_payload_without_owner()
+        )
 
         number_of_accounts_created = 0
         expected_number_of_accounts = (

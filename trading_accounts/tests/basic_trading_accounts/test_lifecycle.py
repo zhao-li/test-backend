@@ -14,7 +14,7 @@ class LIfeCycleTests(TestCase):
         username = 'arbitrary user'
         self.user = User(username=username)
         self.user.save()
-        
+
     @tag('integration')
     def test_life_cycle(self):
         """test life cycle"""
