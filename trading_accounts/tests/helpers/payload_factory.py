@@ -8,7 +8,6 @@ from django.utils.translation import gettext as _
 class PayloadFactory(Client):
     """A factory for generating payloads"""
 
-    DEFAULT_ID = '1'
     DEFAULT_NAME = 'An Arbitrary Name'
 
     def __init__(self, overrides={}):
@@ -57,7 +56,7 @@ class PayloadFactory(Client):
         if 'id' in self.overrides:
             return self.overrides['id']
         else:
-            return self.DEFAULT_ID
+            raise ValidationError(_('Missing account id'))
 
     def _get_name(self):
         if 'name' in self.overrides:
