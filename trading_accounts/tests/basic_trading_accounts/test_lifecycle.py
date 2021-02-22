@@ -1,6 +1,7 @@
 """Define tests for entire lifecycle"""
 from django.test import TestCase, tag
 from rest_framework import status
+from users.models import User
 from ..helpers.api_service import ApiService
 from ..helpers.payload_factory import PayloadFactory
 
@@ -10,6 +11,9 @@ class LIfeCycleTests(TestCase):
 
     def setUp(self):
         self.api_service = ApiService()
+        username = 'arbitrary user'
+        self.user = User(username=username)
+        self.user.save()
 
     @tag('integration')
     def test_life_cycle(self):
@@ -18,6 +22,7 @@ class LIfeCycleTests(TestCase):
         original_name = 'A Trading Account Name'
         payload_factory = PayloadFactory({
             'name': original_name,
+            'owner_id': self.user.id,
         })
         response = self.api_service.post(payload_factory.create_payload())
         account_id = response.json()['data']['id']

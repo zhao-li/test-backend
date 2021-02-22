@@ -1,6 +1,7 @@
 """Define tests for updating"""
 from django.test import TestCase, tag
 from rest_framework import status
+from users.models import User
 from ..helpers.api_service import ApiService
 from ..helpers.payload_factory import PayloadFactory
 from ...models import TradingAccount
@@ -11,27 +12,18 @@ class UpdatingTests(TestCase):
 
     def setUp(self):
         self.api_service = ApiService()
-        original_name = 'A Trading Account Name'
+        username = 'arbitrary user'
+        user = User(username=username)
+        user.save()
+        original_account_name = 'original account name'
         payload_factory = PayloadFactory({
-            'name': original_name,
+            'name': original_account_name,
+            'owner_id': user.id,
         })
-        response = self.api_service.post(payload_factory.create_payload())
-        self.account_id = response.json()['data']['id']
-
-    @tag('integration')
-    def test_for_json_api_compliance(self):
-        """test response complies with json api spec"""
-        payload_factory = PayloadFactory({
-            'id': self.account_id,
-        })
-        response = self.api_service.patch(
-            self.account_id,
-            payload_factory.update_payload()
+        response = self.api_service.post(
+            payload_factory.create_payload()
         )
-
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        expected_key = 'data'
-        self.assertTrue(expected_key in response.json())
+        self.account_id = response.json()['data']['id']
 
     @tag('integration')
     def test_updating(self):
@@ -42,10 +34,14 @@ class UpdatingTests(TestCase):
             'id': self.account_id,
             'name': updated_name,
         })
-        self.api_service.patch(
+        response = self.api_service.patch(
             self.account_id,
             payload_factory.update_payload(),
         )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        expected_key = 'data'
+        self.assertTrue(expected_key in response.json())
 
         expected_name = updated_name
         self.assertEqual(

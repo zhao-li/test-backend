@@ -46,6 +46,12 @@ lint-python-code-with-pylint:
   <<: *base
   script:
     - scripts/lint_app/run_pylint.sh
+  variables:
+    DATABASE_HOST: not_used_to_connect_to_database # needed to run linter
+    DATABASE_PORT: not_used_to_connect_to_database # needed to run linter
+    POSTGRES_DB: not_used_to_connect_to_database # needed to run linter
+    POSTGRES_USER: not_used_to_connect_to_database # needed to run linter
+    POSTGRES_PASSWORD: not_used_to_connect_to_database # needed to run linter
 
 document:
   <<: *base
