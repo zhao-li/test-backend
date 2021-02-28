@@ -1,11 +1,11 @@
 --- # basic trading account
 - model: users.user
-  pk: 10
   fields:
     username: user_with_trading_account
 
 - model: trading_accounts.TradingAccount
   fields:
     name: basic trading account
-    owner: 10
+    owner:
+      - user_with_trading_account
 
