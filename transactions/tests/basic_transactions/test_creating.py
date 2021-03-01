@@ -55,14 +55,14 @@ class CreatingTests(TestCase):
             transaction_in_database.id,
             int(transaction_id) # TODO replace with some important transaction attribute
         )
-        #self.assertEqual(
-        #    transaction_in_database.account.name,
-        #    account_name
-        #)
-        #self.assertEqual(
-        #    transaction_in_database.account.owner.username,
-        #    username
-        #)
+        self.assertEqual(
+            transaction_in_database.account.name,
+            account_name
+        )
+        self.assertEqual(
+            transaction_in_database.account.owner.username,
+            username
+        )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         expected_key = 'data'
