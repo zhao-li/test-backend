@@ -68,4 +68,3 @@ class CreatingTests(TestCase):
         expected_key = 'data'
         self.assertTrue(expected_key in response.json())
 
-
