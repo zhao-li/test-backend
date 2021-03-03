@@ -13,7 +13,6 @@ class CreatingTests(TestCase):
 
     def setUp(self):
         self.api_service = ApiService()
-        pass
 
     @tag('integration')
     def test_creating_with_trading_account(self):
@@ -27,8 +26,8 @@ class CreatingTests(TestCase):
 
         account_name = 'arbitrary account name'
         account = TradingAccount(
-            name = account_name,
-            owner = user,
+            name=account_name,
+            owner=user,
         )
         account.save()
 
