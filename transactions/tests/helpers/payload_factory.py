@@ -8,6 +8,8 @@ from django.utils.translation import gettext as _
 class PayloadFactory(Client):
     """A factory for generating payloads"""
 
+    DEFAULT_SYMBOL = 'TGT'
+
     def __init__(self, overrides={}):
         self.overrides = overrides
 
@@ -16,6 +18,7 @@ class PayloadFactory(Client):
             'data': {
                 'type': 'transactions',
                 'attributes': {
+                    'symbol': self._get_symbol(),
                 },
                 'relationships': {
                     'account': {
@@ -52,6 +55,12 @@ class PayloadFactory(Client):
             return self.overrides['id']
         else:
             raise ValidationError(_('Missing account id'))
+
+    def _get_symbol(self):
+        if 'symbol' in self.overrides:
+            return self.overrides['symbol']
+        else:
+            return self.DEFAULT_SYMBOL
 
     def _get_account_id(self):
         if 'account_id' in self.overrides:

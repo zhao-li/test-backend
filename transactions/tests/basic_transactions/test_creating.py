@@ -32,8 +32,10 @@ class CreatingTests(TestCase):
         )
         account.save()
 
+        symbol = 'arbitrary symbol'
         payload_factory = PayloadFactory({
             'account_id': account.id,
+            'symbol': symbol,
         })
 
         response = self.api_service.post(
@@ -52,8 +54,8 @@ class CreatingTests(TestCase):
 
         transaction_in_database = Transaction.objects.get(pk=transaction_id)
         self.assertEqual(
-            transaction_in_database.id,
-            int(transaction_id) # TODO replace with some important transaction attribute
+            transaction_in_database.symbol,
+            symbol
         )
         self.assertEqual(
             transaction_in_database.account.name,
