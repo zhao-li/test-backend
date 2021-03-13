@@ -46,6 +46,7 @@ class PayloadFactory(Client):
                 'type': 'transactions',
                 'id': self._get_id(),
                 'attributes': {
+                    'symbol': self._get_symbol(),
                 }
             }
         }
