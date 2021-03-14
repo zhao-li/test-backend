@@ -1,10 +1,8 @@
 """Define tests for reading"""
 from django.test import TestCase, tag
-from rest_framework import status
 from trading_accounts.models import TradingAccount
 from users.models import User
 from ..helpers.api_service import ApiService
-from ..helpers.payload_factory import PayloadFactory
 from ...models import Transaction
 
 

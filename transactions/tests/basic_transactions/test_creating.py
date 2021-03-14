@@ -31,7 +31,6 @@ class CreatingTests(TestCase):
 
         initial_number_of_transactions = Transaction.objects.count()
 
-
         symbol = 'arbitrary symbol'
         payload_factory = PayloadFactory({
             'account_id': self.account.id,

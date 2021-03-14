@@ -17,8 +17,8 @@ class DeletingTests(TestCase):
         user.save()
         account_name = 'account name'
         account = TradingAccount(
-          owner_id=user.id,
-          name=account_name,
+            owner_id=user.id,
+            name=account_name,
         )
         account.save()
 
