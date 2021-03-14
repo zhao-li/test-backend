@@ -19,15 +19,15 @@ class UpdatingTests(TestCase):
         user.save()
 
         account_name = 'account name'
-        self.account = TradingAccount(
+        account = TradingAccount(
           owner_id=user.id,
           name=account_name,
         )
-        self.account.save()
+        account.save()
 
         original_symbol = 'Original Symbol'
         self.transaction = Transaction(
-            account_id=self.account.id,
+            account_id=account.id,
             symbol=original_symbol,
         )
         self.transaction.save()
@@ -38,7 +38,7 @@ class UpdatingTests(TestCase):
 
         updated_symbol = 'Updated Symbol'
         payload_factory = PayloadFactory({
-            'id': self.account.id,
+            'id': self.transaction.id,
             'symbol': updated_symbol,
         })
         response = self.api_service.patch(
