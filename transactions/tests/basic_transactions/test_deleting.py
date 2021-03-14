@@ -10,11 +10,7 @@ class DeletingTests(TestCase):
     """Test Deleting"""
 
     def setUp(self):
-        self.arbitrary_symbol = 'original symbol'
-        self.transaction = TransactionFactory(
-            symbol=self.arbitrary_symbol,
-        )
-
+        self.transaction = TransactionFactory()
         self.api_service = ApiService()
 
     @tag('integration')
