@@ -8,5 +8,5 @@ class TradingAccount(models.Model):
     objects = TradingAccountManager()
 
     name = models.CharField(max_length=200)
-    owner = models.ForeignKey('users.user', on_delete=models.CASCADE)
+    owner = models.ForeignKey('users.User', on_delete=models.CASCADE)
 

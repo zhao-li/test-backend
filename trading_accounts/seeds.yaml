@@ -1,5 +1,5 @@
 --- # basic trading account
-- model: users.user
+- model: users.User
   fields:
     username: user_with_trading_account
 
