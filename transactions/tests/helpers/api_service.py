@@ -16,7 +16,7 @@ class ApiService(Client):
         return self.client.get(self.PATH)
 
     def get_one(self, id):
-        return self.client.get(self.PATH + id + '/')
+        return self.client.get(self.PATH + str(id) + '/')
 
     def post(self, payload):
         return self.client.post(
@@ -27,7 +27,7 @@ class ApiService(Client):
 
     def patch(self, id, payload):
         return self.client.patch(
-            self.PATH + id + '/',
+            self.PATH + str(id) + '/',
             data=json.dumps(payload),
             content_type=self.CONTENT_TYPE,
         )
