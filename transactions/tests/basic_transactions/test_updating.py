@@ -13,9 +13,11 @@ class UpdatingTests(TestCase):
 
     def setUp(self):
         self.api_service = ApiService()
+
         username = 'arbitrary user'
         user = User(username=username)
         user.save()
+
         account_name = 'account name'
         self.account = TradingAccount(
           owner_id=user.id,
