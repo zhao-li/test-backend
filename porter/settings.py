@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'greetings',
     'users',
     'trading_accounts',
+    'transactions',
 ]
 
 MIDDLEWARE = [

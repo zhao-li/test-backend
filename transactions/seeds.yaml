@@ -1,0 +1,18 @@
+--- # basic transaction
+- model: users.User
+  fields:
+    username: user_with_transaction
+
+- model: trading_accounts.TradingAccount
+  fields:
+    name: trading_account_with_transaction
+    owner:
+      - user_with_transaction
+
+- model: transactions.Transaction
+  fields:
+    symbol: AAPL
+    account:
+      - trading_account_with_transaction
+      - user_with_transaction
+
