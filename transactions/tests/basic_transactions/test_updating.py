@@ -1,10 +1,9 @@
 """Define tests for updating"""
 from django.test import TestCase, tag
 from rest_framework import status
-from trading_accounts.models import TradingAccount
-from users.models import User
 from ..helpers.api_service import ApiService
 from ..helpers.payload_factory import PayloadFactory
+from ...factories import TransactionFactory
 from ...models import Transaction
 
 
@@ -12,31 +11,18 @@ class UpdatingTests(TestCase):
     """Test Updating"""
 
     def setUp(self):
+        self.arbitrary_symbol = 'original symbol'
+        self.transaction = TransactionFactory(
+            symbol=self.arbitrary_symbol,
+        )
+
         self.api_service = ApiService()
-
-        username = 'arbitrary user'
-        user = User(username=username)
-        user.save()
-
-        account_name = 'account name'
-        account = TradingAccount(
-            owner_id=user.id,
-            name=account_name,
-        )
-        account.save()
-
-        original_symbol = 'Original Symbol'
-        self.transaction = Transaction(
-            account_id=account.id,
-            symbol=original_symbol,
-        )
-        self.transaction.save()
 
     @tag('integration')
     def test_updating(self):
         """test updating"""
 
-        updated_symbol = 'Updated Symbol'
+        updated_symbol = 'updated symbol'
         payload_factory = PayloadFactory({
             'id': self.transaction.id,
             'symbol': updated_symbol,
@@ -47,8 +33,6 @@ class UpdatingTests(TestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        expected_key = 'data'
-        self.assertTrue(expected_key in response.json())
 
         expected_symbol = updated_symbol
         self.assertEqual(

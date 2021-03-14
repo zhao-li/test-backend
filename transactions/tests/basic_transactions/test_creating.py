@@ -1,8 +1,7 @@
 """Define tests for creating"""
 from django.test import TestCase, tag
 from rest_framework import status
-from trading_accounts.models import TradingAccount
-from users.models import User
+from trading_accounts.factories import TradingAccountFactory
 from ..helpers.api_service import ApiService
 from ..helpers.payload_factory import PayloadFactory
 from ...models import Transaction
@@ -12,18 +11,12 @@ class CreatingTests(TestCase):
     """Test Creating"""
 
     def setUp(self):
-        self.api_service = ApiService()
-
-        self.username = 'arbitrary user'
-        user = User(username=self.username)
-        user.save()
-
-        self.account_name = 'arbitrary account name'
-        self.account = TradingAccount(
-            name=self.account_name,
-            owner=user,
+        self.arbitrary_account_name = 'arbitrary account name'
+        self.account = TradingAccountFactory(
+            name=self.arbitrary_account_name,
         )
-        self.account.save()
+
+        self.api_service = ApiService()
 
     @tag('integration')
     def test_creating_with_trading_account(self):
@@ -31,16 +24,18 @@ class CreatingTests(TestCase):
 
         initial_number_of_transactions = Transaction.objects.count()
 
-        symbol = 'arbitrary symbol'
+        arbitrary_symbol = 'arbitrary symbol'
         payload_factory = PayloadFactory({
             'account_id': self.account.id,
-            'symbol': symbol,
+            'symbol': arbitrary_symbol,
         })
 
         response = self.api_service.post(
             payload_factory.create_payload()
         )
         transaction_id = response.json()['data']['id']
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         number_of_transactions_created = 1
         expected_number_of_transactions = (
@@ -52,20 +47,15 @@ class CreatingTests(TestCase):
         )
 
         transaction_in_database = Transaction.objects.get(pk=transaction_id)
+        expected_symbol = arbitrary_symbol
         self.assertEqual(
             transaction_in_database.symbol,
-            symbol
-        )
-        self.assertEqual(
-            transaction_in_database.account.name,
-            self.account_name
-        )
-        self.assertEqual(
-            transaction_in_database.account.owner.username,
-            self.username
+            expected_symbol
         )
 
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        expected_key = 'data'
-        self.assertTrue(expected_key in response.json())
+        expected_account_name = self.arbitrary_account_name
+        self.assertEqual(
+            transaction_in_database.account.name,
+            expected_account_name
+        )
 

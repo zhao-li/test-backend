@@ -1,34 +1,19 @@
 """Define tests for reading"""
 from django.test import TestCase, tag
-from trading_accounts.models import TradingAccount
-from users.models import User
 from ..helpers.api_service import ApiService
-from ...models import Transaction
+from ...factories import TransactionFactory
 
 
 class ReadingTests(TestCase):
     """Test Reading"""
 
     def setUp(self):
-        self.api_service = ApiService()
-
-        username = 'arbitrary user'
-        user = User(username=username)
-        user.save()
-
-        account_name = 'arbitrary account name'
-        account = TradingAccount(
-            name=account_name,
-            owner=user,
-        )
-        account.save()
-
         self.arbitrary_symbol = 'arbitrary symbol'
-        self.transaction = Transaction(
-            account_id=account.id,
+        self.transaction = TransactionFactory(
             symbol=self.arbitrary_symbol,
         )
-        self.transaction.save()
+
+        self.api_service = ApiService()
 
     @tag('integration')
     def test_reading_all_transactions(self):

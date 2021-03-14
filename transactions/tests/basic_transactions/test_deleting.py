@@ -1,9 +1,8 @@
 """Define tests for deleting"""
 from django.test import TestCase, tag
 from rest_framework import status
-from trading_accounts.models import TradingAccount
-from users.models import User
 from ..helpers.api_service import ApiService
+from ...factories import TransactionFactory
 from ...models import Transaction
 
 
@@ -11,23 +10,8 @@ class DeletingTests(TestCase):
     """Test Deleting"""
 
     def setUp(self):
+        self.transaction = TransactionFactory()
         self.api_service = ApiService()
-        username = 'arbitrary user'
-        user = User(username=username)
-        user.save()
-        account_name = 'account name'
-        account = TradingAccount(
-            owner_id=user.id,
-            name=account_name,
-        )
-        account.save()
-
-        arbitrary_symbol = 'arbitrary symbol'
-        self.transaction = Transaction(
-            account_id=account.id,
-            symbol=arbitrary_symbol,
-        )
-        self.transaction.save()
 
     @tag('integration')
     def test_deleting(self):
