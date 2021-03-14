@@ -1,12 +1,7 @@
 """Define models"""
 from django.db import models
-from users.models import User
+from .managers import TradingAccountManager
 
-
-class TradingAccountManager(models.Manager):
-    def get_by_natural_key(self, name, owner_username):
-        owner = User.objects.get(username=owner_username)
-        return self.get(name=name, owner=owner)
 
 class TradingAccount(models.Model):
     """Define TradingAccount model"""
