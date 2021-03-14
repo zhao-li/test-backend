@@ -14,26 +14,27 @@ class CreatingTests(TestCase):
     def setUp(self):
         self.api_service = ApiService()
 
+        self.username = 'arbitrary user'
+        user = User(username=self.username)
+        user.save()
+
+        self.account_name = 'arbitrary account name'
+        self.account = TradingAccount(
+            name=self.account_name,
+            owner=user,
+        )
+        self.account.save()
+
     @tag('integration')
     def test_creating_with_trading_account(self):
         """test creating with associated trading account"""
 
         initial_number_of_transactions = Transaction.objects.count()
 
-        username = 'arbitrary user'
-        user = User(username=username)
-        user.save()
-
-        account_name = 'arbitrary account name'
-        account = TradingAccount(
-            name=account_name,
-            owner=user,
-        )
-        account.save()
 
         symbol = 'arbitrary symbol'
         payload_factory = PayloadFactory({
-            'account_id': account.id,
+            'account_id': self.account.id,
             'symbol': symbol,
         })
 
@@ -58,11 +59,11 @@ class CreatingTests(TestCase):
         )
         self.assertEqual(
             transaction_in_database.account.name,
-            account_name
+            self.account_name
         )
         self.assertEqual(
             transaction_in_database.account.owner.username,
-            username
+            self.username
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
