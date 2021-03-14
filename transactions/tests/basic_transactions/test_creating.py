@@ -11,12 +11,12 @@ class CreatingTests(TestCase):
     """Test Creating"""
 
     def setUp(self):
-        self.api_service = ApiService()
-
         self.arbitrary_account_name = 'arbitrary account name'
         self.account = TradingAccountFactory(
             name=self.arbitrary_account_name,
         )
+
+        self.api_service = ApiService()
 
     @tag('integration')
     def test_creating_with_trading_account(self):
