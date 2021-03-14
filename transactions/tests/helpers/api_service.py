@@ -34,7 +34,7 @@ class ApiService(Client):
 
     def delete(self, id):
         return self.client.delete(
-            self.PATH + id + '/',
+            self.PATH + str(id) + '/',
             content_type=self.CONTENT_TYPE,
         )
 
