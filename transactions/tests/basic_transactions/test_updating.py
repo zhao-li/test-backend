@@ -23,15 +23,12 @@ class UpdatingTests(TestCase):
         )
         self.account.save()
 
-        original_symbol = 'arbitrary symbol'
-        payload_factory = PayloadFactory({
-            'account_id': self.account.id,
-            'symbol': original_symbol,
-        })
-        response = self.api_service.post(
-            payload_factory.create_payload()
+        original_symbol = 'Original Symbol'
+        self.transaction = Transaction(
+            account_id=self.account.id,
+            symbol=original_symbol,
         )
-        self.transaction_id = response.json()['data']['id']
+        self.transaction.save()
 
     @tag('integration')
     def test_updating(self):
@@ -43,7 +40,7 @@ class UpdatingTests(TestCase):
             'symbol': updated_symbol,
         })
         response = self.api_service.patch(
-            self.transaction_id,
+            self.transaction.id,
             payload_factory.update_payload(),
         )
 
@@ -53,7 +50,7 @@ class UpdatingTests(TestCase):
 
         expected_symbol = updated_symbol
         self.assertEqual(
-            Transaction.objects.get(pk=self.transaction_id).symbol,
+            Transaction.objects.get(pk=self.transaction.id).symbol,
             expected_symbol
         )
 
