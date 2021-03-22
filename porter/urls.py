@@ -21,6 +21,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(f'{settings.PATH_PREFIX}', include([
+        path('imports/', include('imports.urls')),
         path('trading-accounts/', include('trading_accounts.urls')),
         path('transactions/', include('transactions.urls')),
         path('greetings/', include('greetings.urls')),
