@@ -25,6 +25,8 @@ class ImportingTransactionsTest(TestCase):
                 file_pointer
             )
 
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
         number_of_transactions_created = 1
         expected_number_of_transactions = (
             initial_number_of_transactions + number_of_transactions_created
@@ -46,7 +48,4 @@ class ImportingTransactionsTest(TestCase):
             self.account.id
         )
 
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        expected_key = 'data'
-        self.assertTrue(expected_key in response.json())
 
