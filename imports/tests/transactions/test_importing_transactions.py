@@ -1,7 +1,9 @@
 """Define tests for importing transactions"""
 from django.test import TestCase, tag
+from rest_framework import status
 from trading_accounts.factories import TradingAccountFactory
 from trading_accounts.models import TradingAccount
+from transactions.models import Transaction
 from ..helpers.api_service import ApiService
 
 
@@ -31,4 +33,20 @@ class ImportingTransactionsTest(TestCase):
             TradingAccount.objects.count(),
             expected_number_of_transactions
         )
+
+        transactions_in_database = Transactions.objects.get()
+        first_transaction_index = 0
+        expected_symbol_of_first_transaction = 'AAPL'
+        self.assertEqual(
+            account_in_database[first_transaction_index].symbol(),
+            expected_symbol_of_first_transaction
+        )
+        self.assertEqual(
+            account_in_database[first_transaction_index].account().id,
+            self.account.id
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        expected_key = 'data'
+        self.assertTrue(expected_key in response.json())
 
