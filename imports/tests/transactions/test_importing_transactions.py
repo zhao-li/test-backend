@@ -19,7 +19,9 @@ class ImportingTransactionsTest(TestCase):
         """test importing transactions to account"""
         initial_number_of_transactions = TradingAccount.objects.count()
 
-        with open('imports/tests/transactions/transactions.csv') as file_pointer:
+        with open(
+            'imports/tests/transactions/transactions.csv'
+        ) as file_pointer:
             response = self.api_service.post_transactions(
                 self.account.id,
                 file_pointer
