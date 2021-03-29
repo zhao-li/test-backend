@@ -10,9 +10,29 @@ class TransactionsParserTest(TestCase):
     def test_parsing_transactions(self):
         """test parsing transactions"""
 
-        with open(
-            'imports/tests/services/transactions.csv'
-        ) as file_pointer:
-            raw_data_string = file_pointer.read()
-            transactions = TransactionsParser(raw_data_string).parse()
+        transactions_data = [
+            '''"","Name","Symbol","Exchange","Open Date","Type","Amount","Open Price","Current Price","Extended Hours","Extended Hours (%)","Prev.","Market Value","Commission","Net P/L%","Weight","Daily P/L","Daily P/L%","Net P/L","Next Earnings Date"''',
+            '''"","Unity Software","U","NYSE","01/08/2021","BUY","35.00000000","147.22","146.20","146.43","0.16%","138.57","$5,117.00","$0.00","-0.69%","3.09%","$267.05","5.51%","-$35.70","May 13, 2021"''',
+            '''"","Fastly","FSLY.K","NYSE","01/07/2021","BUY","100.00000000","86.41","88.22","88.25","0.03%","86.91","$8,822.00","$0.00","2.09%","5.33%","$131.00","1.51%","$181.00","May 12, 2021"''',
+        ]
+
+        transactions = TransactionsParser(transactions_data).parse()
+
+        expected_number_of_transactions = 2
+        self.assertEqual(
+            len(transactions),
+            expected_number_of_transactions
+        )
+
+        first_transaction_index = 0
+        self.assertEqual(
+            transactions[first_transaction_index]["symbol"],
+            "FSLY.K"
+        )
+
+        sescond_transaction_index = 1
+        self.assertEqual(
+            transactions[first_transaction_index]["symbol"],
+            "OSTK.O"
+        )
 
