@@ -14,41 +14,47 @@ class TransactionsExtractor():
     def __init__(self, raw_data_string):
         self.raw_data_string = raw_data_string
         self.transaction_lines = []
-        self.started_flag = False
-        self.ended_flag = False
+        self.start_flag = False
+        self.stop_flag = False
 
     def extract(self):
         for line in self.raw_data_string.split("\n"):
-            if self._transaction_section_had_started():
-                if self._transaction_section_should_be_stopping(line):
-                    self._stop_on_this_line()
-                else:
-                    self._save(line)
-            else:
-                if self._transaction_section_should_be_starting(line):
-                    self._start_saving_next_lines_as_transactions()
+            self._process(line)
             if self._this_is_last_line():
                 break 
         return self.transaction_lines
 
-    def _transaction_section_had_started(self):
-        return self.started_flag == True
+    def _process(self, line):
+        if self._current_line_is_the_beginning_of_transactions_section(line):
+            self._start_saving_next_lines_as_transactions()
+        elif self._current_line_is_the_ending_of_transactions_section(line):
+            self._stop_on_this_line()
+        elif self._current_line_is_a_transaction():
+            self._save(line)
+        elif self._current_line_is_not_useful():
+            pass # do nothing
 
-    def _transaction_section_should_be_starting(self, line):
+    def _this_is_last_line(self):
+        return self.start_flag == True and self.stop_flag == True
+
+    def _current_line_is_the_beginning_of_transactions_section(self, line):
         return line == self.START_DELIMITER
 
     def _start_saving_next_lines_as_transactions(self):
-        self.started_flag = True
+        self.start_flag = True
 
-    def _this_is_last_line(self):
-        return self.ended_flag == True
-
-    def _transaction_section_should_be_stopping(self, line):
-        return line == self.STOP_DELIMITER
+    def _current_line_is_the_ending_of_transactions_section(self, line):
+        return line == self.STOP_DELIMITER and self.start_flag == True
 
     def _stop_on_this_line(self):
-        self.ended_flag = True
+        self.stop_flag = True
+
+    def _current_line_is_a_transaction(self):
+        return self.start_flag == True and self.stop_flag == False
 
     def _save(self, line):
         self.transaction_lines.append(line)
+
+    def _current_line_is_not_useful(self):
+        return self.start_flag == False
 
