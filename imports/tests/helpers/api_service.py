@@ -15,8 +15,8 @@ class ApiService(Client):
         return self.client.post(
             self.PATH + 'transactions/',
             {
-              'account_id': account_id,
-              'attachment': csv_file,
+                'account_id': account_id,
+                'attachment': csv_file,
             },
         )
 
