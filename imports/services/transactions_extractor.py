@@ -4,8 +4,8 @@
 class TransactionsExtractor():
     """
     An extractor for transactdions in an Investing.com portfolio export
-    Input: CSV String
-    Output: List of transaction strings for each row of transaction data
+    Input: String of entire CSV file
+    Output: List of transactions as strings for each row of transaction data
     """
 
     START_DELIMITER = '''"Closed Positions"'''
