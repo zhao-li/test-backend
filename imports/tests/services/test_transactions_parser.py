@@ -1,18 +1,18 @@
 """Define tests for transaction parser"""
 from django.test import TestCase, tag
-from ...services.transaction_parser import TransactionParser
+from ...services.transactions_parser import TransactionsParser
 
 
-class TransactionParserTest(TestCase):
+class TransactionsParserTest(TestCase):
     """Test Parsing Transactions"""
 
     @tag('unit')
-    def test_parsing_transaction(self):
+    def test_parsing_transactions(self):
         """test parsing transactions"""
 
         with open(
             'imports/tests/services/transactions.csv'
         ) as file_pointer:
             raw_data_string = file_pointer.read()
-            parser = TransactionParser(raw_data_string)
+            transactions = TransactionsParser(raw_data_string).parse()
 
