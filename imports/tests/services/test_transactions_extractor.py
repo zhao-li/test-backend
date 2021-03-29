@@ -16,19 +16,21 @@ class TransactionsExtractorTest(TestCase):
             raw_data_string = file_pointer.read()
             transactions = TransactionsExtractor(raw_data_string).extract()
 
-        number_of_transactions = 2
+        expected_number_of_headings = 1
+        expected_number_of_transactions = 2
+        expected_number_of_rows = expected_number_of_headings + expected_number_of_transactions
         self.assertEqual(
             len(transactions),
-            number_of_transactions
+            expected_number_of_rows
         )
 
-        first_transaction_index = 0
+        first_transaction_index = 1
         self.assertEqual(
             transactions[first_transaction_index],
             '''"","Fastly","FSLY.K","NYSE","01/07/2021","BUY","100.00000000","86.41","01/08/2021","86.41","0.00%","$0.00"'''
         )
 
-        sescond_transaction_index = 1
+        second_transaction_index = 2
         self.assertEqual(
             transactions[second_transaction_index],
             '''"","Overstockcom","OSTK.O","NASDAQ","01/05/2021","BUY","100.00000000","53.42","01/07/2021","57.16","7.00%","$374.00"'''
