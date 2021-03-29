@@ -9,10 +9,15 @@ class ImportTransactions(APIView):
 
     def post(self, request):
         """This action handles receiving a file posted by a client"""
-        print(request.FILES['attachment'])
-        print(request.POST['account_id'])
-        for chunk in request.FILES['attachment'].chunks():
-            print(chunk)
-            print('===')
-        return Response(status=status.HTTP_202_ACCEPTED)
+        account_id = request.POST['account_id']
+        file = request.FILES['attachment']
+        raw_data_string = request.FILES['attachment'].read().decode('UTF-8')
+
+        transactions_string = TransactionExtractor(raw_data_string).extract()
+        transactions = TransactionParser(transactions_string).parse()
+        #[saved, duplicates] = save transactions
+        return Response(
+            duplicates,
+            status=status.HTTP_202_ACCEPTED,
+        )
 

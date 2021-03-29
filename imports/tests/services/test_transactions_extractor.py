@@ -16,6 +16,12 @@ class TransactionsExtractorTest(TestCase):
             raw_data_string = file_pointer.read()
             transactions = TransactionsExtractor(raw_data_string).extract()
 
+        number_of_transactions = 2
+        self.assertEqual(
+            len(transactions),
+            number_of_transactions
+        )
+
         first_transaction_index = 0
         self.assertEqual(
             transactions[first_transaction_index],
