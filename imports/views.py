@@ -1,4 +1,5 @@
 """Defines views"""
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -13,5 +14,5 @@ class ImportTransactions(APIView):
         for chunk in request.FILES['attachment'].chunks():
             print(chunk)
             print('===')
-        return Response()
+        return Response(status=status.HTTP_202_ACCEPTED)
 

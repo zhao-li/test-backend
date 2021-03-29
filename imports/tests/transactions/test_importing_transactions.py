@@ -27,7 +27,7 @@ class ImportingTransactionsTest(TestCase):
                 file_pointer
             )
 
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
 
         number_of_transactions_created = 1
         expected_number_of_transactions = (
