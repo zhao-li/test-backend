@@ -13,11 +13,15 @@ class TransactionsParser():
 
     def __init__(self, raw_data_string):
         self.raw_data_string = raw_data_string
-        self.transactions = []
 
     def parse(self):
-        self.reader = csv.reader(self.raw_data_string)
-        for row in self.reader:
-            pass # TODO build out class
-        return self.transactions
+        self._read_data()
+        self._transform_fieldnames()
+        return list(self.reader)
+
+    def _read_data(self):
+        self.reader = csv.DictReader(self.raw_data_string)
+
+    def _transform_fieldnames(self):
+        self.reader.fieldnames = [fieldname.lower() for fieldname in self.reader.fieldnames]
 
