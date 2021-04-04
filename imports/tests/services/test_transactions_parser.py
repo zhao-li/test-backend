@@ -10,9 +10,10 @@ class TransactionsParserTest(TestCase):
     def test_parsing_transactions(self):
         """test parsing transactions"""
 
-        transaction_fieldnames = '''"","Name","Symbol","Exchange","Open Date","Type","Amount","Open Price","Current Price","Extended Hours","Extended Hours (%)","Prev.","Market Value","Commission","Net P/L%","Weight","Daily P/L","Daily P/L%","Net P/L","Next Earnings Date"'''
-        first_transaction = '''"","Unity Software","U","NYSE","01/08/2021","BUY","35.00000000","147.22","146.20","146.43","0.16%","138.57","$5,117.00","$0.00","-0.69%","3.09%","$267.05","5.51%","-$35.70","May 13, 2021"'''
-        second_transaction = '''"","Fastly","FSLY.K","NYSE","01/07/2021","BUY","100.00000000","86.41","88.22","88.25","0.03%","86.91","$8,822.00","$0.00","2.09%","5.33%","$131.00","1.51%","$181.00","May 12, 2021"'''
+        transaction_fieldnames = '''"","Name","Symbol","Exchange","Open Date","Type","Amount","Open Price","Close Date","Close Price","Gain%","Net P/L"'''
+        first_transaction = '''"","Fastly","FSLY.K","NYSE","01/07/2021","BUY","100.00000000","86.41","01/08/2021","86.42","0.00%","$0.00"'''
+        second_transaction = '''"","Overstockcom","OSTK.O","NASDAQ","01/05/2021","BUY","101.00000000","53.42","01/07/2021","57.16","7.00%","$374.00"'''
+
         transactions_data = [
             transaction_fieldnames,
             first_transaction,
@@ -30,12 +31,60 @@ class TransactionsParserTest(TestCase):
         first_transaction_index = 0
         self.assertEqual(
             transactions[first_transaction_index]["symbol"],
-            "U"
+            "FSLY.K"
+        )
+        self.assertEqual(
+            transactions[first_transaction_index]["type"],
+            "BUY"
+        )
+        self.assertEqual(
+            transactions[first_transaction_index]["amount"],
+            "100.00000000"
+        )
+        self.assertEqual(
+            transactions[first_transaction_index]["open date"],
+            "01/07/2021"
+        )
+        self.assertEqual(
+            transactions[first_transaction_index]["open price"],
+            "86.41"
+        )
+        self.assertEqual(
+            transactions[first_transaction_index]["close date"],
+            "01/08/2021"
+        )
+        self.assertEqual(
+            transactions[first_transaction_index]["close price"],
+            "86.42"
         )
 
         second_transaction_index = 1
         self.assertEqual(
             transactions[second_transaction_index]["symbol"],
-            "FSLY.K"
+            "OSTK.O"
+        )
+        self.assertEqual(
+            transactions[second_transaction_index]["type"],
+            "BUY"
+        )
+        self.assertEqual(
+            transactions[second_transaction_index]["amount"],
+            "101.00000000"
+        )
+        self.assertEqual(
+            transactions[second_transaction_index]["open date"],
+            "01/05/2021"
+        )
+        self.assertEqual(
+            transactions[second_transaction_index]["open price"],
+            "53.42"
+        )
+        self.assertEqual(
+            transactions[second_transaction_index]["close date"],
+            "01/07/2021"
+        )
+        self.assertEqual(
+            transactions[second_transaction_index]["close price"],
+            "57.16"
         )
 
