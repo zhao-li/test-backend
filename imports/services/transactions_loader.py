@@ -1,7 +1,5 @@
 """Define Loader for Transactions"""
 from django.core.exceptions import ValidationError
-from django.db.transaction import TransactionManagementError
-from django.db.utils import IntegrityError
 from transactions.models import Transaction
 
 
@@ -42,6 +40,9 @@ class TransactionsLoader():
         )
         try:
             self._check()
+        except ValidationError as error:
+            self.duplicate_transactions.append(self.staged_transaction)
+            self.failed_transactions.append(self.staged_transaction)
         else:
             self._load()
             self.loaded_transactions.append(self.staged_transaction)

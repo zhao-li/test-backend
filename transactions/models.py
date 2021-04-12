@@ -11,3 +11,13 @@ class Transaction(models.Model):
     )
     symbol = models.TextField()
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=[
+                    'account',
+                    'symbol',
+                ],
+                name='unique_transaction'
+            ),
+        ]
