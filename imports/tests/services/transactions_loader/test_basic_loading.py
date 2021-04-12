@@ -64,7 +64,6 @@ class TestBasicLoading(TestCase):
 
         transactions_in_database = Transaction.objects.all()
         first_transaction_index = 0
-        expected_symbol_of_first_transaction = 'AAPL'
         self.assertEqual(
             transactions_in_database[first_transaction_index].symbol,
             first_transaction_symbol
