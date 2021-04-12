@@ -9,7 +9,7 @@ class TransactionsTransformer():
     Example:
         ['"","Name","Symbol","Exchange","Open Date","Type","Amount","Open Price","Close Date","Close Price","Gain%","Net P/L"', '"","Fastly","FSLY.K","NYSE","01/07/2021","BUY","100.00000000","86.41","01/08/2021","86.41","0.00%","$0.00"', '"","Overstockcom","OSTK.O","NASDAQ","01/05/2021","BUY","100.00000000","53.42","01/07/2021","57.16","7.00%","$374.00"']
     Output: List of transactions as dicts
-    """
+    """  # nopep8
 
     def __init__(self, raw_data_string):
         self.raw_data_string = raw_data_string
@@ -23,5 +23,6 @@ class TransactionsTransformer():
         self.reader = csv.DictReader(self.raw_data_string)
 
     def _transform_fieldnames(self):
-        self.reader.fieldnames = [fieldname.lower() for fieldname in self.reader.fieldnames]
+        self.reader.fieldnames = \
+            [fieldname.lower() for fieldname in self.reader.fieldnames]
 

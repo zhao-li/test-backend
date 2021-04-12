@@ -10,9 +10,12 @@ class TransactionsParserTest(TestCase):
     def test_parsing_transactions(self):
         """test parsing transactions"""
 
-        transaction_fieldnames = '''"","Name","Symbol","Exchange","Open Date","Type","Amount","Open Price","Close Date","Close Price","Gain%","Net P/L"'''
-        first_transaction = '''"","Fastly","FSLY.K","NYSE","01/07/2021","BUY","100.00000000","86.41","01/08/2021","86.42","0.00%","$0.00"'''
-        second_transaction = '''"","Overstockcom","OSTK.O","NASDAQ","01/05/2021","BUY","101.00000000","53.42","01/07/2021","57.16","7.00%","$374.00"'''
+        transaction_fieldnames = \
+            '''"","Name","Symbol","Exchange","Open Date","Type","Amount","Open Price","Close Date","Close Price","Gain%","Net P/L"'''  # nopep8 pylint: disable=line-too-long
+        first_transaction = \
+            '''"","Fastly","FSLY.K","NYSE","01/07/2021","BUY","100.00000000","86.41","01/08/2021","86.42","0.00%","$0.00"'''  # nopep8 pylint: disable=line-too-long
+        second_transaction = \
+            '''"","Overstockcom","OSTK.O","NASDAQ","01/05/2021","BUY","101.00000000","53.42","01/07/2021","57.16","7.00%","$374.00"'''  # nopep8 pylint: disable=line-too-long
 
         transactions_data = [
             transaction_fieldnames,
