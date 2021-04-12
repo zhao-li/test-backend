@@ -14,7 +14,7 @@ unit-test:
     - .cache-coverage
   variables:
     DATABASE_HOST: not_used_to_connect_to_database # needed to run test suite
-    DATABASE_PORT: not_used_to_connect_to_database # needed to run test suite
+    DATABASE_PORT: 1234 # needed to run test suite; not used to connect to database, but needs to be an integer
     POSTGRES_DB: not_used_to_connect_to_database # needed to run test suite
     POSTGRES_USER: not_used_to_connect_to_database # needed to run test suite
     POSTGRES_PASSWORD: not_used_to_connect_to_database # needed to run test suite
