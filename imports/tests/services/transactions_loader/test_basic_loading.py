@@ -23,11 +23,11 @@ class TestBasicLoading(TestCase):
                 'name': 'Fastly',
                 'symbol': first_transaction_symbol,
                 'exchange': 'NYSE',
-                'open date': '01/07/2021',
+                'open date': '01/06/2021',
                 'type': 'BUY',
                 'amount': '100.00000000',
                 'open price': '86.41',
-                'close date': '01/08/2021',
+                'close date': '01/09/2021',
                 'close price': '86.42',
                 'gain%': '0.00%',
                 'net p/l': '$0.00'
@@ -49,11 +49,26 @@ class TestBasicLoading(TestCase):
         ]
 
         initial_number_of_transactions = Transaction.objects.count()
-        expected_number_of_transactions_loaded = 2
-        [saved, duplicates, failed] = TransactionsLoader(
+        [loaded, duplicates, not_loaded] = TransactionsLoader(
             self.account,
             transactions_to_be_loaded
         ).load()
+
+        expected_number_of_transactions_loaded = 2
+        self.assertEqual(
+            len(loaded),
+            expected_number_of_transactions_loaded
+        )
+        expected_number_of_duplicate_transactions = 0
+        self.assertEqual(
+            len(duplicates),
+            expected_number_of_duplicate_transactions
+        )
+        expected_number_of_transactions_not_loaded = 0
+        self.assertEqual(
+            len(not_loaded),
+            expected_number_of_transactions_not_loaded
+        )
 
         expected_number_of_transactions = initial_number_of_transactions + \
             expected_number_of_transactions_loaded
@@ -73,5 +88,4 @@ class TestBasicLoading(TestCase):
             transactions_in_database[second_transaction_index].symbol,
             second_transaction_symbol
         )
-
 

@@ -38,16 +38,15 @@ class ImportingTransactionsTest(TestCase):
             expected_number_of_transactions
         )
 
-        transactions_in_database = Transactions.objects.get()
+        transactions_in_database = Transaction.objects.get()
         first_transaction_index = 0
         expected_symbol_of_first_transaction = 'AAPL'
         self.assertEqual(
-            account_in_database[first_transaction_index].symbol(),
+            transactions_in_database[first_transaction_index].symbol(),
             expected_symbol_of_first_transaction
         )
         self.assertEqual(
-            account_in_database[first_transaction_index].account().id,
+            transactions_in_database[first_transaction_index].account().id,
             self.account.id
         )
-
 

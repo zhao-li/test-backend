@@ -1,6 +1,5 @@
 """Define tests for loading duplicate transactions"""
 from django.test import TestCase, tag
-from django.core.exceptions import ValidationError
 from transactions.factories import TransactionFactory
 from transactions.models import Transaction
 from ....services.transactions_loader import TransactionsLoader
@@ -50,28 +49,33 @@ class TestBasicLoading(TestCase):
             },
         ]
 
-        [saved, duplicates, failed] = TransactionsLoader(
+        initial_number_of_transactions = Transaction.objects.count()
+        [loaded, duplicates, not_loaded] = TransactionsLoader(
             self.original_transaction.account,
             transactions_to_be_loaded
         ).load()
 
-        initial_number_of_transactions = Transaction.objects.count()
+        expected_number_of_transactions_loaded = 0
+        self.assertEqual(
+            len(loaded),
+            expected_number_of_transactions_loaded
+        )
+        expected_number_of_duplicate_transactions = 2
+        self.assertEqual(
+            len(duplicates),
+            expected_number_of_duplicate_transactions
+        )
+        expected_number_of_transactions_not_loaded = 2
+        self.assertEqual(
+            len(not_loaded),
+            expected_number_of_transactions_not_loaded  # nopep8 pylint:disable=line-too-long; duplicate transactions are not loaded
+        )
+
         expected_number_of_transactions_loaded = 0
         expected_number_of_transactions = initial_number_of_transactions + \
             expected_number_of_transactions_loaded
         self.assertEqual(
             Transaction.objects.count(),
             expected_number_of_transactions
-        )
-
-        expected_number_of_duplicate_transactions = 2
-        self.assertEqual(
-            len(duplicates),
-            expected_number_of_duplicate_transactions
-        )
-        expected_number_of_failed_transactions = 2
-        self.assertEqual(
-            len(failed),
-            expected_number_of_duplicate_transactions  # duplicate transactions are included as failed transactions
         )
 
