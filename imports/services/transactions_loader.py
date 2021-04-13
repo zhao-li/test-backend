@@ -7,8 +7,8 @@ class TransactionsLoader():
     """
     A loader for transactions
     Note: load means saving to storage
-    Input: 
-    Example: 
+    Input:
+    Example:
     Output: A list of 3 lists
       * first list is a list of transactions that were loaded
       * second list is a list of transactions that were duplicates
