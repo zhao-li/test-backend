@@ -5,7 +5,7 @@ from transactions.models import Transaction
 from ....services.transactions_loader import TransactionsLoader
 
 
-class TestBasicLoading(TestCase):
+class TestLoadingDuplicates(TestCase):
     """Test Basic Loading Duplicates"""
 
     def setUp(self):
@@ -50,30 +50,29 @@ class TestBasicLoading(TestCase):
         ]
 
         initial_number_of_transactions = Transaction.objects.count()
-        [loaded, duplicates, not_loaded] = TransactionsLoader(
+        [valids, duplicates, dirties] = TransactionsLoader(
             self.original_transaction.account,
             transactions_to_be_loaded
         ).load()
 
-        expected_number_of_transactions_loaded = 0
+        expected_number_of_valid_transactions = 0
         self.assertEqual(
-            len(loaded),
-            expected_number_of_transactions_loaded
+            len(valids),
+            expected_number_of_valid_transactions
         )
         expected_number_of_duplicate_transactions = 2
         self.assertEqual(
             len(duplicates),
             expected_number_of_duplicate_transactions
         )
-        expected_number_of_transactions_not_loaded = 2
+        expected_number_of_dirty_transactions = 0
         self.assertEqual(
-            len(not_loaded),
-            expected_number_of_transactions_not_loaded  # nopep8 pylint:disable=line-too-long; duplicate transactions are not loaded
+            len(dirties),
+            expected_number_of_dirty_transactions
         )
 
-        expected_number_of_transactions_loaded = 0
         expected_number_of_transactions = initial_number_of_transactions + \
-            expected_number_of_transactions_loaded
+            expected_number_of_valid_transactions
         self.assertEqual(
             Transaction.objects.count(),
             expected_number_of_transactions
