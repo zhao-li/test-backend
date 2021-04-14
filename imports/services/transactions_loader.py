@@ -19,33 +19,36 @@ class TransactionsLoader():
     def __init__(self, account, transactions):
         self.account = account
         self.queued_transactions = transactions
-        self.loaded_transactions = []
+        self.valid_transactions = []
         self.duplicate_transactions = []
-        self.not_loaded_transactions = []
+        self.dirty_transactions = []
 
     def load(self):
         for candidate_transaction in self.queued_transactions:
             self._process(candidate_transaction)
 
         return [
-            self.loaded_transactions,
+            self.valid_transactions,
             self.duplicate_transactions,
-            self.not_loaded_transactions,
+            self.dirty_transactions,
         ]
 
     def _process(self, transaction):
         self.staged_transaction = Transaction(
             account_id=self.account.id,
-            symbol=transaction['symbol']
+            symbol=transaction.get('symbol')
         )
         try:
             self._check()
         except ValidationError as error:
-            self.duplicate_transactions.append(self.staged_transaction)
-            self.not_loaded_transactions.append(self.staged_transaction)
+            all_errors = ''.join(error.message_dict.get('__all__', ''))
+            if 'already exists' in all_errors:
+                self.duplicate_transactions.append(self.staged_transaction)
+            else:
+                self.dirty_transactions.append(self.staged_transaction)
         else:
             self._load()
-            self.loaded_transactions.append(self.staged_transaction)
+            self.valid_transactions.append(self.staged_transaction)
 
     def _check(self):
         self.staged_transaction.full_clean()
