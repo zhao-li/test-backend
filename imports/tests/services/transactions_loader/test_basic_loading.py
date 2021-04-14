@@ -59,6 +59,9 @@ class TestBasicLoading(TestCase):
             len(valids),
             expected_number_of_valid_transactions
         )
+        # pylint: disable=all; keeping tests DAMP requires some duplicate code
+        # unable to just disable duplicate-code:
+        # https://github.com/PyCQA/pylint/issues/214#issuecomment-506642328
         expected_number_of_duplicate_transactions = 0
         self.assertEqual(
             len(duplicates),
@@ -76,6 +79,7 @@ class TestBasicLoading(TestCase):
             Transaction.objects.count(),
             expected_number_of_transactions
         )
+        # pylint: enable=all
 
         transactions_in_database = Transaction.objects.all()
         first_transaction_index = 0

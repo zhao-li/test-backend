@@ -20,11 +20,11 @@ class TestLoadingTransactionWithoutSymbol(TestCase):
                 '': '',
                 'name': 'Fastly',
                 'exchange': 'NYSE',
-                'open date': '01/07/2021',
+                'open date': '01/05/2021',
                 'type': 'BUY',
                 'amount': '100.00000000',
                 'open price': '86.41',
-                'close date': '01/08/2021',
+                'close date': '01/10/2021',
                 'close price': '86.42',
                 'gain%': '0.00%',
                 'net p/l': '$0.00'
@@ -42,21 +42,29 @@ class TestLoadingTransactionWithoutSymbol(TestCase):
             len(valids),
             expected_number_of_valid_transactions
         )
+        # pylint: disable=all; keeping tests DAMP requires some duplicate code
+        # unable to just disable duplicate-code:
+        # https://github.com/PyCQA/pylint/issues/214#issuecomment-506642328
         expected_number_of_duplicate_transactions = 0
         self.assertEqual(
             len(duplicates),
             expected_number_of_duplicate_transactions
         )
+        # pylint: enable=all
         expected_number_of_dirty_transactions = 1
         self.assertEqual(
             len(dirties),
             expected_number_of_dirty_transactions
         )
 
+        # pylint: disable=all; keeping tests DAMP requires some duplicate code
+        # unable to just disable duplicate-code:
+        # https://github.com/PyCQA/pylint/issues/214#issuecomment-506642328
         expected_number_of_transactions = initial_number_of_transactions + \
             expected_number_of_valid_transactions
         self.assertEqual(
             Transaction.objects.count(),
             expected_number_of_transactions
         )
+        # pylint: enable=all
 

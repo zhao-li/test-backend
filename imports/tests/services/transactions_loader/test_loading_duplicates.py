@@ -65,6 +65,9 @@ class TestLoadingDuplicates(TestCase):
             len(duplicates),
             expected_number_of_duplicate_transactions
         )
+        # pylint: disable=all; keeping tests DAMP requires some duplicate code
+        # unable to just disable duplicate-code:
+        # https://github.com/PyCQA/pylint/issues/214#issuecomment-506642328
         expected_number_of_dirty_transactions = 0
         self.assertEqual(
             len(dirties),
@@ -77,4 +80,5 @@ class TestLoadingDuplicates(TestCase):
             Transaction.objects.count(),
             expected_number_of_transactions
         )
+        # pylint: enable=all
 
