@@ -21,7 +21,7 @@ class TransactionsLoader():
         self.queued_transactions = transactions
         self.loaded_transactions = []
         self.duplicate_transactions = []
-        self.failed_transactions = []
+        self.not_loaded_transactions = []
 
     def load(self):
         for candidate_transaction in self.queued_transactions:
@@ -30,7 +30,7 @@ class TransactionsLoader():
         return [
             self.loaded_transactions,
             self.duplicate_transactions,
-            self.failed_transactions,
+            self.not_loaded_transactions,
         ]
 
     def _process(self, transaction):
@@ -42,7 +42,7 @@ class TransactionsLoader():
             self._check()
         except ValidationError as error:
             self.duplicate_transactions.append(self.staged_transaction)
-            self.failed_transactions.append(self.staged_transaction)
+            self.not_loaded_transactions.append(self.staged_transaction)
         else:
             self._load()
             self.loaded_transactions.append(self.staged_transaction)
