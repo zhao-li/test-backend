@@ -17,7 +17,7 @@ class ImportingTransactionsTest(TestCase):
     @tag('integration')
     def test_importing_transactions_to_account(self):
         """test importing transactions to account"""
-        initial_number_of_transactions = TradingAccount.objects.count()
+        initial_number_of_transactions = Transaction.objects.count()
 
         with open(
             'imports/tests/transactions/transactions.csv'
@@ -29,24 +29,36 @@ class ImportingTransactionsTest(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
 
-        number_of_transactions_created = 1
+        number_of_transactions_created = 2
         expected_number_of_transactions = (
             initial_number_of_transactions + number_of_transactions_created
         )
         self.assertEqual(
-            TradingAccount.objects.count(),
+            Transaction.objects.count(),
             expected_number_of_transactions
         )
 
-        transactions_in_database = Transaction.objects.get()
+        transactions_in_database = Transaction.objects.all()
+
         first_transaction_index = 0
-        expected_symbol_of_first_transaction = 'AAPL'
+        expected_symbol_of_first_transaction = 'FSLY.K'
         self.assertEqual(
-            transactions_in_database[first_transaction_index].symbol(),
+            transactions_in_database[first_transaction_index].symbol,
             expected_symbol_of_first_transaction
         )
         self.assertEqual(
-            transactions_in_database[first_transaction_index].account().id,
-            self.account.id
+            transactions_in_database[first_transaction_index].account,
+            self.account
+        )
+
+        second_transaction_index = 1
+        expected_symbol_of_second_transaction = 'OSTK.O'
+        self.assertEqual(
+            transactions_in_database[second_transaction_index].symbol,
+            expected_symbol_of_second_transaction
+        )
+        self.assertEqual(
+            transactions_in_database[second_transaction_index].account,
+            self.account
         )
 
