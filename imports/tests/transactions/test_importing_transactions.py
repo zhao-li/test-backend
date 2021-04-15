@@ -2,7 +2,6 @@
 from django.test import TestCase, tag
 from rest_framework import status
 from trading_accounts.factories import TradingAccountFactory
-from trading_accounts.models import TradingAccount
 from transactions.models import Transaction
 from ..helpers.api_service import ApiService
 
