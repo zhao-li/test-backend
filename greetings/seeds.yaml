@@ -1,4 +1,4 @@
 --- # basic greeting
-- model: greeting.greeting
+- model: greetings.Greeting
   fields:
     message: hello world

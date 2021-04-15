@@ -2,5 +2,5 @@
 
 # This script adds seed data
 
-./manage.py loaddata greeting/seeds.yaml
+./manage.py loaddata ./*/seeds.yaml
 

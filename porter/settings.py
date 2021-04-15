@@ -39,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'rest_framework',
-    'greeting',
+    'greetings',
+    'users',
+    'trading_accounts',
+    'transactions',
 ]
 
 MIDDLEWARE = [
@@ -166,6 +170,7 @@ REST_FRAMEWORK = {
 }
 
 JSON_API_FORMAT_TYPES = 'camelize'
+JSON_API_PLURALIZE_TYPES = True
 
 TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
 TEST_OUTPUT_FILE_NAME = "test.xml"
@@ -174,4 +179,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://localhost:8081"
 ]
+
+AUTH_USER_MODEL = 'users.User'
 
