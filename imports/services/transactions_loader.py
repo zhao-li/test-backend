@@ -35,8 +35,8 @@ class TransactionsLoader():
 
     def _process(self, transaction):
         self.staged_transaction = Transaction(
-            account_id=self.account.id,
-            symbol=transaction.get('symbol')
+            account=self.account,
+            symbol=transaction.get('symbol'),
         )
         try:
             self._check()
