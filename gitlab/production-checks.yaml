@@ -25,6 +25,7 @@ integration-test:
     - cd $APP_DIR
     - pip install
         coverage
+        factory_boy
         unittest-xml-reporting
     - cp $CI_PROJECT_DIR/.coverage $APP_DIR/.
   script:
