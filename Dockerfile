@@ -4,7 +4,7 @@ WORKDIR ${APP_DIR}/
 
 USER root
 RUN rpm -ivh \
-  https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 RUN yum --nobest --assumeyes update && yum --allowerasing --assumeyes install \
     nc \
     ShellCheck \
