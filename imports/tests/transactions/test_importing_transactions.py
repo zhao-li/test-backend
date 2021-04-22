@@ -28,7 +28,7 @@ class ImportingTransactionsTest(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
 
-        number_of_transactions_created = 2
+        number_of_transactions_created = 1
         expected_number_of_transactions = (
             initial_number_of_transactions + number_of_transactions_created
         )
