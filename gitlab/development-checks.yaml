@@ -44,8 +44,8 @@ lint-shell-scripts:
     - pwd
     - ls -la
   script:
-    - pwd
-    - ls -la
+    - ls -la scripts/
+    - ls -la scripts/lint_app/
     - scripts/lint_app/run_shellcheck.sh
   variables:
     GIT_STRATEGY: fetch
