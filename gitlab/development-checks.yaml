@@ -39,8 +39,11 @@ unit-test:
 
 lint-shell-scripts:
   <<: *base
+  image: koalaman/shellcheck-alpine:v0.7.1
   script:
     - scripts/lint_app/run_shellcheck.sh
+  variables:
+    GIT_STRATEGY: fetch
 
 lint-python-code-with-pycodestyle:
   <<: *base
