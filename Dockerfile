@@ -7,7 +7,6 @@ RUN rpm -ivh \
   https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 RUN yum --nobest --assumeyes update && yum --allowerasing --assumeyes install \
     nc \
-    ShellCheck \
   && yum clean all
 
 COPY requirements*.txt ${APP_DIR}/
