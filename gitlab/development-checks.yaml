@@ -40,19 +40,12 @@ unit-test:
 lint-shell-scripts:
   <<: *base
   image: koalaman/shellcheck-alpine:v0.7.1
-  before_script:
-    - pwd
-    - ls -la
-  script:
-    - pwd
-    - ls -la
-    - ls -la scripts/
-    - ls -la scripts/lint_app/
-    #- /builds/porter4/backend/scripts/lint_app/run_shellcheck.sh
-    - ./scripts/lint_app/run_shellcheck.sh
-    - scripts/lint_app/run_shellcheck.sh
   variables:
     GIT_STRATEGY: fetch
+  before_script:
+    - ls -la
+  script:
+    - scripts/lint_app/run_shellcheck.sh
 
 lint-python-code-with-pycodestyle:
   <<: *base
