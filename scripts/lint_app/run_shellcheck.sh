@@ -2,14 +2,15 @@
 
 # This script runs shellcheck to lint shell scripts
 
-echo "in script"
 findings_found=0
-trap '(( findings_found |= $? ))' ERR
+update_findings_count() {
+  findings_found=$(findings_found + 1)
+}
 
-shellcheck -- *.sh
+shellcheck --external -- *.sh || update_findings_count
 for file in scripts/**/*.sh; do
-  shellcheck "$file"
+  shellcheck --external "$file" || update_findings_count
 done
 
-exit $findings_found
+exit "$findings_found"
 
