@@ -6,6 +6,7 @@ set -e
 SRC_DIR=$(cd "$(dirname "$0")" || exit; pwd -P)
 
 ### define functions
+# shellcheck source=scripts/bootstrap/functions.sh
 . "$SRC_DIR"/scripts/bootstrap/functions.sh
 
 # set_defaults
