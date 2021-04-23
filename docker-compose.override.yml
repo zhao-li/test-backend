@@ -33,4 +33,6 @@ services:
       - scripts/lint_app/run_shellcheck.sh
     volumes:
       - .:/mnt/
+    deploy:
+      replicas: 0 # run as one-off process not part of doker-compose up
 
