@@ -32,6 +32,19 @@ To lint the application:
 
     backend$ scripts/lint_app.sh
 
+To lint the shell scripts:
+
+    $ docker-compose run shell-checker sh
+    shell-checker$ scripts/lint_app/run_shellcheck.sh
+
+    or
+
+    $ docker-compose run shell-checker scripts/lint_app/run_shellcheck.sh
+
+    or
+
+    $ docker-compose run shell-checker scripts/lint_app/run_shellcheck.sh
+
 Documenting
 -----------
 To document the application:
