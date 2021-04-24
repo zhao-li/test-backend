@@ -28,16 +28,16 @@
     IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE
   script:
     - mkdir -p /kaniko/.docker
-    - echo
-        "{
-          \"auths\":
-            {
-              \"$CI_REGISTRY\":
-                {
-                  \"username\":\"$CI_REGISTRY_USER\",
+    - >
+      echo
+        "{ 
+          \"auths\": {
+            \"$CI_REGISTRY\":
+              {
+                \"username\":\"$CI_REGISTRY_USER\",
                   \"password\":\"$CI_REGISTRY_PASSWORD\"
-                }
-            }
+              }
+          }
         }"
       > /kaniko/.docker/config.json
     - /kaniko/executor
