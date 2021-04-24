@@ -28,7 +28,7 @@
     IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE
   script:
     - mkdir -p /kaniko/.docker
-    - >
+    - |
       echo
         "{ 
           \"auths\": {
