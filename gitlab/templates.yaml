@@ -1,24 +1,4 @@
 .build-container:
-  #image: docker:19.03.12
-  #variables:
-  #  ENVIRONMENT: development
-  #  GIT_STRATEGY: fetch
-  #  IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE
-  #script:
-  #  - echo "$CI_REGISTRY_PASSWORD" |
-  #    docker login 
-  #      --username $CI_REGISTRY_USER
-  #      --password-stdin
-  #      $CI_REGISTRY
-  #  - docker build 
-  #      --pull
-  #      --target $ENVIRONMENT
-  #      --tag $IMAGE_TAG
-  #      .
-  #  - docker push $IMAGE_TAG
-  #services:
-  #  - docker:19.03.12-dind
-
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
