@@ -16,6 +16,8 @@
         --tag $IMAGE_TAG
         .
     - docker push $IMAGE_TAG
+  services:
+    - docker:19.03.12-dind
 
 .cache-coverage:
   cache:
