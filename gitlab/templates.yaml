@@ -3,9 +3,6 @@
     ENVIRONMENT: development
     GIT_STRATEGY: fetch
     IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE
-  image: docker:19.03.12
-  services:
-    - docker:19.03.12-dind
   script:
     - echo "$CI_REGISTRY_PASSWORD" |
       docker login 
