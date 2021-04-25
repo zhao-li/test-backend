@@ -8,6 +8,7 @@
 integration-test:
   <<: *base
   extends:
+    - .database
     - .cache-coverage
   needs:
     - build-production-container
