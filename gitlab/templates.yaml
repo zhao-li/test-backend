@@ -18,7 +18,7 @@
                   "password":"$CI_REGISTRY_PASSWORD"
               }
           }
-        }'
+        }' \
       > /kaniko/.docker/config.json
     - cat /kaniko/.docker/config.json
     - /kaniko/executor
