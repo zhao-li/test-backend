@@ -41,5 +41,4 @@ integration-test:
     reports:
       cobertura: coverage.xml
       junit: test.xml
-    when: always
 

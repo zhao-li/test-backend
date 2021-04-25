@@ -26,7 +26,6 @@ unit-test:
   artifacts:
     reports:
       junit: test.xml
-    when: always
 
 lint-shell-scripts:
   <<: *base
