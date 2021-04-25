@@ -12,15 +12,6 @@ integration-test:
   needs:
     - build-production-container
     - unit-test
-  services:
-    - name: postgres:13.0
-      alias: database
-  variables:
-    DATABASE_HOST: database
-    DATABASE_PORT: 5432
-    POSTGRES_DB: porter_pipeline
-    POSTGRES_USER: porter_app
-    POSTGRES_PASSWORD: password
   before_script:
     - cd $APP_DIR
     - pip install
