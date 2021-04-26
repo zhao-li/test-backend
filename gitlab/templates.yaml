@@ -12,10 +12,10 @@
       echo \
         '{
           "auths": {
-            "$CI_REGISTRY":
+            '"$CI_REGISTRY"':
               {
-                "username":"$CI_REGISTRY_USER",
-                  "password":"$CI_REGISTRY_PASSWORD"
+                "username":'"$CI_REGISTRY_USER"',
+                  "password":'"$CI_REGISTRY_PASSWORD"'
               }
           }
         }' \
