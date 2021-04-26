@@ -7,13 +7,11 @@ include:
   - gitlab/deploy.yaml
 
 stages:
-  - .pre
   - development-container
   - development-checks
   - production-container
   - production-checks
   - deploy
-  - .post
 
 variables:
   APP_DIR: /usr/src/app/
