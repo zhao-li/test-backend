@@ -31,6 +31,6 @@ integration-test:
     policy: pull
   artifacts:
     reports:
-      cobertura: coverage.xml
-      junit: test.xml
+      cobertura: $ARTIFACTS_DIR/coverage.xml
+      junit: $ARTIFACTS_DIR/test.xml
 

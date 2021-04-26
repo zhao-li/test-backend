@@ -25,7 +25,7 @@ unit-test:
     policy: push
   artifacts:
     reports:
-      junit: test.xml
+      junit: $ARTIFACTS_DIR/test.xml
 
 lint-shell-scripts:
   <<: *base
