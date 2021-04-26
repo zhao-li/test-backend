@@ -7,7 +7,7 @@
   variables:
     ENVIRONMENT: "this needs to be set"
   script:
-    - echo "deploying to ${ENVIRONMENT}" # using as a placeholder
+    - echo "deploying to ${ENVIRONMENT}"
 
 release-package:
   <<: *base
