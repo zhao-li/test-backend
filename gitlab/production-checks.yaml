@@ -4,6 +4,9 @@
     - build-production-container
   stage: production-checks
   image: $PRODUCTION_CONTAINER_IMAGE
+  before_script:
+    - cd $APP_DIR
+    - ls -la
 
 integration-test:
   <<: *base
@@ -14,7 +17,6 @@ integration-test:
     - build-production-container
     - unit-test
   before_script:
-    - cd $APP_DIR
     - pip install
         coverage
         factory_boy
