@@ -11,7 +11,7 @@
   script:
     - echo "deploying to ${ENVIRONMENT}" # using as a placeholder
 
-release:
+release-package:
   <<: *base
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   rules:
