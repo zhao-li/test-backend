@@ -17,6 +17,7 @@ integration-test:
     - build-production-container
     - unit-test
   before_script:
+    - cd $APP_DIR
     - pip install
         coverage
         factory_boy
