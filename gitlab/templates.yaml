@@ -20,7 +20,6 @@
           }
         }' \
       > /kaniko/.docker/config.json
-    - cat /kaniko/.docker/config.json
     - /kaniko/executor
         --context $CI_PROJECT_DIR
         --dockerfile $CI_PROJECT_DIR/Dockerfile
