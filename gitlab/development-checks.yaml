@@ -11,31 +11,22 @@
 unit-test:
   <<: *base
   extends:
+    - .database # database is needed to run unit test suite,
+    # but database is not used in unit test suite
     - .cache-coverage
-  ### test database needed to run test suite, but used in unit tests
-  services:
-    - name: postgres:13.0
-      alias: database
-  variables:
-    DATABASE_HOST: database
-    DATABASE_PORT: 5432
-    POSTGRES_DB: porter_pipeline
-    POSTGRES_USER: porter_app
-    POSTGRES_PASSWORD: password
-  ###:end test database needed to run test suite, but used in unit tests
   script:
     - scripts/test_app/run_unit_tests.sh
     - scripts/test_app/fill_coverage_gaps.sh
     - coverage report
   after_script:
     - cp $APP_DIR/.coverage $CI_PROJECT_DIR/.
-    - cp $APP_DIR/test.xml $CI_PROJECT_DIR/.
+    - mkdir --parents $CI_PROJECT_DIR/$ARTIFACTS_DIR/
+    - cp $APP_DIR/$ARTIFACTS_DIR/test.xml $CI_PROJECT_DIR/$ARTIFACTS_DIR/.
   cache:
     policy: push
   artifacts:
     reports:
-      junit: test.xml
-    when: always
+      junit: $ARTIFACTS_DIR/test.xml
 
 lint-shell-scripts:
   <<: *base
@@ -56,12 +47,8 @@ lint-python-code-with-pylint:
   <<: *base
   script:
     - scripts/lint_app/run_pylint.sh
-  variables:
-    DATABASE_HOST: not_used_to_connect_to_database # needed to run linter
-    DATABASE_PORT: not_used_to_connect_to_database # needed to run linter
-    POSTGRES_DB: not_used_to_connect_to_database # needed to run linter
-    POSTGRES_USER: not_used_to_connect_to_database # needed to run linter
-    POSTGRES_PASSWORD: not_used_to_connect_to_database # needed to run linter
+  variables: !reference [.database, variables] # needed to run linter, but is
+    # not used to connect to database
 
 document:
   <<: *base

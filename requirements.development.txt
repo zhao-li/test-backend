@@ -2,6 +2,8 @@
 coverage ~= 5.3
 factory_boy ~= 3.2.0
 pycodestyle ~= 2.6.0
+pylint == 2.7.4 # 2.8.0 and 2.8.1 are broken; remove line item and let
+# pylint-django pull in pylint package
 pylint-django ~= 2.4.2
 pyyaml ~= 5.3.1
 sphinx ~= 3.2.1

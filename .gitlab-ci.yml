@@ -7,17 +7,16 @@ include:
   - gitlab/deploy.yaml
 
 stages:
-  - .pre
   - development-container
   - development-checks
   - production-container
   - production-checks
   - deploy
-  - .post
 
 variables:
   APP_DIR: /usr/src/app/
   DEVELOPMENT_CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:development
   GIT_STRATEGY: none
   PRODUCTION_CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest
+  ARTIFACTS_DIR: artifacts/
 

@@ -1,27 +1,47 @@
 .build-container:
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   variables:
     ENVIRONMENT: development
     GIT_STRATEGY: fetch
     IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE
-  image: docker:19.03.12
-  services:
-    - docker:19.03.12-dind
   script:
-    - echo "$CI_REGISTRY_PASSWORD" |
-      docker login 
-        --username $CI_REGISTRY_USER
-        --password-stdin
-        $CI_REGISTRY
-    - docker build 
-        --pull
+    - mkdir -p /kaniko/.docker
+    - |
+      echo \
+        '{
+          "auths": {
+            "'$CI_REGISTRY'":
+              {
+                "username":"'$CI_REGISTRY_USER'",
+                  "password":"'$CI_REGISTRY_PASSWORD'"
+              }
+          }
+        }' \
+      > /kaniko/.docker/config.json
+    - /kaniko/executor
+        --context $CI_PROJECT_DIR
+        --dockerfile $CI_PROJECT_DIR/Dockerfile
         --target $ENVIRONMENT
-        --tag $IMAGE_TAG
-        .
-    - docker push $IMAGE_TAG
+        --destination $IMAGE_TAG
 
 .cache-coverage:
   cache:
     key: ${CI_COMMIT_SHA}
     paths:
       - .coverage
+  artifacts:
+    when: always
+
+.database:
+  services:
+    - name: postgres:13.0
+      alias: database
+  variables:
+    DATABASE_HOST: database
+    DATABASE_PORT: 5432
+    POSTGRES_DB: porter_pipeline
+    POSTGRES_USER: porter_app
+    POSTGRES_PASSWORD: password
 

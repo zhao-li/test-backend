@@ -4,23 +4,18 @@
     - build-production-container
   stage: production-checks
   image: $PRODUCTION_CONTAINER_IMAGE
+  before_script:
+    - cd $APP_DIR
+    - ls -la
 
 integration-test:
   <<: *base
   extends:
+    - .database
     - .cache-coverage
   needs:
     - build-production-container
     - unit-test
-  services:
-    - name: postgres:13.0
-      alias: database
-  variables:
-    DATABASE_HOST: database
-    DATABASE_PORT: 5432
-    POSTGRES_DB: porter_pipeline
-    POSTGRES_USER: porter_app
-    POSTGRES_PASSWORD: password
   before_script:
     - cd $APP_DIR
     - pip install
@@ -33,13 +28,13 @@ integration-test:
     - coverage xml
     - coverage report
   after_script:
-    - cp $APP_DIR/coverage.xml $CI_PROJECT_DIR/.
-    - cp $APP_DIR/test.xml $CI_PROJECT_DIR/.
+    - mkdir --parents $CI_PROJECT_DIR/$ARTIFACTS_DIR/
+    - cp $APP_DIR/$ARTIFACTS_DIR/coverage.xml $CI_PROJECT_DIR/$ARTIFACTS_DIR/.
+    - cp $APP_DIR/$ARTIFACTS_DIR/test.xml $CI_PROJECT_DIR/$ARTIFACTS_DIR/.
   cache:
     policy: pull
   artifacts:
     reports:
-      cobertura: coverage.xml
-      junit: test.xml
-    when: always
+      cobertura: $ARTIFACTS_DIR/coverage.xml
+      junit: $ARTIFACTS_DIR/test.xml
 
