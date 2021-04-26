@@ -21,10 +21,10 @@ unit-test:
   after_script:
     - ls -la $APP_DIR/
     - ls -la $APP_DIR/$ARTIFACTS_DIR/
-    - ls -la $CI_PROJECT_DIR/
-    - ls -la $CI_PROJECT_DIR/$ARTIFACTS_DIR/
     - cp $APP_DIR/.coverage $CI_PROJECT_DIR/.
     - cp $APP_DIR/$ARTIFACTS_DIR/test.xml $CI_PROJECT_DIR/$ARTIFACTS_DIR/.
+    - ls -la $CI_PROJECT_DIR/
+    - ls -la $CI_PROJECT_DIR/$ARTIFACTS_DIR/
   cache:
     policy: push
   artifacts:
