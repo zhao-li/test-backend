@@ -26,8 +26,12 @@ ARG BIN_DIR=/usr/bin/
 WORKDIR ${APP_DIR}/
 
 RUN microdnf install \
+    gcc \
     nc \
-    python38.x86_64 \
+    postgresql-devel \
+    postgresql-libs \
+    python3 \
+    python3-devel \
   && microdnf clean all
 RUN ln -s ${BIN_DIR}/pip3 ${BIN_DIR}/pip
 
@@ -37,9 +41,12 @@ RUN pip install --upgrade pip
 RUN scripts/install_dependencies.sh
 
 RUN microdnf remove \
-    python38.x86_64 \
-  && microdnf clean all; \
-  exit 0 # hacky workaround to allow Docker to continue building when microdnf fails
+    gcc \
+    postgresql-devel \
+    postgresql-libs \
+    python3 \
+    python3-devel \
+  && microdnf clean all
 
 COPY . ${APP_DIR}
 
