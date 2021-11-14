@@ -60,9 +60,7 @@ document:
     DESTINATION_DIR: ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}docs/
   script:
     - scripts/document_app.sh
-    - echo ${SOURCE_DIR}
-    - ls -la ${SOURCE_DIR}/
-    - mkdir --parents ${DESTINATION_DIR}/
+    #- mkdir --parents ${DESTINATION_DIR}/
     - cp --recursive ${SOURCE_DIR}/ ${DESTINATION_DIR}/
   cache:
     policy: push
