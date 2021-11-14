@@ -60,8 +60,6 @@ pages:
         --recursive \
         ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs/build/* \
         ${GITLAB_PAGES_FOLDER}/
-  cache:
-    policy: pull
   artifacts:
     paths:
     - ${GITLAB_PAGES_FOLDER}/
