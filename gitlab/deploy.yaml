@@ -58,6 +58,4 @@ pages: # GitLab Pages require the job to be named "pages": https://docs.gitlab.c
     - mkdir --parents ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/${GITLAB_PAGES_FOLDER}/
     - cp --recursive ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs/build/* ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/${GITLAB_PAGES_FOLDER}/
     - ls -la ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/${GITLAB_PAGES_FOLDER}/ 
-  cache:
-    policy: pull
 
