@@ -55,17 +55,20 @@ document:
     - .database # database is needed to build documentation,
     # but database is not used while building documentation
     - .cache-document
+  variables:
+    SOURCE_DIR: ${APP_DIR}/docs/build/
+    DESTINATION_DIR: ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}docs/
   script:
     - scripts/document_app.sh
     - pwd
     - ls -la
-    - mkdir --parents ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/${GITLAB_PAGES_FOLDER}/docs-d/
+    - mkdir --parents ${DESTINATION_DIR}/
     - ls -la  ${CI_PROJECT_DIR}
     - ls -la  ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}
-    - cp --recursive ${APP_DIR}/docs/build/ ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs-d/
+    - cp --recursive ${SOURCE_DIR}/ ${DESTINATION_DIR}/
   cache:
     policy: push
   artifacts:
     paths:
-      - ${ARTIFACTS_DIR}/docs-d/
+      - /${SOURCE_DIR}/
 

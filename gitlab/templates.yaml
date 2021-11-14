@@ -38,7 +38,7 @@
   cache:
     key: ${CI_COMMIT_SHA}
     paths:
-      - ${ARTIFACTS_DIR}/docs/
+      - ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}docs/
   artifacts:
     when: always
 
