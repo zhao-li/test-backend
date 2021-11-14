@@ -71,5 +71,5 @@ document:
     policy: push
   artifacts:
     paths:
-      - ${SOURCE_DIR}/
+      - ${DESTINATION_DIR}/
 
