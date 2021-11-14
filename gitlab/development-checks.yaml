@@ -56,7 +56,7 @@ document:
     # but database is not used while building documentation
   script:
     - scripts/document_app.sh
-    - cp -r docs/build/ /builds/porter4/backend/.
+    - cp -r docs/build/ "$CI_PROJECT_DIR"/.
   artifacts:
     paths:
       - build/
