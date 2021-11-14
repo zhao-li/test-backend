@@ -51,6 +51,9 @@ lint-python-code-with-pylint:
 
 document:
   <<: *base
+  extends:
+    - .database # database is needed to build documentation,
+    # but database is not used while building documentation
   script:
     - scripts/document_app.sh
     - cp -r docs/build/ /builds/porter4/backend/.
