@@ -63,12 +63,13 @@ document:
     - pwd
     - ls -la
     - mkdir --parents ${DESTINATION_DIR}/
-    - ls -la  ${CI_PROJECT_DIR}
-    - ls -la  ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}
+    - ls -la ${CI_PROJECT_DIR}
+    - ls -la ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}
+    - ls -la ${SOURCE_DIR}/
     - cp --recursive ${SOURCE_DIR}/ ${DESTINATION_DIR}/
   cache:
     policy: push
   artifacts:
     paths:
-      - /${SOURCE_DIR}/
+      - ${SOURCE_DIR}/
 
