@@ -43,7 +43,9 @@ deploy-to-production:
   rules:
     - if: $CI_COMMIT_TAG
 
-pages: # GitLab Pages require the job to be named "pages": https://docs.gitlab.com/ee/user/project/pages/#how-it-works
+# GitLab Pages require the job to be named "pages":
+# https://docs.gitlab.com/ee/user/project/pages/#how-it-works
+pages:
   extends: .deploy
   needs:
     - document
