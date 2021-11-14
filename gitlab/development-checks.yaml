@@ -56,10 +56,12 @@ document:
     # but database is not used while building documentation
   script:
     - scripts/document_app.sh
+    - env
     - ls -la /builds/
-    - ls -la /builds/porter/
-    - ls -la /builds/startingspark/
-    - cp -r docs/build/ /builds/porter4/backend/.
+    - ls -la /builds/starting-spark/
+    - ls -la /builds/starting-spark/porter/
+    - ls -la /builds/starting-spark/porter/backend/
+    - cp -r docs/build/ /builds/starting-spark/porter/backend/.
   artifacts:
     paths:
       - build/
