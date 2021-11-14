@@ -43,3 +43,16 @@ deploy-to-production:
   rules:
     - if: $CI_COMMIT_TAG
 
+pages: # GitLab Pages require the job to be named "pages": https://docs.gitlab.com/ee/user/project/pages/#how-it-works
+  extends: .deploy
+  needs: []
+  variables:
+    GITLAB_PAGES_FOLDER: public/ # GitLab Pages require the website contents to be located in a folder named public/: https://docs.gitlab.com/ee/user/project/pages/#how-it-works
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+  - scripts/document_app.sh
+  after_script:
+    - mkdir --parents ${CI_PROJECT_DIR}/${GITLAB_PAGES_FOLDER}/
+    - cp --recursive ${APP_DIR}/docs/build/* ${CI_PROJECT_DIR}/${GITLAB_PAGES_FOLDER}/
+
