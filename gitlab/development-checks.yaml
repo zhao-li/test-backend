@@ -59,13 +59,13 @@ document:
     - scripts/document_app.sh
     - pwd
     - ls -la
-    - mkdir --parents ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/${GITLAB_PAGES_FOLDER}/docs/
+    - mkdir --parents ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/${GITLAB_PAGES_FOLDER}/docs-d/
     - ls -la  ${CI_PROJECT_DIR}
     - ls -la  ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}
-    - cp --recursive ${APP_DIR}/docs/build/ ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs/
+    - cp --recursive ${APP_DIR}/docs/build/ ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs-d/
   cache:
     policy: push
   artifacts:
     paths:
-      - ${ARTIFACTS_DIR}/docs/
+      - ${ARTIFACTS_DIR}/docs-d/
 
