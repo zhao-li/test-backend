@@ -34,6 +34,14 @@
   artifacts:
     when: always
 
+.cache-document:
+  cache:
+    key: ${CI_COMMIT_SHA}
+    paths:
+      - ${ARTIFACTS_DIR}/docs/
+  artifacts:
+    when: always
+
 .database:
   services:
     - name: postgres:13.0
