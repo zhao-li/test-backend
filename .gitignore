@@ -6,4 +6,5 @@ docs/build/*
 !docs/source/conf.py
 !docs/source/index.rst
 artifacts/*
+.DS_Store
 
