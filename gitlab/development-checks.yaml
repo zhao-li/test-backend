@@ -57,6 +57,11 @@ document:
     - .cache-document
   script:
     - scripts/document_app.sh
+    - pwd
+    - ls -la
+    - ls -la  ${CI_PROJECT_DIR}
+    - ls -la  ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}
+    - mkdir --parents ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/${GITLAB_PAGES_FOLDER}/docs/
     - cp --recursive ${APP_DIR}/docs/build/ ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs/
   cache:
     policy: push
