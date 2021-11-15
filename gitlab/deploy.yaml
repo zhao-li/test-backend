@@ -52,7 +52,7 @@ pages:
   variables:
     # GitLab Pages require the website contents to be located in a folder
     # named public/: https://docs.gitlab.com/ee/user/project/pages/#how-it-works
-    GITLAB_PAGES_FOLDER: ${CI_PROJECT_DIR}/artifacts/public/
+    GITLAB_PAGES_FOLDER: ${CI_PROJECT_DIR}/public/
   script:
     - ls -la ${ARTIFACT_DESTINATION_DIR}
     - ls -la ${ARTIFACT_DESTINATION_DIR}/docs/
