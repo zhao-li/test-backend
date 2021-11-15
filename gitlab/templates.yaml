@@ -37,7 +37,7 @@
   cache:
     key: ${CI_COMMIT_SHA}
     paths:
-      - ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}docs/
+      - ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs/
     when: always
 
 .database:
