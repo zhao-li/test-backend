@@ -25,8 +25,8 @@ unit-test:
     - ls -la ${APP_DIR}
     - ls -la ${APP_DIR}/artifacts/
     - mkdir --parents ${DESTINATION_DIR}/
+    - cp --recursive ${SOURCE_DIR}/ ${CI_PROJECT_DIR}/
     - cp ${APP_DIR}/.coverage ${DESTINATION_DIR}/
-    - cp --recursive ${SOURCE_DIR}/* ${DESTINATION_DIR}/
     - ls -la ${DESTINATION_DIR}
   artifacts:
     reports:
