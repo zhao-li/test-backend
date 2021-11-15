@@ -30,14 +30,14 @@
   cache:
     key: ${CI_COMMIT_SHA}
     paths:
-      - ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/.coverage
+      - ${ARTIFACT_DESTINATION_DIR}/.coverage
     when: always
 
 .cache-document:
   cache:
     key: ${CI_COMMIT_SHA}
     paths:
-      - ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs/
+      - ${ARTIFACT_DESTINATION_DIR}/docs/
     when: always
 
 .database:

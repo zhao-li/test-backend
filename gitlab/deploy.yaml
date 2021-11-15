@@ -57,7 +57,7 @@ pages:
     - mkdir --parents ${GITLAB_PAGES_FOLDER}/
     - cp
         --recursive
-        ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs/build/*
+        ${ARTIFACT_DESTINATION_DIR}/docs/build/*
         ${GITLAB_PAGES_FOLDER}/
   artifacts:
     paths:
