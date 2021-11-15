@@ -54,10 +54,17 @@ document:
   extends:
     - .database # database is needed to build documentation,
     # but database is not used while building documentation
+    - .cache-document
+  variables:
+    SOURCE_DIR: ${APP_DIR}/docs/build/
+    DESTINATION_DIR: ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}docs/
   script:
     - scripts/document_app.sh
-    - cp -r docs/build/ "$CI_PROJECT_DIR"/.
+    - mkdir --parents ${DESTINATION_DIR}/
+    - cp --recursive ${SOURCE_DIR}/ ${DESTINATION_DIR}/
+  cache:
+    policy: push
   artifacts:
     paths:
-      - build/
+      - ${DESTINATION_DIR}/
 
