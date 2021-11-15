@@ -49,18 +49,12 @@ lint-python-code-with-pylint:
 
 document:
   <<: *base
-  extends:
-    - .database # database is needed to build documentation,
-      # but database is not used while building documentation
-    - .cache-document
-  variables:
-    SOURCE_DIR: ${APP_DIR}/docs/build/
-    DESTINATION_DIR: ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs/
+  variables: !reference [.database, variables] # needed to run documenting
+    # tool, but is not used to connect to database
   script:
     - scripts/document_app.sh
-    - mkdir --parents ${DESTINATION_DIR}/
-    - cp --recursive ${SOURCE_DIR}/ ${DESTINATION_DIR}/
+    - cp --recursive ${ARTIFACT_SOURCE_DIR}/ ${CI_PROJECT_DIR}/
   artifacts:
     paths:
-      - ${DESTINATION_DIR}/
+      - ${ARTIFACT_DESTINATION_DIR}/
 
