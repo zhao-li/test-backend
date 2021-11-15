@@ -39,7 +39,6 @@
     key: ${CI_COMMIT_SHA}
     paths:
       - ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}docs/
-  artifacts:
     when: always
 
 .database:
