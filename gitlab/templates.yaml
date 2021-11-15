@@ -21,10 +21,10 @@
         }' \
       > /kaniko/.docker/config.json
     - /kaniko/executor
-        --context $CI_PROJECT_DIR
-        --dockerfile $CI_PROJECT_DIR/Dockerfile
-        --target $ENVIRONMENT
-        --destination $IMAGE_TAG
+        --context ${CI_PROJECT_DIR}
+        --dockerfile ${CI_PROJECT_DIR}/Dockerfile
+        --target ${ENVIRONMENT}
+        --destination ${IMAGE_TAG}
 
 .cache-coverage:
   cache:
