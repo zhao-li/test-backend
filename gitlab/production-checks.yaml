@@ -10,28 +10,31 @@
 
 integration-test:
   <<: *base
-  extends:
-    - .database
-    - .cache-coverage
   needs:
     - build-production-container
     - unit-test
+  extends:
+    - .database
+    - .cache-coverage
+  variables:
+    SOURCE_DIR: ${APP_DIR}/${ARTIFACTS_DIR}/
+    DESTINATION_DIR: ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/
   before_script:
     - cd ${APP_DIR}
     - pip install
         coverage
         factory_boy
         unittest-xml-reporting
-    - cp ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/.coverage ${APP_DIR}/.
+    - cp ${DESTINATION_DIR}/${ARTIFACTS_DIR}/.coverage ${APP_DIR}/.
   script:
     - scripts/test_app/run_integration_tests.sh
     - coverage xml
     - coverage report
   after_script:
-    - cp ${APP_DIR}/${ARTIFACTS_DIR}/coverage.xml ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/.
-    - cp ${APP_DIR}/${ARTIFACTS_DIR}/test.xml ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/.
+    - cp ${SOURCE_DIR}/coverage.xml ${DESTINATION_DIR}/
+    - cp ${SOURCE_DIR}/test.xml ${DESTINATION_DIR}/
   artifacts:
     reports:
-      cobertura: ${ARTIFACTS}_DIR/coverage.xml
-      junit: ${ARTIFACTS_DIR}/test.xml
+      cobertura: ${DESTINATION_DIR}/coverage.xml
+      junit: ${DESTINATION_DIR}/test.xml
 
