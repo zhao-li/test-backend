@@ -30,7 +30,7 @@
   cache:
     key: ${CI_COMMIT_SHA}
     paths:
-      - .coverage
+      - ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/.coverage
     when: always
 
 .cache-document:

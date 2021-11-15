@@ -3,29 +3,31 @@
   needs:
     - build-development-container
   stage: development-checks
-  image: $DEVELOPMENT_CONTAINER_IMAGE
+  image: ${DEVELOPMENT_CONTAINER_IMAGE}
   before_script:
-    - cd $APP_DIR
+    - cd ${APP_DIR}
     - ls -la
 
 unit-test:
   <<: *base
   extends:
     - .database # database is needed to run unit test suite,
-    # but database is not used in unit test suite
+      # but database is not used in unit test suite
     - .cache-coverage
+  variables:
+    SOURCE_DIR: ${APP_DIR}/${ARTIFACTS_DIR}/
+    DESTINATION_DIR: ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/
   script:
     - scripts/test_app/run_unit_tests.sh
     - scripts/test_app/fill_coverage_gaps.sh
     - coverage report
   after_script:
-    - cp $APP_DIR/.coverage $CI_PROJECT_DIR/.
-    - cp $APP_DIR/$ARTIFACTS_DIR/test.xml $CI_PROJECT_DIR/$ARTIFACTS_DIR/.
-  cache:
-    policy: push
+    - mkdir --parents ${DESTINATION_DIR}/
+    - cp ${APP_DIR}/.coverage $CI_PROJECT_DIR/${ARTIFACTS_DIR}/
+    - cp ${APP_DIR}/${ARTIFACTS_DIR}/ ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/
   artifacts:
     reports:
-      junit: $ARTIFACTS_DIR/test.xml
+      junit: ${DESTINATION_DIR}/test.xml
 
 lint-shell-scripts:
   <<: *base
@@ -53,11 +55,11 @@ document:
   <<: *base
   extends:
     - .database # database is needed to build documentation,
-    # but database is not used while building documentation
+      # but database is not used while building documentation
     - .cache-document
   variables:
     SOURCE_DIR: ${APP_DIR}/docs/build/
-    DESTINATION_DIR: ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}docs/
+    DESTINATION_DIR: ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs/
   script:
     - scripts/document_app.sh
     - mkdir --parents ${DESTINATION_DIR}/
