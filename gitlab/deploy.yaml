@@ -25,7 +25,7 @@ release-package:
 deploy-to-isolated-staging:
   extends: .deploy
   variables:
-    ENVIRONMENT: $GITLAB_USER_EMAIL
+    ENVIRONMENT: ${GITLAB_USER_EMAIL}
   rules:
     - if: '$CI_COMMIT_BRANCH =~ /feature/'
 
