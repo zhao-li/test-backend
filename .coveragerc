@@ -6,6 +6,9 @@ omit =
   # location of dependencies in production container
   /usr/local/*
 
+[run]
+data_file = artifacts/.coverage
+
 [xml]
 output = artifacts/coverage.xml
 
