@@ -22,9 +22,10 @@ unit-test:
     - scripts/test_app/fill_coverage_gaps.sh
     - coverage report
   after_script:
+    - ls -la ${APP_DIR}
     - mkdir --parents ${DESTINATION_DIR}/
     - cp ${APP_DIR}/.coverage ${DESTINATION_DIR}/
-    - cp ${SOURCE_DIR}/ ${DESTINATION_DIR}/
+    - cp ${APP_DIR}/test.xml ${DESTINATION_DIR}/
   artifacts:
     reports:
       junit: ${DESTINATION_DIR}/test.xml
