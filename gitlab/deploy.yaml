@@ -13,7 +13,7 @@ release-package:
   <<: *base
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   rules:
-    - if: $CI_COMMIT_TAG
+    - if: ${CI_COMMIT_TAG}
   release:
      name: 'Release $CI_COMMIT_TAG'
      description: Created from CI/CD pipeline
@@ -25,7 +25,7 @@ release-package:
 deploy-to-isolated-staging:
   extends: .deploy
   variables:
-    ENVIRONMENT: $GITLAB_USER_EMAIL
+    ENVIRONMENT: ${GITLAB_USER_EMAIL}
   rules:
     - if: '$CI_COMMIT_BRANCH =~ /feature/'
 
@@ -41,7 +41,7 @@ deploy-to-production:
   variables:
     ENVIRONMENT: production
   rules:
-    - if: $CI_COMMIT_TAG
+    - if: ${CI_COMMIT_TAG}
 
 # GitLab Pages require the job to be named "pages":
 # https://docs.gitlab.com/ee/user/project/pages/#how-it-works
