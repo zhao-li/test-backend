@@ -23,7 +23,7 @@ unit-test:
     - coverage report
   after_script:
     - mkdir --parents ${DESTINATION_DIR}/
-    - cp ${APP_DIR}/.coverage $CI_PROJECT_DIR/${ARTIFACTS_DIR}/
+    - cp ${APP_DIR}/.coverage ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/
     - cp ${APP_DIR}/${ARTIFACTS_DIR}/ ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/
   artifacts:
     reports:
