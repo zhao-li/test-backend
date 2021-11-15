@@ -49,8 +49,6 @@ lint-python-code-with-pylint:
 
 document:
   <<: *base
-  extends:
-    - .cache-document
   variables: !reference [.database, variables] # needed to run documenting
     # tool, but is not used to connect to database
   script:
