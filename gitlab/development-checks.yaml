@@ -23,6 +23,7 @@ unit-test:
     - coverage report
   after_script:
     - ls -la ${APP_DIR}
+    - ls -la ${APP_DIR}/artifacts/
     - mkdir --parents ${DESTINATION_DIR}/
     - cp ${APP_DIR}/.coverage ${DESTINATION_DIR}/
     - cp ${SOURCE_DIR}/test.xml ${DESTINATION_DIR}/
