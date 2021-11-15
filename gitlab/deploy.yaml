@@ -55,10 +55,9 @@ pages:
     GITLAB_PAGES_FOLDER: ${CI_PROJECT_DIR}/public/
   script:
     - mkdir --parents ${GITLAB_PAGES_FOLDER}/
-    - |
-      cp \
-        --recursive \
-        ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs/build/* \
+    - cp
+        --recursive
+        ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs/build/*
         ${GITLAB_PAGES_FOLDER}/
   artifacts:
     paths:
