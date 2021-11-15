@@ -32,7 +32,6 @@ integration-test:
     - coverage report
   after_script:
     - cp --recursive ${SOURCE_DIR}/ ${CI_PROJECT_DIR}/
-    - ls -la ${DESTINATION_DIR}
   artifacts:
     reports:
       cobertura: ${DESTINATION_DIR}/coverage.xml
