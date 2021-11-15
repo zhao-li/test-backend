@@ -8,7 +8,7 @@ build-production-container:
   extends: .build-container
   variables:
     ENVIRONMENT: production
-    IMAGE_TAG: ${PRODUCTION_CONTAINER_IMAGE} # does not interpolate properly: https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1809#note_99891354
+    IMAGE_TAG: $PRODUCTION_CONTAINER_IMAGE # does not interpolate properly: https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1809#note_99891354
   before_script:
     - export IMAGE_TAG=$PRODUCTION_CONTAINER_IMAGE # delete hack when possible: https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1809#note_99891354
 
