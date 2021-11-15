@@ -5,39 +5,32 @@
   variables:
     ENVIRONMENT: development
     GIT_STRATEGY: fetch
-    IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE
+    IMAGE_TAG: ${DEVELOPMENT_CONTAINER_IMAGE}
   script:
     - mkdir -p /kaniko/.docker
     - |
       echo \
         '{
           "auths": {
-            "'$CI_REGISTRY'":
+            "'${CI_REGISTRY}'":
               {
-                "username":"'$CI_REGISTRY_USER'",
-                  "password":"'$CI_REGISTRY_PASSWORD'"
+                "username":"'${CI_REGISTRY_USER}'",
+                  "password":"'${CI_REGISTRY_PASSWORD}'"
               }
           }
         }' \
       > /kaniko/.docker/config.json
     - /kaniko/executor
-        --context $CI_PROJECT_DIR
-        --dockerfile $CI_PROJECT_DIR/Dockerfile
-        --target $ENVIRONMENT
-        --destination $IMAGE_TAG
+        --context ${CI_PROJECT_DIR}
+        --dockerfile ${CI_PROJECT_DIR}/Dockerfile
+        --target ${ENVIRONMENT}
+        --destination ${IMAGE_TAG}
 
 .cache-coverage:
   cache:
     key: ${CI_COMMIT_SHA}
     paths:
-      - .coverage
-    when: always
-
-.cache-document:
-  cache:
-    key: ${CI_COMMIT_SHA}
-    paths:
-      - ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}docs/
+      - ${ARTIFACT_DESTINATION_DIR}/.coverage
     when: always
 
 .database:

@@ -3,29 +3,26 @@
   needs:
     - build-development-container
   stage: development-checks
-  image: $DEVELOPMENT_CONTAINER_IMAGE
+  image: ${DEVELOPMENT_CONTAINER_IMAGE}
   before_script:
-    - cd $APP_DIR
+    - cd ${APP_DIR}
     - ls -la
 
 unit-test:
   <<: *base
   extends:
-    - .database # database is needed to run unit test suite,
-    # but database is not used in unit test suite
+    - .database # needed to run unit test suite,
+    # but is not used to connect to database
     - .cache-coverage
   script:
     - scripts/test_app/run_unit_tests.sh
     - scripts/test_app/fill_coverage_gaps.sh
     - coverage report
   after_script:
-    - cp $APP_DIR/.coverage $CI_PROJECT_DIR/.
-    - cp $APP_DIR/$ARTIFACTS_DIR/test.xml $CI_PROJECT_DIR/$ARTIFACTS_DIR/.
-  cache:
-    policy: push
+    - cp --recursive ${ARTIFACT_SOURCE_DIR}/ ${CI_PROJECT_DIR}/
   artifacts:
     reports:
-      junit: $ARTIFACTS_DIR/test.xml
+      junit: ${ARTIFACT_DESTINATION_DIR}/test.xml
 
 lint-shell-scripts:
   <<: *base
@@ -51,20 +48,12 @@ lint-python-code-with-pylint:
 
 document:
   <<: *base
-  extends:
-    - .database # database is needed to build documentation,
-    # but database is not used while building documentation
-    - .cache-document
-  variables:
-    SOURCE_DIR: ${APP_DIR}/docs/build/
-    DESTINATION_DIR: ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}docs/
+  variables: !reference [.database, variables] # needed to run documenting
+    # tool, but is not used to connect to database
   script:
     - scripts/document_app.sh
-    - mkdir --parents ${DESTINATION_DIR}/
-    - cp --recursive ${SOURCE_DIR}/ ${DESTINATION_DIR}/
-  cache:
-    policy: push
+    - cp --recursive ${ARTIFACT_SOURCE_DIR}/ ${CI_PROJECT_DIR}/
   artifacts:
     paths:
-      - ${DESTINATION_DIR}/
+      - ${ARTIFACT_DESTINATION_DIR}/
 

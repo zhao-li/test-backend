@@ -3,37 +3,34 @@
   needs:
     - build-production-container
   stage: production-checks
-  image: $PRODUCTION_CONTAINER_IMAGE
+  image: ${PRODUCTION_CONTAINER_IMAGE}
   before_script:
-    - cd $APP_DIR
+    - cd ${APP_DIR}
     - ls -la
 
 integration-test:
   <<: *base
-  extends:
-    - .database
-    - .cache-coverage
   needs:
     - build-production-container
     - unit-test
+  extends:
+    - .database
+    - .cache-coverage
   before_script:
-    - cd $APP_DIR
+    - cd ${APP_DIR}
     - pip install
         coverage
         factory_boy
         unittest-xml-reporting
-    - cp $CI_PROJECT_DIR/.coverage $APP_DIR/.
+    - cp ${ARTIFACT_DESTINATION_DIR}/.coverage ${ARTIFACT_SOURCE_DIR}/
   script:
     - scripts/test_app/run_integration_tests.sh
     - coverage xml
     - coverage report
   after_script:
-    - cp $APP_DIR/$ARTIFACTS_DIR/coverage.xml $CI_PROJECT_DIR/$ARTIFACTS_DIR/.
-    - cp $APP_DIR/$ARTIFACTS_DIR/test.xml $CI_PROJECT_DIR/$ARTIFACTS_DIR/.
-  cache:
-    policy: pull
+    - cp --recursive ${ARTIFACT_SOURCE_DIR}/ ${CI_PROJECT_DIR}/
   artifacts:
     reports:
-      cobertura: $ARTIFACTS_DIR/coverage.xml
-      junit: $ARTIFACTS_DIR/test.xml
+      cobertura: ${ARTIFACT_DESTINATION_DIR}/coverage.xml
+      junit: ${ARTIFACT_DESTINATION_DIR}/test.xml
 
