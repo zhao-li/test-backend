@@ -31,7 +31,6 @@
     key: ${CI_COMMIT_SHA}
     paths:
       - .coverage
-  artifacts:
     when: always
 
 .cache-document:
