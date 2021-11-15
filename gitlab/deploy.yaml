@@ -56,7 +56,6 @@ pages:
   script:
     - ls -la ${ARTIFACT_DESTINATION_DIR}
     - ls -la ${ARTIFACT_DESTINATION_DIR}/docs/
-    - ls -la ${ARTIFACT_DESTINATION_DIR}/docs/build/
     - mkdir --parents ${GITLAB_PAGES_FOLDER}/
     - cp
         --recursive
