@@ -22,7 +22,7 @@ integration-test:
         coverage
         factory_boy
         unittest-xml-reporting
-    - cp ${ARTIFACT_DESTINATION_DIR}/.coverage ${APP_DIR}/.
+    - cp ${ARTIFACT_DESTINATION_DIR}/.coverage ${ARTIFACT_SOURCE_DIR}/
   script:
     - scripts/test_app/run_integration_tests.sh
     - coverage xml
