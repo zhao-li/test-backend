@@ -23,7 +23,7 @@ unit-test:
     - coverage report
   after_script:
     - mkdir --parents ${DESTINATION_DIR}/
-    - cp --recursive ${SOURCE_DIR}/ ${DESTINATION_DIR}/
+    - cp --recursive ${SOURCE_DIR}/ ${CI_PROJECT_DIR}/
     - cp ${APP_DIR}/.coverage ${DESTINATION_DIR}/
     - ls -la ${DESTINATION_DIR}
   artifacts:
