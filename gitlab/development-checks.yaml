@@ -27,6 +27,7 @@ unit-test:
     - mkdir --parents ${DESTINATION_DIR}/
     - cp ${APP_DIR}/.coverage ${DESTINATION_DIR}/
     - cp --recursive ${SOURCE_DIR}/ ${DESTINATION_DIR}/
+    - ls -la ${DESTINATION_DIR}
   artifacts:
     reports:
       junit: ${DESTINATION_DIR}/test.xml
