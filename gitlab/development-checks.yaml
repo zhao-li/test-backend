@@ -53,9 +53,6 @@ document:
     - .database # database is needed to build documentation,
       # but database is not used while building documentation
     - .cache-document
-  variables:
-    SOURCE_DIR: ${APP_DIR}/docs/build/
-    DESTINATION_DIR: ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/docs/
   script:
     - scripts/document_app.sh
     - mkdir --parents ${DESTINATION_DIR}/
