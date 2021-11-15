@@ -22,8 +22,6 @@ unit-test:
     - scripts/test_app/fill_coverage_gaps.sh
     - coverage report
   after_script:
-    - ls -la ${APP_DIR}
-    - ls -la ${APP_DIR}/artifacts/
     - mkdir --parents ${DESTINATION_DIR}/
     - cp --recursive ${SOURCE_DIR}/ ${CI_PROJECT_DIR}/
     - cp ${APP_DIR}/.coverage ${DESTINATION_DIR}/
