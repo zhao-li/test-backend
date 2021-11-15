@@ -65,8 +65,6 @@ document:
     - scripts/document_app.sh
     - mkdir --parents ${DESTINATION_DIR}/
     - cp --recursive ${SOURCE_DIR}/ ${DESTINATION_DIR}/
-  cache:
-    policy: push
   artifacts:
     paths:
       - ${DESTINATION_DIR}/
