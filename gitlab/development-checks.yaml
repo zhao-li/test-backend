@@ -52,10 +52,10 @@ lint-python-code-with-pylint:
 document:
   <<: *base
   extends:
+    - .database # database is needed to build documentation,
+    # but database is not used while building documentation
     - .cache-document
   variables:
-  variables: !reference [.database, variables] # needed to run linter, but is
-    # not used to connect to database
     SOURCE_DIR: ${APP_DIR}/docs/build/
     DESTINATION_DIR: ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}docs/
   script:
