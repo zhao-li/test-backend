@@ -5,7 +5,7 @@
   variables:
     ENVIRONMENT: development
     GIT_STRATEGY: fetch
-    IMAGE_TAG: $DEVELOPMENT_CONTAINER_IMAGE
+    IMAGE_TAG: ${DEVELOPMENT_CONTAINER_IMAGE}
   script:
     - mkdir -p /kaniko/.docker
     - |
