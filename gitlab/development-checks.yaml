@@ -11,9 +11,9 @@
 unit-test:
   <<: *base
   extends:
-    - .cache-coverage
-  variables: !reference [.database, variables] # needed to run unit test suite,
+    - .database # needed to run unit test suite,
     # but is not used to connect to database
+    - .cache-coverage
   script:
     - scripts/test_app/run_unit_tests.sh
     - scripts/test_app/fill_coverage_gaps.sh
