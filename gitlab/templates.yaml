@@ -1,20 +1,30 @@
 .build-container:
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   variables:
     ENVIRONMENT: development
     GIT_STRATEGY: fetch
     IMAGE_TAG: ${DEVELOPMENT_CONTAINER_IMAGE}
   script:
-    - echo "$CI_REGISTRY_PASSWORD" |
-      docker login 
-        --username $CI_REGISTRY_USER
-        --password-stdin
-        $CI_REGISTRY
-    - docker build 
-        --pull
-        --target $ENVIRONMENT
-        --tag $IMAGE_TAG
-        .
-    - docker push $IMAGE_TAG
+    - mkdir -p /kaniko/.docker
+    - |
+      echo \
+        '{
+          "auths": {
+            "'${CI_REGISTRY}'":
+              {
+                "username":"'${CI_REGISTRY_USER}'",
+                  "password":"'${CI_REGISTRY_PASSWORD}'"
+              }
+          }
+        }' \
+      > /kaniko/.docker/config.json
+    - /kaniko/executor
+        --context ${CI_PROJECT_DIR}
+        --dockerfile ${CI_PROJECT_DIR}/Dockerfile
+        --target ${ENVIRONMENT}
+        --destination ${IMAGE_TAG}
 
 .cache-coverage:
   cache:
