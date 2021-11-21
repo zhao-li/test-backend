@@ -49,4 +49,5 @@ RUN microdnf remove \
   && microdnf clean all
 
 COPY . ${APP_DIR}
+EXPOSE 8000
 
