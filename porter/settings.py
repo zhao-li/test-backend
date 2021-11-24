@@ -26,7 +26,10 @@ SECRET_KEY = 'hz*n3+7658l609cz-n$zl$ly+z^@8=*2!)qh*#c2r_pzavzt3s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+  "localhost",
+  "backend",
+]
 
 
 # Application definition
@@ -170,7 +173,6 @@ REST_FRAMEWORK = {
 }
 
 JSON_API_FORMAT_TYPES = 'camelize'
-JSON_API_PLURALIZE_TYPES = True
 
 TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
 TEST_OUTPUT_DIR = 'artifacts/'
@@ -178,7 +180,8 @@ TEST_OUTPUT_FILE_NAME = 'test.xml'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
-    "http://localhost:8081"
+    "http://localhost:8081",
+    "http://e2e-frontend:8080",
 ]
 
 AUTH_USER_MODEL = 'users.User'
