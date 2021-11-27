@@ -9,6 +9,8 @@ class PayloadFactory(Client):
     """A factory for generating payloads"""
 
     DEFAULT_NAME = 'An Arbitrary Name'
+    TRADING_ACCOUNT_TYPE = 'tradingAccount'
+    USER_TYPE = 'user'
 
     def __init__(self, overrides={}):
         self.overrides = overrides
@@ -16,14 +18,14 @@ class PayloadFactory(Client):
     def create_payload(self):
         return {
             'data': {
-                'type': 'tradingAccounts',
+                'type': self.TRADING_ACCOUNT_TYPE,
                 'attributes': {
                     'name': self._get_name(),
                 },
                 'relationships': {
                     'owner': {
                         'data': {
-                            'type': 'users',
+                            'type': self.USER_TYPE,
                             'id': self._get_owner_id(),
                         }
                     }
@@ -34,7 +36,7 @@ class PayloadFactory(Client):
     def create_payload_without_owner(self):
         return {
             'data': {
-                'type': 'tradingAccounts',
+                'type': self.TRADING_ACCOUNT_TYPE,
                 'attributes': {
                     'name': self._get_name(),
                 },
@@ -44,7 +46,7 @@ class PayloadFactory(Client):
     def update_payload(self):
         return {
             'data': {
-                'type': 'tradingAccounts',
+                'type': 'tradingAccount',
                 'id': self._get_id(),
                 'attributes': {
                     'name': self._get_name()
