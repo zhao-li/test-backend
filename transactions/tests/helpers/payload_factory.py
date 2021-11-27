@@ -9,6 +9,8 @@ class PayloadFactory(Client):
     """A factory for generating payloads"""
 
     DEFAULT_SYMBOL = 'TGT'
+    TRANSACTION_TYPE = 'transaction'
+    TRADING_ACCOUNT_TYPE = 'tradingAccount'
 
     def __init__(self, overrides={}):
         self.overrides = overrides
@@ -16,14 +18,14 @@ class PayloadFactory(Client):
     def create_payload(self):
         return {
             'data': {
-                'type': 'transactions',
+                'type': self.TRANSACTION_TYPE,
                 'attributes': {
                     'symbol': self._get_symbol(),
                 },
                 'relationships': {
                     'account': {
                         'data': {
-                            'type': 'tradingAccounts',
+                            'type': self.TRADING_ACCOUNT_TYPE,
                             'id': self._get_account_id(),
                         }
                     }
@@ -34,7 +36,7 @@ class PayloadFactory(Client):
     def create_payload_without_account(self):
         return {
             'data': {
-                'type': 'transactions',
+                'type': self.TRANSACTION_TYPE,
                 'attributes': {
                 },
             }
@@ -43,7 +45,7 @@ class PayloadFactory(Client):
     def update_payload(self):
         return {
             'data': {
-                'type': 'transactions',
+                'type': 'transaction',
                 'id': self._get_id(),
                 'attributes': {
                     'symbol': self._get_symbol(),

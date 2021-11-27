@@ -27,8 +27,8 @@ SECRET_KEY = 'hz*n3+7658l609cz-n$zl$ly+z^@8=*2!)qh*#c2r_pzavzt3s'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-  "localhost",
-  "backend",
+    "localhost",
+    "backend",
 ]
 
 

@@ -4,7 +4,7 @@ from django.test import Client, TestCase, tag
 from rest_framework import status
 from .models import Greeting
 
-TYPE = 'greetings'
+TYPE = 'greeting'
 PATH = '/greetings/'
 CONTENT_TYPE = 'application/vnd.api+json'
 
