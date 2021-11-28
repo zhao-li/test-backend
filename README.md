@@ -51,8 +51,8 @@ To document the application:
 
     backend$ scripts/document_app.sh
 
-Migratiing Database
--------------------
+Migrating Database
+------------------
 To create database migrations:
 
     backend$ python manage.py makemigrations
