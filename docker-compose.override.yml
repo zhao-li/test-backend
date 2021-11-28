@@ -36,5 +36,5 @@ services:
     volumes:
       - .:/mnt/
     deploy:
-      replicas: 0 # run as one-off process not part of doker-compose up
+      replicas: 0
 
