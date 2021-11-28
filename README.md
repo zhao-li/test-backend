@@ -59,6 +59,18 @@ To create database migrations:
 
 For more information: https://docs.djangoproject.com/en/3.1/topics/migrations/
 
+Using Production Container
+--------------------------
+To run the production container alongside development container
+
+    $ docker compose up --scale backend-production=1
+
+To run the production container by itself, i.e. without development container
+
+    $ docker compose up --scale backend-production=1 backend-production
+
+The database container is needed in order for the production container to work properly.
+
 Notes
 -----
 TBD

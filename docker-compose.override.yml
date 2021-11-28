@@ -22,6 +22,8 @@ services:
     <<: *app-override
     ports:
       - 8001:${APP_PORT}
+    deploy:
+      replicas: 0
 
   database:
     <<: *database-base
