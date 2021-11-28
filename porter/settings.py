@@ -182,7 +182,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://localhost:8081",
     "http://frontend",
-    "http://frontend:80",
     "http://frontend:8080",
     "http://e2e-frontend:8080",
 ]
