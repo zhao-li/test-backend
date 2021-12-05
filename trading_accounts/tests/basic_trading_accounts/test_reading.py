@@ -16,6 +16,7 @@ class ReadingTests(TestCase):
         response = self.api_service.get_all()
 
         # pylint:disable=duplicate-code ; is not really recognized by linter
+        # update once https://github.com/PyCQA/pylint/issues/214 is closed
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         expected_key = 'data'
         self.assertTrue(expected_key in response.json())
