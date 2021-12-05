@@ -1,6 +1,5 @@
 """Define tests for creating"""
-import json
-from django.test import Client, TestCase, tag
+from django.test import TestCase, tag
 from rest_framework import status
 from ..helpers.api_service import ApiService
 from ..helpers.payload_factory import PayloadFactory
