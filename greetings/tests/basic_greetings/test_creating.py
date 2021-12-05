@@ -18,7 +18,7 @@ class CreatingTests(TestCase):
 
     @tag('integration')
     def test_creating(self):
-        """test creating worked"""
+        """test creating works"""
 
         initial_number_of_greetings = Greeting.objects.count()
         response = self.api_service.post(self.payload_factory.create_payload())
