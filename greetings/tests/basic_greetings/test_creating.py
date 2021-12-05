@@ -2,7 +2,7 @@
 import json
 from django.test import Client, TestCase, tag
 from rest_framework import status
-from .models import Greeting
+from ...models import Greeting
 
 TYPE = 'greeting'
 PATH = '/greetings/'
