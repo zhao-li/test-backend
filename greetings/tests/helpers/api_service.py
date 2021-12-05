@@ -32,3 +32,9 @@ class ApiService(Client):
             content_type=self.CONTENT_TYPE,
         )
 
+    def delete(self, id):
+        return self.client.delete(
+            self.PATH + id + '/',
+            content_type=self.CONTENT_TYPE,
+        )
+
