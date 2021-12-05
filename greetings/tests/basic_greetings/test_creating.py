@@ -2,6 +2,8 @@
 import json
 from django.test import Client, TestCase, tag
 from rest_framework import status
+from ..helpers.api_service import ApiService
+from ..helpers.payload_factory import PayloadFactory
 from ...models import Greeting
 
 TYPE = 'greeting'
@@ -13,7 +15,34 @@ class GreetingsTests(TestCase):
     """Test CRUD"""
 
     def setUp(self):
-        self.client = Client()
+        self.api_service = ApiService()
+        self.message = 'An Arbitrary Message'
+        self.payload_factory = PayloadFactory({
+            'message': self.message,
+        })
+
+    @tag('integration')
+    def test_creating(self):
+        """test creating"""
+
+        initial_number_of_greetings = Greeting.objects.count()
+        response = self.api_service.post(self.payload_factory.create_payload())
+
+        expected_number_of_greetings_created = 1
+        expected_number_of_total_greetings = (
+            initial_number_of_greetings + expected_number_of_greetings_created
+        )
+        self.assertEqual(
+            Greeting.objects.count(),
+            expected_number_of_total_greetings
+        )
+
+        greeting_id = response.json()['data']['id']
+        expected_message = self.message
+        self.assertEqual(
+            Greeting.objects.get(pk=greeting_id).message,
+            expected_message
+        )
 
     @tag('integration')
     def test_reading(self):
@@ -28,33 +57,6 @@ class GreetingsTests(TestCase):
 
         expected_key = 'data'
         self.assertTrue(expected_key in response.json())
-
-    @tag('integration')
-    def test_creating(self):
-        """test creating"""
-
-        arbitrary_message = 'A Greeting'
-        json_data = {
-            'data': {
-                'type': TYPE,
-                'attributes': {
-                    'message': arbitrary_message
-                }
-            }
-        }
-
-        response = self.client.post(
-            PATH,
-            json.dumps(json_data),
-            content_type=CONTENT_TYPE,
-        )
-
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        expected_message = arbitrary_message
-        self.assertEqual(
-            Greeting.objects.first().message,
-            expected_message
-        )
 
     @tag('integration')
     def test_updating(self):
