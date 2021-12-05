@@ -45,18 +45,27 @@ class GreetingsTests(TestCase):
         )
 
     @tag('integration')
-    def test_reading(self):
-        """test reading"""
-        response = self.client.get(PATH)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    def test_for_json_api_compliance(self):
+        """test response complies with json api spec"""
+        response = self.api_service.post(self.payload_factory.create_payload())
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        expected_key = 'data'
+        self.assertTrue(expected_key in response.json())
 
     @tag('integration')
-    def test_for_json_api_compliance(self):
+    def test_for_json_api_compliancee(self):
         """test response complies with json api spec"""
         response = self.client.get(PATH)
 
         expected_key = 'data'
         self.assertTrue(expected_key in response.json())
+
+    @tag('integration')
+    def test_reading(self):
+        """test reading"""
+        response = self.client.get(PATH)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     @tag('integration')
     def test_updating(self):
