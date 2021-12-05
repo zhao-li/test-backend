@@ -7,7 +7,7 @@ from ...models import Greeting
 
 
 class CreatingTests(TestCase):
-    """Test kreating functionality"""
+    """Test creating feature"""
 
     def setUp(self):
         self.api_service = ApiService()
