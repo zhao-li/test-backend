@@ -11,9 +11,11 @@ class DeletingTests(TestCase):
 
     def setUp(self):
         self.api_service = ApiService()
-        payload_factory = PayloadFactory()
-        response = self.api_service.post(payload_factory.create_payload())
-        self.greeting_id = response.json()['data']['id']
+        greeting = Greeting(
+            message='Arbitrary Message',
+        )
+        greeting.save()
+        self.greeting_id = greeting.id
 
     @tag('integration')
     def test_deleting(self):
