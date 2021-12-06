@@ -30,6 +30,7 @@ class ReadingTestsWhenNoGreetings(TestCase):
         expected_key = 'data'
         self.assertTrue(expected_key in response.json())
 
+
 class ReadingTestsWhenGreetingsExist(TestCase):
     """Test reading feature when greetings exist"""
 
@@ -53,10 +54,10 @@ class ReadingTestsWhenGreetingsExist(TestCase):
         index_of_first_message = 0
         received_message = (
             response.json()
-                ['data']
-                [index_of_first_message]
-                ['attributes']
-                ['message']
+            ['data']
+            [index_of_first_message]
+            ['attributes']
+            ['message']
         )
         expected_message = self.message
         self.assertEqual(
