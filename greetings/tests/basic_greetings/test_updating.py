@@ -12,11 +12,11 @@ class UpdatingTests(TestCase):
     def setUp(self):
         self.api_service = ApiService()
         original_message = 'Arbitrary Message'
-        payload_factory = PayloadFactory({
-            'message': original_message,
-        })
-        response = self.api_service.post(payload_factory.create_payload())
-        self.greeting_id = response.json()['data']['id']
+        greeting = Greeting(
+            message=original_message,
+        )
+        greeting.save()
+        self.greeting_id = greeting.id
 
     @tag('integration')
     def test_updating(self):
