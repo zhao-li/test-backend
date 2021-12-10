@@ -3,7 +3,6 @@ from django.test import TestCase, tag
 from rest_framework import status
 from ..helpers.api_service import ApiService
 from ..helpers.factories import GreetingFactory
-from ...models import Greeting
 
 
 class ReadingTestsWhenNoGreetings(TestCase):
