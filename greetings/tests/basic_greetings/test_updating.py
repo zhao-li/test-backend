@@ -2,6 +2,7 @@
 from django.test import TestCase, tag
 from rest_framework import status
 from ..helpers.api_service import ApiService
+from ..helpers.factories import GreetingFactory
 from ..helpers.payload_factory import PayloadFactory
 from ...models import Greeting
 
@@ -11,12 +12,7 @@ class UpdatingTests(TestCase):
 
     def setUp(self):
         self.api_service = ApiService()
-        original_message = 'Arbitrary Message'
-        greeting = Greeting(
-            message=original_message,
-        )
-        greeting.save()
-        self.greeting_id = greeting.id
+        self.greeting_id = GreetingFactory().id
 
     @tag('integration')
     def test_updating(self):

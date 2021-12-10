@@ -2,7 +2,7 @@
 from django.test import TestCase, tag
 from rest_framework import status
 from ..helpers.api_service import ApiService
-from ...models import Greeting
+from ..helpers.factories import GreetingFactory
 
 
 class ReadingTestsWhenNoGreetings(TestCase):
@@ -36,10 +36,7 @@ class ReadingTestsWhenGreetingsExist(TestCase):
 
     def setUp(self):
         self.api_service = ApiService()
-        self.message = 'An Arbitrary Message'
-        Greeting(
-            message=self.message,
-        ).save()
+        self.message = GreetingFactory().message
 
     @tag('integration')
     def test_reading(self):
