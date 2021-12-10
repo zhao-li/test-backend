@@ -2,6 +2,7 @@
 from django.test import TestCase, tag
 from rest_framework import status
 from ..helpers.api_service import ApiService
+from ..helpers.factories import GreetingFactory
 from ...models import Greeting
 
 
@@ -10,11 +11,7 @@ class DeletingTests(TestCase):
 
     def setUp(self):
         self.api_service = ApiService()
-        greeting = Greeting(
-            message='Arbitrary Message',
-        )
-        greeting.save()
-        self.greeting_id = greeting.id
+        self.greeting_id = GreetingFactory().id
 
     @tag('integration')
     def test_deleting(self):
