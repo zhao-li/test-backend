@@ -177,7 +177,7 @@ TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
 TEST_OUTPUT_DIR = 'artifacts/'
 TEST_OUTPUT_FILE_NAME = 'test.xml'
 
-if (os.environ['CORS_ALLOWED_ORIGINS'] == ""):
+if os.environ['CORS_ALLOWED_ORIGINS'] == "":
     CORS_ALLOWED_ORIGINS = []
 else:
     CORS_ALLOWED_ORIGINS = os.environ['CORS_ALLOWED_ORIGINS'].split(',')
