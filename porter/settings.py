@@ -177,13 +177,10 @@ TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
 TEST_OUTPUT_DIR = 'artifacts/'
 TEST_OUTPUT_FILE_NAME = 'test.xml'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
-    "http://localhost:8081",
-    "http://frontend",
-    "http://frontend:8080",
-    "http://e2e-frontend:8080",
-]
+if (os.environ['CORS_ALLOWED_ORIGINS'] == ""):
+  CORS_ALLOWED_ORIGINS = []
+else:
+  CORS_ALLOWED_ORIGINS = os.environ['CORS_ALLOWED_ORIGINS'].split(',')
 
 AUTH_USER_MODEL = 'users.User'
 
