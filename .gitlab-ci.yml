@@ -22,5 +22,5 @@ variables:
   ARTIFACT_SOURCE_DIR: ${APP_DIR}/${ARTIFACTS_DIR}/
   ARTIFACT_DESTINATION_DIR: ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/
   SECRET_KEY: "hz*n3+7658l609cz-n$zl$ly+z^@8=*2!)qh*#c2r_pzavzt3s"
-  DEBUG: True
+  DEBUG: "True"
 
