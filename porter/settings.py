@@ -28,10 +28,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = bool(util.strtobool(os.environ['DEBUG']))
 
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "backend",
-]
+ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(',')
 
 
 # Application definition
