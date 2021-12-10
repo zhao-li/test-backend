@@ -178,9 +178,9 @@ TEST_OUTPUT_DIR = 'artifacts/'
 TEST_OUTPUT_FILE_NAME = 'test.xml'
 
 if (os.environ['CORS_ALLOWED_ORIGINS'] == ""):
-  CORS_ALLOWED_ORIGINS = []
+    CORS_ALLOWED_ORIGINS = []
 else:
-  CORS_ALLOWED_ORIGINS = os.environ['CORS_ALLOWED_ORIGINS'].split(',')
+    CORS_ALLOWED_ORIGINS = os.environ['CORS_ALLOWED_ORIGINS'].split(',')
 
 AUTH_USER_MODEL = 'users.User'
 
