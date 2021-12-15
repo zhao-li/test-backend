@@ -168,10 +168,10 @@ REST_FRAMEWORK = {
     'TEST_REQUEST_RENDERER_CLASSES': (
         'rest_framework_json_api.renderers.JSONRenderer',
     ),
-    'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json'
 }
 
 JSON_API_FORMAT_TYPES = 'camelize'
+JSON_API_CONTENT_TYPE = 'application/vnd.api+json'
 
 TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
 TEST_OUTPUT_DIR = 'artifacts/'

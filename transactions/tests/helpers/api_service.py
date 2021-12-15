@@ -1,5 +1,6 @@
 """Define API Service for tests"""
 import json
+from django.conf import settings
 from django.test import Client
 
 
@@ -7,7 +8,7 @@ class ApiService(Client):
     """A service for testing API"""
 
     PATH = '/transactions/'
-    CONTENT_TYPE = 'application/vnd.api+json'
+    CONTENT_TYPE = settings.JSON_API_CONTENT_TYPE
 
     def __init__(self):
         self.client = Client()
