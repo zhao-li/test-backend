@@ -1,16 +1,7 @@
 x-app-override:
   &app-override
-  env_file:
-    - .env
-    - app.env
-    - database/.env
   volumes:
     - .:${APP_DIR}/
-
-x-database-base:
-  &database-base
-  env_file:
-    - database/.env
 
 services:
   backend:
@@ -22,13 +13,8 @@ services:
     <<: *app-override
     ports:
       - 8001:${APP_PORT}
-    environment:
-      - DEBUG=False
     deploy:
       replicas: 0
-
-  database:
-    <<: *database-base
 
   shell-checker:
     image: koalaman/shellcheck-alpine:v0.7.1

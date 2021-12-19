@@ -10,10 +10,16 @@ x-app-base:
     - ${APP_PORT}
   depends_on:
     - database
+  env_file:
+    - .env
+    - app.env
+    - database/.env
 
 x-database-base:
   &database-base
   image: postgres:13.0
+  env_file:
+    - database/.env
   volumes:
     - data:/var/lib/postgresql/data/
 
@@ -29,6 +35,8 @@ services:
     build:
       <<: *app-build-base
       target: production
+    environment:
+      - DEBUG=False
 
   database:
     <<: *database-base
