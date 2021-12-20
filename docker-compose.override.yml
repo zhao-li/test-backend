@@ -22,7 +22,7 @@ services:
     command:
       - scripts/lint_app/run_shellcheck.sh
     volumes:
-      - .:/mnt/
+      - ${BACKEND_BASE:-.}:/mnt/
     deploy:
       replicas: 0
 
