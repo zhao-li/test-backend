@@ -1,7 +1,7 @@
 x-app-base:
   &app-base
   build: &app-build-base
-    context: .
+    context: ${BACKEND_BASE:-.}
     args:
       - APP_DIR=${APP_DIR}
   command:
@@ -11,15 +11,15 @@ x-app-base:
   depends_on:
     - database
   env_file:
-    - .env
-    - app.env
-    - database/.env
+    - ${BACKEND_BASE:-.}/.env
+    - ${BACKEND_BASE:-.}/app.env
+    - ${BACKEND_BASE:-.}/database/.env
 
 x-database-base:
   &database-base
   image: postgres:13.0
   env_file:
-    - database/.env
+    - ${BACKEND_BASE:-.}/database/.env
   volumes:
     - data:/var/lib/postgresql/data/
 

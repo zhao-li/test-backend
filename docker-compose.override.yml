@@ -1,7 +1,7 @@
 x-app-override:
   &app-override
   volumes:
-    - .:${APP_DIR}/
+    - ${BACKEND_BASE:-.}:${APP_DIR}/
 
 services:
   backend:
