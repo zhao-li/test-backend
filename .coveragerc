@@ -5,6 +5,7 @@ omit =
   /opt/*
   # location of dependencies in production container
   /usr/local/*
+  **/tests/*
 
 [run]
 data_file = artifacts/.coverage

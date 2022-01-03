@@ -14,6 +14,9 @@ unit-test:
     - .database # needed to run unit test suite,
     # but is not used to connect to database
     - .cache-coverage
+  before_script:
+    - cd ${APP_DIR}
+    - scripts/setup_app/run_migrations.sh
   script:
     - scripts/test_app/run_unit_tests.sh
     - scripts/test_app/fill_coverage_gaps.sh

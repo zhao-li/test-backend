@@ -25,9 +25,9 @@ integration-test:
     - cp ${ARTIFACT_DESTINATION_DIR}/.coverage ${ARTIFACT_SOURCE_DIR}/
   script:
     - scripts/test_app/run_integration_tests.sh
-    - coverage xml
-    - coverage report
+    - coverage report --fail-under=100
   after_script:
+    - coverage xml
     - cp --recursive ${ARTIFACT_SOURCE_DIR}/ ${CI_PROJECT_DIR}/
   artifacts:
     reports:
