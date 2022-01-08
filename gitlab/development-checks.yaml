@@ -20,7 +20,6 @@ unit-test:
   script:
     - scripts/test_app/run_unit_tests.sh
     - scripts/test_app/fill_coverage_gaps.sh
-    - coverage report
   after_script:
     - cp --recursive ${ARTIFACT_SOURCE_DIR}/ ${CI_PROJECT_DIR}/
   artifacts:
