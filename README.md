@@ -1,15 +1,15 @@
 # Porter:Backend
 The API backend for the Porter application.
 
-[![pipeline status](https://gitlab.com/porter4/backend/badges/master/pipeline.svg)](https://gitlab.com/porter4/backend/-/commits/master)
-[![coverage report](https://gitlab.com/porter4/backend/badges/master/coverage.svg?job=integration-test)](https://gitlab.com/porter4/backend/-/commits/master)
+[![pipeline status](https://gitlab.com/starting-spark/porter/backend/badges/master/pipeline.svg)](https://gitlab.com/starting-spark/porter/backend/-/commits/master)
+[![coverage report](https://gitlab.com/starting-spark/porter/backend/badges/master/coverage.svg)](https://gitlab.com/starting-spark/porter/backend/-/commits/master)
 
 Prerequisites
 -------------
 1. install docker
 1. install docker-compose
 1. install git
-1. clone repository: `git clone --recursive https://gitlab.com/porter4/backend.git`
+1. clone repository: `git clone --recursive https://gitlab.com/starting-spark/porter/backend.git`
 
 Getting Started
 ---------------
