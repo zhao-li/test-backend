@@ -13,8 +13,6 @@ services:
     <<: *app-override
     ports:
       - 8001:${APP_PORT}
-    deploy:
-      replicas: 0
 
   shell-checker:
     image: koalaman/shellcheck-alpine:v0.7.1
@@ -23,6 +21,4 @@ services:
       - scripts/lint_app/run_shellcheck.sh
     volumes:
       - ${BACKEND_BASE:-.}:/mnt/
-    deploy:
-      replicas: 0
 
