@@ -21,4 +21,6 @@ services:
       - scripts/lint_app/run_shellcheck.sh
     volumes:
       - ${BACKEND_BASE:-.}:/mnt/
+    profiles:
+      - shell-checker
 
