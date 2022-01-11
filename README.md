@@ -41,10 +41,6 @@ To lint the shell scripts:
 
     $ docker-compose run shell-checker scripts/lint_app/run_shellcheck.sh
 
-    or
-
-    $ docker-compose run shell-checker scripts/lint_app/run_shellcheck.sh
-
 Documenting
 -----------
 To document the application:
