@@ -37,6 +37,8 @@ services:
       target: production
     environment:
       - DEBUG=False
+    profiles:
+      - production
 
   database:
     <<: *database-base

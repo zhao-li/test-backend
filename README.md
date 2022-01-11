@@ -41,10 +41,6 @@ To lint the shell scripts:
 
     $ docker-compose run shell-checker scripts/lint_app/run_shellcheck.sh
 
-    or
-
-    $ docker-compose run shell-checker scripts/lint_app/run_shellcheck.sh
-
 Documenting
 -----------
 To document the application:
@@ -61,15 +57,12 @@ For more information: https://docs.djangoproject.com/en/3.1/topics/migrations/
 
 Using Production Container
 --------------------------
-To run the production container alongside development container
+To run the production container
 
-    $ docker compose up --scale backend-production=1
-
-To run the production container by itself, i.e. without development container
-
-    $ docker compose up --scale backend-production=1 backend-production
-
-The database container is needed in order for the production container to work properly.
+    $ docker compose \
+        --profile production \
+        up \
+        backend-production
 
 Notes
 -----
