@@ -2,7 +2,7 @@
 import csv
 
 
-class TransactionsTransformer():
+class Transformer():
     """
     A parser for reading in transactdions
     Input: List of transactions as strings for each row of transaction data

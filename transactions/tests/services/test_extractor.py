@@ -1,20 +1,20 @@
 """Define tests for Transactions Extractor"""
-from django.test import TestCase, tag
-from ...services.transactions_extractor import TransactionsExtractor
+import os
+from django.test import tag, TestCase
+from ...services.extractor import Extractor
 
 
-class TransactionsExtractorTest(TestCase):
+class ExtractorTest(TestCase):
     """Test Transactions Extractor"""
 
     @tag('unit')
     def test_extracting_transactions(self):
         """test extracting transactions"""
 
-        with open(
-            'imports/tests/services/portfolio.csv'
-        ) as file_pointer:
+        current_path = os.path.dirname(__file__)
+        with open(os.path.join(current_path, 'portfolio.csv')) as file_pointer:
             raw_data_string = file_pointer.read()
-            transactions = TransactionsExtractor(raw_data_string).extract()
+            transactions = Extractor(raw_data_string).extract()
 
         expected_number_of_headings = 1
         expected_number_of_transactions = 2

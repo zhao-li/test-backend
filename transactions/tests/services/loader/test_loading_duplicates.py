@@ -1,8 +1,8 @@
 """Define tests for loading duplicate transactions"""
-from django.test import TestCase, tag
+from django.test import tag, TestCase
 from transactions.factories import TransactionFactory
 from transactions.models import Transaction
-from ....services.transactions_loader import TransactionsLoader
+from ....services.loader import Loader
 
 
 class TestLoadingDuplicates(TestCase):
@@ -50,7 +50,7 @@ class TestLoadingDuplicates(TestCase):
         ]
 
         initial_number_of_transactions = Transaction.objects.count()
-        [valids, duplicates, dirties] = TransactionsLoader(
+        [valids, duplicates, dirties] = Loader(
             self.original_transaction.account,
             transactions_to_be_loaded
         ).load()

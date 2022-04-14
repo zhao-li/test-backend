@@ -2,7 +2,7 @@
 from django.test import TestCase, tag
 from trading_accounts.factories import TradingAccountFactory
 from transactions.models import Transaction
-from ....services.transactions_loader import TransactionsLoader
+from ....services.loader import Loader
 
 
 class TestLoadingTransactionWithoutSymbol(TestCase):
@@ -32,7 +32,7 @@ class TestLoadingTransactionWithoutSymbol(TestCase):
         ]
 
         initial_number_of_transactions = Transaction.objects.count()
-        [valids, duplicates, dirties] = TransactionsLoader(
+        [valids, duplicates, dirties] = Loader(
             self.account,
             transaction_to_be_loaded
         ).load()
