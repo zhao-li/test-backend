@@ -1,9 +1,9 @@
 """Define tests for transaction parser"""
-from django.test import TestCase, tag
-from ...services.transactions_transformer import TransactionsTransformer
+from django.test import tag, TestCase
+from ...services.transformer import Transformer
 
 
-class TransactionsParserTest(TestCase):
+class ParserTest(TestCase):
     """Test Parsing Transactions"""
 
     @tag('unit')
@@ -23,7 +23,7 @@ class TransactionsParserTest(TestCase):
             second_transaction,
         ]
 
-        transactions = TransactionsTransformer(transactions_data).parse()
+        transactions = Transformer(transactions_data).parse()
 
         expected_number_of_transactions = 2
         self.assertEqual(

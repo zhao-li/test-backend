@@ -1,7 +1,7 @@
 """Define Extractor for Transacations"""
 
 
-class TransactionsExtractor():
+class Extractor():
     """
     An extractor for transactdions in an Investing.com portfolio export
     Input: String of entire CSV file

@@ -23,7 +23,6 @@ from django.conf import settings
 urlpatterns = [
     re_path('admin/?', admin.site.urls),
     re_path(f'{settings.PATH_PREFIX}', include([
-        re_path('imports/', include('imports.urls')),
         re_path('trading-accounts/', include('trading_accounts.urls')),
         re_path('transactions/', include('transactions.urls')),
         re_path('greetings/?', include('greetings.urls')),

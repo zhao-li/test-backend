@@ -39,3 +39,9 @@ class ApiService(Client):
             content_type=self.CONTENT_TYPE,
         )
 
+    def batch_upload(self, payload):
+        return self.client.post(
+            self.PATH + 'batch_upload/',
+            payload,
+        )
+

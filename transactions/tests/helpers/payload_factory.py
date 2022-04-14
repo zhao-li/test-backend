@@ -53,6 +53,12 @@ class PayloadFactory(Client):
             }
         }
 
+    def file_upload_payload(self, file):
+        return {
+            'account_id': self._get_account_id(),
+            'file': file,
+        }
+
     def _get_id(self):
         if 'id' in self.overrides:
             return self.overrides['id']

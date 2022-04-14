@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from transactions.models import Transaction
 
 
-class TransactionsLoader():
+class Loader():
     """
     A loader for transactions
     Note: load means saving to storage

@@ -13,3 +13,6 @@ data_file = artifacts/.coverage
 [xml]
 output = artifacts/coverage.xml
 
+[html]
+directory = artifacts/htmlcov/
+
