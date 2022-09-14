@@ -32,7 +32,7 @@ integration-test:
   artifacts:
     reports:
       junit: ${ARTIFACT_DESTINATION_DIR}/test.xml
-      coverage_reports:
+      coverage_report:
         coverage_format: cobertura
         path: ${ARTIFACT_DESTINATION_DIR}/coverage.xml
 
