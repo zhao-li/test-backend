@@ -31,6 +31,8 @@ integration-test:
     - cp --recursive ${ARTIFACT_SOURCE_DIR}/ ${CI_PROJECT_DIR}/
   artifacts:
     reports:
-      cobertura: ${ARTIFACT_DESTINATION_DIR}/coverage.xml
       junit: ${ARTIFACT_DESTINATION_DIR}/test.xml
+      coverage_reports:
+        coverage_format: cobertura
+        path: ${ARTIFACT_DESTINATION_DIR}/coverage.xml
 
