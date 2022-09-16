@@ -26,3 +26,8 @@ variables:
   ALLOWED_HOSTS: localhost
   CORS_ALLOWED_ORIGINS: ''
 
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH
+    - if: $CI_COMMIT_TAG
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
