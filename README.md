@@ -14,7 +14,7 @@ Prerequisites
 Getting Started
 ---------------
 1. run bootstrap.sh: `./bootstrap.sh`
-1. start service: `docker-compose up`
+1. start service: `docker compose up`
 
 Testing
 -------
@@ -34,12 +34,12 @@ To lint the application:
 
 To lint the shell scripts:
 
-    $ docker-compose run shell-checker sh
+    $ docker compose run shell-checker sh
     shell-checker$ scripts/lint_app/run_shellcheck.sh
 
     or
 
-    $ docker-compose run shell-checker scripts/lint_app/run_shellcheck.sh
+    $ docker compose run shell-checker scripts/lint_app/run_shellcheck.sh
 
 Documenting
 -----------
