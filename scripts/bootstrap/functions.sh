@@ -15,7 +15,7 @@ teardown_containers() (
 
   case $environment in
     'development')
-      docker-compose \
+      docker compose \
       --profile production \
       --profile shell-checker \
       down \
@@ -34,8 +34,8 @@ setup_containers() (
 
   case $environment in
     'development')
-      docker-compose build --pull
-      docker-compose run backend scripts/setup_app.sh
+      docker compose build --pull
+      docker compose run backend scripts/setup_app.sh
     ;;
   esac
 )
